@@ -29,4 +29,4 @@ FOLDER=: 'math/uu'
 
 LABCATEGORY=: 'Math'
 
-PLATFORMS=: 'darwin'
+PLATFORMS=: 'darwin macOS OSX'
