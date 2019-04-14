@@ -1,13 +1,16 @@
-NB. uu manifest
-NB. IAC Tuesday 2 April 2019  02:17:07
+NB. math/uu manifest
+NB. IAC Sunday 14 April 2019  07:39:12
 
 CAPTION=: 'Scientific units conversion package'
 
-VERSION=: '1.2.00'
+VERSION=: '2.1.00'
+
+DEPENDS=: ''
 
 FILES=: 0 : 0
 manifest.ijs
-readme.ijs
+readme_uuc_uuf.txt
+tpathjal.ijs
 uu.ijs
 uuc.ijs
 uuf.ijs
@@ -16,15 +19,14 @@ uu.ijt
 )
 
 DESCRIPTION=: 0 : 0
-Sunday 10 June 2018  17:40:19
 UU (units-to-units) is a scientific units conversion package
 based on the SI system of units.
 )
 
-RELEASE=: ''
+RELEASE=: 'j805 j807'
 
 FOLDER=: 'math/uu'
 
 LABCATEGORY=: 'Math'
 
-PLATFORMS=: ''
+PLATFORMS=: 'darwin'

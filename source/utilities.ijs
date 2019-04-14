@@ -3,56 +3,15 @@
 
 cocurrent 'uu'
 
-sl_z_=: 4 : 0
-  NB. RELIABLE path catenator: should reside in _z_
-  NB. made available in utilities.ijs of both CAL and UU
-  NB. IAC Saturday 22 December 2018  19:25:56
-SL=. '/'
-if. SL={:x do. x=. }:x end.
-if. SL={.y do. x=. }.y end.
-x,SL,y
-)
-
-real=: 9&o.
-imag=: 11&o.
+  NB. NEEDS CHECKING against long PI again >>>>>>>>>>>>>>>>>>>>
+NB. dfr=: *&(%PI%180)  NO... needs latest truncated PI!
+NB. rfd=: *&(PI%180)
+dfr=: 3 : '180*y%PI'
+rfd=: 3 : 'PI*y%180'
 
 NB. boxed substrings in x at the stars of pattern: y
 cutByPattern=: 13 : '((;:y) -. <,ST) -.~ ;:x'
 cutByPattern=: ((<,'*') -.~ [: ;: ]) -.~ [: ;: [
-
-NB. from handy, post-analoc
-isLit=: 2 2048 e.~ 3!:0
-ifdefined=: 0 <: [: 4!:0 <
-isNum=: 1 4 8 64 128 e.~ 3!:0
-isScalar=: [: {. 0 = [: $ $
-isNo=: isNum *. isScalar
-   
-ddefine=: 1 : 'm&$: : (4 : 0)'
-isBoxed=: 0 < L.
-llog=: (1 { ":)@(,@([: ] ;: ,. [: ".&.> ;:))
-  NB. smresolve=. is only used by Swift-string verb: sw
-smresolve=. (((<0),(<3 3 2$1 0 0 0 0 0 2 1 2 1 2 1 2 0 0 3 2 0),<'(';')') ;: ucp)"1
-sw=: ] rplc [: , (paren&.> ,. ":&".&.>)&smresolve
-emsg=: smoutput&sw		NB. for error signal: always smoutputs
-ssw=: smoutput&sw		NB. the standard verb: always smoutputs
-zeroifabsent=: [: {. ".
-ifabsent=: 4 : 'if. ifdefined y do. ".y else. x end.'
-
-all=: *./
-and=: *.
-any=: +./
-o4b=: b2o=:	}.@((<SP) ;@,. ])
-b4o=: o2b=:	[: <;._1 SP , ]
-b4f=: f2b=:	[: <;._1 LF , ]
-  NB. …use b4o instead of monadic (;:) with open-lists of units
-  NB. because units can contain '.' -which (;:) cuts.
-begins=: beginsWith=: ] -: [ {.~ [: # ]
-brack=:	1 |. '][' , ":  NB. layout tool for message string ->'[y]'
-cmx=: [: > <;._2	NB. expects trailing LF
-nb=: [: ([: }. [: ; ' ' ,&.> ]) ":&.>	 NB. embed nums in string
-or=:  +.
-not=: -.
-to=:    [ + [: i. [: >: -~	NB. eg: 3 to 5 <--> 3 4 5
 
 report_complex_nouns=: 3 : 0
   NB. check for complex nouns in given locale
@@ -85,10 +44,6 @@ utoks=: 3 : 0
 z=. sp1 y	NB. ensure leading sign-byte: SP|SL
 z=. (z e. SP,SL) <;.1 z
 )
-
-NB. ======================================
-NB. TEST-ONLY utilities, some redundant...
-NB. ======================================
 
 vt=: viewtable=: '' ddefine
   NB. y == list of indexes into UUC -- OR ALTERNATIVELY...
@@ -153,11 +108,46 @@ if. -.fexist y do.
 end.
 ]thelab_z_=: y
 trace 0	NB. to reset existing verb tracing
-require '~addons/labs/labs/labs805.ijs'
-NB. lab805_jlab_ thelab  NB. alternative (WHEN TO USE??)
-lab_jlab_ thelab
+require '~addons/labs/labs/labs.ijs'
+try. lab_jlab_ thelab
+catch.
+  require '~addons/labs/labs/labs805.ijs'
+  lab_jlab805_ thelab
+end.
 )
 
-uuc_z_=: 3 : 'open ''~UUC'''
-uuf_z_=: 3 : 'open ''~UUF'''
-uum_z_=: 3 : 'open ''~UUM'''
+originalsin=: 3 : 0
+  NB. restore the floating pt trig defns
+cocurrent 'z'
+sin=: 1&o."0
+cos=: 2&o."0
+tan=: 3&o."0
+
+sinh=: 5&o."0
+cosh=: 6&o."0
+tanh=: 7&o."0
+
+arcsin=: _1&o."0
+arccos=: _2&o."0
+arctan=: _3&o."0
+
+arcsinh=: _5&o."0
+arccosh=: _6&o."0
+arctanh=: _7&o."0
+i.0 0
+)
+
+NB. ======================================
+NB. SCIENTIFIC UTILITIES
+NB. ======================================
+
+cocurrent 'z'  NB. <<<<< MAKE VISIBLE TO CAL TOO
+
+choice=: 4 : '((0>.1<.x)){y'
+
+abs=: |
+avg=: +/ % #
+div=: %
+int=: [: <. ] + 0 > ]
+mod=: |~
+times=: *

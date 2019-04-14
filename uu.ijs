@@ -1,76 +1,52 @@
 0 :0
-Saturday 29 December 2018  15:21:14
+Wednesday 10 April 2019  05:35:01
 -
 UU: scientific units conversion package
 )
-
-clear 'uu'
 coclass 'uu'
 onload_z_=: empty
 
-AABUILT=: '2018-12-29  15:21:55'
-AABUILT=: '2018-12-29  15:33:46'
-AABUILT=: '2018-12-29  15:46:13'
-AABUILT=: '2019-01-01  20:26:37'
-AABUILT=: '2019-01-27  10:18:11'
-AABUILT=: '2019-02-22  22:49:49'
-AABUILT=: '2019-02-25  12:14:59'
-AABUILT=: '2019-02-25  12:15:29'
-AABUILT=: '2019-02-25  12:30:23'
-AABUILT=: '2019-02-25  12:31:04'
-AABUILT=: '2019-02-25  12:38:52'
-AABUILT=: '2019-03-16  11:27:12'
-AABUILT=: '2019-03-16  11:48:39'
-AABUILT=: '2019-03-16  14:32:11'
-AABUILT=: '2019-03-16  19:51:17'
-AABUILT=: '2019-03-16  19:55:54'
-AABUILT=: '2019-03-16  19:57:05'
-AABUILT=: '2019-03-19  17:40:10'
-AABUILT=: '2019-03-19  19:06:38'
-AABUILT=: '2019-03-19  19:07:31'
-AABUILT=: '2019-03-19  23:16:02'
-AABUILT=: '2019-03-19  23:18:17'
-AABUILT=: '2019-03-19  23:18:38'
-AABUILT=: '2019-03-19  23:27:36'
-AABUILT=: '2019-03-19  23:27:45'
-AABUILT=: '2019-03-19  23:32:14'
-AABUILT=: '2019-03-20  00:01:11'
-AABUILT=: '2019-03-20  00:10:48'
-AABUILT=: '2019-03-20  00:15:01'
-AABUILT=: '2019-03-20  00:27:51'
-AABUILT=: '2019-03-20  00:34:40'
-AABUILT=: '2019-03-20  00:57:58'
-AABUILT=: '2019-03-20  14:10:37'
-AABUILT=: '2019-03-20  14:10:49'
-AABUILT=: '2019-03-20  19:36:23'
-AABUILT=: '2019-03-20  19:38:27'
-AABUILT=: '2019-03-21  01:53:02'
-AABUILT=: '2019-03-27  23:03:53'
-AABUILT=: '2019-03-28  01:04:22'
-AABUILT=: '2019-03-28  01:40:41'
-AABUILT=: '2019-03-28  01:53:29'
-AABUILT=: '2019-03-28  01:56:12'
-AABUILT=: '2019-03-29  13:05:14'
-AABUILT=: '2019-03-29  13:08:23'
-AABUILT=: '2019-03-29  13:09:26'
-AABUILT=: '2019-03-29  13:14:20'
-AABUILT=: '2019-03-29  13:15:31'
-AABUILT=: '2019-03-29  13:16:08'
-AABUILT=: '2019-03-29  13:23:04'
-AABUILT=: '2019-03-29  13:28:04'
-AABUILT=: '2019-03-30  17:25:57'
-AABUILT=: '2019-03-30  17:27:46'
-AABUILT=: '2019-03-30  17:29:32'
-AABUILT=: '2019-03-30  17:30:15'
-AABUILT=: '2019-03-30  18:11:14'
-AABUILT=: '2019-03-30  18:15:09'
+CREATOR=: ;(4!:4<'zx'){4!:3''[zx=.''
+
+AABUILT=: '2019-04-10  06:00:04'
+AABUILT=: '2019-04-10  06:00:46'
+AABUILT=: '2019-04-10  06:06:40'
+AABUILT=: '2019-04-10  06:27:37'
+AABUILT=: '2019-04-10  06:29:32'
+AABUILT=: '2019-04-10  06:32:00'
+AABUILT=: '2019-04-10  23:26:05'
+AABUILT=: '2019-04-10  23:28:51'
+AABUILT=: '2019-04-12  11:58:10'
+AABUILT=: '2019-04-12  12:01:31'
+AABUILT=: '2019-04-12  12:01:50'
+AABUILT=: '2019-04-12  12:03:15'
+AABUILT=: '2019-04-12  12:04:53'
+AABUILT=: '2019-04-12  12:07:02'
+AABUILT=: '2019-04-12  12:10:29'
+AABUILT=: '2019-04-12  12:33:34'
+AABUILT=: '2019-04-12  12:43:00'
+AABUILT=: '2019-04-12  12:43:53'
+AABUILT=: '2019-04-12  12:50:38'
+AABUILT=: '2019-04-12  13:16:27'
+AABUILT=: '2019-04-12  13:19:00'
+AABUILT=: '2019-04-12  13:44:21'
+AABUILT=: '2019-04-13  03:22:49'
+AABUILT=: '2019-04-13  03:42:02'
+AABUILT=: '2019-04-13  06:14:43'
+AABUILT=: '2019-04-13  18:48:08'
+AABUILT=: '2019-04-13  18:51:59'
 
 '==================== [uu] constants ===================='
 
 cocurrent 'uu'
 
 0 :0
-Wednesday 20 March 2019  19:21:15
+Friday 12 April 2019  12:51:30
+)
+
+ABOUT=: 0 : 0
+UU: scientific quantity converter
+-works with SI units, also Imperial and misc systems.
 )
 
 
@@ -78,16 +54,10 @@ Wednesday 20 March 2019  19:21:15
 CUTAB0=: 2 2$<;._1 ' USD 1.3 GBP 0.8'
 CUTAB=: CUTAB0
 BADQTY=: '0 ??'
-BOIL_F=: 212
-BOIL_C=: 100
-BOIL_K=: 373.15
-ICE_F=: 32
-ICE_C=: 0
-ICE_K=: 273.15
+BADRAT=: _r1
 HD=: '·'
 MI=: '-'
 NUN=: '??'
-PI=: o.1
 PWM=: '^-'
 PWU=: '^_'
 PW=: '^'
@@ -110,15 +80,14 @@ SIZ=: 1e_9
 ZERO=: 'NO'
 i.0 0
 )
-b4f=: f2b=:	[: <;._1 LF , ]
 
-CANNOTSCALE=: b4f }: 0 : 0
+CANNOTSCALE=: cutopen 0 : 0
 gas.mark
 midino
 note
 )
 
-TEMPERATURE_SCALES=: b4f }: 0 : 0
+TEMPERATURE_SCALES=: cutopen 0 : 0
 K
 Kelvin
 C
@@ -142,7 +111,7 @@ De
 )
 
 
-UUC=: cmx 0 : 0
+REF_UUC=: >cutopen 0 : 0
 1 /	[saved]	BASIC TESTING ONLY
 1 m	[m]	fundamental unit - metre (distance)
 1 kg	[kg]	fundamental unit - kilogramme (mass)
@@ -155,9 +124,6 @@ UUC=: cmx 0 : 0
 1 eur	[eur]	fundamental unit - euro (currency)
 1 /	[/]	fundamental unit - (dimensionless)
 1 *	[*]	fundamental unit - (matches any units)
-1000 m	[km] kilometre
-0.01 m	[cm] centimetre
-0.001 m	[mm] millimetre
 0.0254 m	[in]	inch
 12 in	[ft]	feet
 36 in	[yd]	yard
@@ -172,69 +138,55 @@ UUC=: cmx 0 : 0
 1 deg	[dms]	degrees as deg min sec
 )
 
-UUF=: cmx 0 : 0
+REF_UUF=: >cutopen 0 : 0
 PI*r*r : r(m)		[m^2]	area of circle
 sin a ; a(rad)		[/]	sine
 cos a ; a(rad)		[/]	cosine
 tan a ; a(rad)		[/]	tangent
 )
 
-UUM=: ''
+REF_UUM=: ''
 SIbu=: ;:'m kg s A K mol cd'
 mks=:   SIbu,'rad';'eur'
 
-PI=: 314159265358979323846264338327950288419716939937510r100000000000000000000000000000000000000000000000000 
+cocurrent 'z'
+
+
+
+
+
+
+
+
+
+
+REF_PI=:  31415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679821x 
+
+
+
+REF_EXP=: 2718281828459045235360287471352662497757247093699959574966967627724076630353547594571382178525166427427x
+
+
+
+REF_RT2=: 141421356237309504880168872420969807856967187537694807317667973799073247846210703885038753432764157x
+assert (_1&x: 2 - REF_RT2*REF_RT2) = _2e196
+
+ICE_F=: 32x
+ICE_C=: 0x
+ICE_K=: 27315r100
+BOIL_F=: 180x + ICE_F
+BOIL_C=: 100x + ICE_C
+BOIL_K=: 100x + ICE_K
 
 '==================== [uu] utilities ===================='
 
 cocurrent 'uu'
 
-sl_z_=: 4 : 0
 
-
-
-SL=. '/'
-if. SL={:x do. x=. }:x end.
-if. SL={.y do. x=. }.y end.
-x,SL,y
-)
-
-real=: 9&o.
-imag=: 11&o.
+dfr=: 3 : '180*y%PI'
+rfd=: 3 : 'PI*y%180'
 cutByPattern=: 13 : '((;:y) -. <,ST) -.~ ;:x'
 cutByPattern=: ((<,'*') -.~ [: ;: ]) -.~ [: ;: [
-isLit=: 2 2048 e.~ 3!:0
-ifdefined=: 0 <: [: 4!:0 <
-isNum=: 1 4 8 64 128 e.~ 3!:0
-isScalar=: [: {. 0 = [: $ $
-isNo=: isNum *. isScalar
-   
-ddefine=: 1 : 'm&$: : (4 : 0)'
-isBoxed=: 0 < L.
-llog=: (1 { ":)@(,@([: ] ;: ,. [: ".&.> ;:))
-
-smresolve=. (((<0),(<3 3 2$1 0 0 0 0 0 2 1 2 1 2 1 2 0 0 3 2 0),<'(';')') ;: ucp)"1
-sw=: ] rplc [: , (paren&.> ,. ":&".&.>)&smresolve
-emsg=: smoutput&sw
-ssw=: smoutput&sw
-zeroifabsent=: [: {. ".
-ifabsent=: 4 : 'if. ifdefined y do. ".y else. x end.'
-
-all=: *./
-and=: *.
-any=: +./
-o4b=: b2o=:	}.@((<SP) ;@,. ])
-b4o=: o2b=:	[: <;._1 SP , ]
-b4f=: f2b=:	[: <;._1 LF , ]
-
-
-begins=: beginsWith=: ] -: [ {.~ [: # ]
-brack=:	1 |. '][' , ":
-cmx=: [: > <;._2
-nb=: [: ([: }. [: ; ' ' ,&.> ]) ":&.>
-or=:  +.
-not=: -.
-to=:    [ + [: i. [: >: -~
 
 report_complex_nouns=: 3 : 0
 
@@ -266,6 +218,7 @@ utoks=: 3 : 0
 z=. sp1 y
 z=. (z e. SP,SL) <;.1 z
 )
+
 vt=: viewtable=: '' ddefine
 
 
@@ -329,18 +282,280 @@ if. -.fexist y do.
 end.
 ]thelab_z_=: y
 trace 0
-require '~addons/labs/labs/labs805.ijs'
-lab_jlab_ thelab
+require '~addons/labs/labs/labs.ijs'
+try. lab_jlab_ thelab
+catch.
+  require '~addons/labs/labs/labs805.ijs'
+  lab_jlab805_ thelab
+end.
 )
 
-uuc_z_=: 3 : 'open ''~UUC'''
-uuf_z_=: 3 : 'open ''~UUF'''
-uum_z_=: 3 : 'open ''~UUM'''
+originalsin=: 3 : 0
+
+cocurrent 'z'
+sin=: 1&o."0
+cos=: 2&o."0
+tan=: 3&o."0
+
+sinh=: 5&o."0
+cosh=: 6&o."0
+tanh=: 7&o."0
+
+arcsin=: _1&o."0
+arccos=: _2&o."0
+arctan=: _3&o."0
+
+arcsinh=: _5&o."0
+arccosh=: _6&o."0
+arctanh=: _7&o."0
+i.0 0
+)
+cocurrent 'z'
+
+choice=: 4 : '((0>.1<.x)){y'
+
+abs=: |
+avg=: +/ % #
+div=: %
+int=: [: <. ] + 0 > ]
+mod=: |~
+times=: *
+
+'==================== [uu] handy4uu ===================='
+cocurrent 'z'
+
+Cut=: <;._1
+
+real=: 9&o.
+imag=: 11&o.
+
+ifdefined=: 0 <: [: 4!:0 <
+
+isLit=: 2 2048 e.~ 3!:0
+isNum=: 1 4 8 64 128 e.~ 3!:0
+isScalar=: [: {. 0 = [: $ $
+isNo=: isNum *. isScalar
+   
+daterev=: 3 : 'if. 31<2{y do. |.3{.y else. 3{.y end.'
+dayy=: (Cut ' Sunday Monday Tuesday Wednesday Thursday Friday Saturday') pick~ [: weekday 3 {. ]
+ddefine=: 1 : 'm&$: : (4 : 0)'
+isBoxed=: 0 < L.
+llog=: (1 { ":)@(,@([: ] ;: ,. [: ".&.> ;:))
+
+smresolve=: (((<0),(<3 3 2$1 0 0 0 0 0 2 1 2 1 2 1 2 0 0 3 2 0),<'(';')') ;: ucp)"1
+sw=: ] rplc [: , (paren&.> ,. ":&".&.>)&smresolve
+emsg=: smoutput&sw
+ssw=: smoutput&sw
+zeroifabsent=: [: {. ".
+ifabsent=: 4 : 'if. ifdefined y do. ".y else. x end.'
+
+all=: *./
+and=: *.
+any=: +./
+o4b=: b2o=:	}.@((<SP) ;@,. ])
+b4o=: o2b=:	[: <;._1 SP , ]
+b4f=: f2b=:	[: <;._1 LF , ]
+
+
+begins=: beginsWith=: ] -: [ {.~ [: # ]
+brack=:	1 |. '][' , ":
+nb=: [: ([: }. [: ; ' ' ,&.> ]) ":&.>
+or=:  +.
+not=: -.
+to=:    [ + [: i. [: >: -~
+
+
+
+
+AZ=: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+CO=: ':'
+DT=: '.'
+NUL=: 0{a.
+az=: 'abcdefghijklmnopqrstuvwxyz'
+
+NaNoun=: 0 ~: [: nc ;:
+
+cmx=: [: > <;._2
+
+date=: 6!:0@('YYYY-MM-DD  hh:mm:ss'"_)
+day=: dayy&daterev
+
+default=: 0&$: :(4 : 0)
+
+
+
+
+
+
+if. 0<: 4!:0 <y do. y~ return. end.
+(y)=:x
+)
+
+min=: $:/ :<.
+n9=: '0123456789'
+paren=: 1 |. ')(' , ":
+rnd=: 0&$: :(4 : '(<. 0.5 + y*10^x)%10^x')
+
+sl=: 4 : 0
+
+
+SL=. '/'
+if. SL={:x do. x=. }:x end.
+if. SL={.y do. x=. }.y end.
+x,SL,y
+)
+
+term=: 3 : '>{:{. wd''sm get term'''
+edwn=: 3 : '>{:{. wd''sm get edit'''
+
+vv=: ":@|:@,:
+x2f=: }.@((<10{a.) ;@,. ])@([: (#~ ([: +./\. ' '&~:))&.> <"1)
+
+'==================== [z] extended ===================='
+
+0 :0
+Saturday 6 April 2019  18:44:46
+-
+https://code.jsoftware.com/wiki/Essays/Extended_Precision_Functions
+-
+These words are into _z_ overwriting the trig verbs there…
+ arccos arcsin arctan arctan0 arctan1 asin0 asin1 cnt
+ cos cosh erf exp ln n01cdf pi round sin sinh sqrt
+-
+sel=: (<1 1) pick wd'sm get term'
+)
+
+cocurrent 'z'
+
+DP=: 40
+
+round=: DP&$: : (4 : 0)
+ b %~ <.1r2+y*b=. 10x^x
+)
+
+pi=: DP&$: : (4 : 0)
+ b %~ (x:!.0 y) * <.@o. b=. 10x^x+8+0>.>.10^.>./|y
+)
+
+ln=: DP&$: : (4 : 0) " 0
+ assert. 0<y
+ m=. <.0.5+2^.y
+ t=. (<:%>:) (x:!.0 y)%2x^m
+ if. x<-:#":t do. t=. (1+x) round t end.
+ ln2=. 2*+/1r3 (^%]) 1+2*i.>.0.5*(%3)^.0.5*0.1^x+>.10^.1>.m
+ lnr=. 2*+/t   (^%]) 1+2*i.>.0.5*(|t)^.0.5*0.1^x
+ lnr + m * ln2
+)
+
+exp=: DP&$: : (4 : 0) " 0
+ m=. <.0.5+y%^.2
+ xm=. x+>.m*10^.2
+ d=. (x:!.0 y)-m*xm ln 2
+ if. xm<-:#":d do. d=. xm round d end.
+ e=. 0.1^xm
+ n=. e (>i.1:) a (^%!@]) i.>.a^.e [ a=. |y-m*^.2
+ (2x^m) * 1++/*/\d%1+i.n
+)
+
+sqrt=: DP&$: : (4 : 0) " 0
+ assert. 0<:y
+ %/ <.@%: (2 x: (2*x) round y)*10x^2*x+0>.>.10^.y
+)
+
+cnt=: 4 : 0
+ t=. ((x+0>.>.(10^.|y)-10^.2p1) pi 2)|x:!.0 y
+ c=. (1,0.25p1*2+i.6) I. x:^:_1 t
+ t=. (1+x) round +/(_1x^c+0 1)*t,(1r2*>.c%2)*(1+x) pi 1
+ e=. 0.1^x
+ n=. e (>i.1:) d (^%!@]) 2*i.x>.<.0.5*d^.e [ d=. x:^:_1 t
+ c;n;t
+)
+
+sin=: DP&$: : (4 : 0) " 0
+ 'c n t'=. x cnt y
+ (_1^c e. 4 5 6 7) * -/ t (^%!@]) (2x*i.n) + c e. 0 3 4 7
+)
+
+cos=: DP&$: : (4 : 0) " 0
+ 'c n t'=. x cnt y
+ (_1^c e. 2 3 4 5) * -/ t (^%!@]) (2x*i.n) + c e. 1 2 5 6
+)
+
+asin1=: 4 : 0
+ z=. 1-y
+ k=. 1x + i.<.-x%10^.z%2
+ s=. 1x + +/ (z^k) * (>:2*k) %~ */\ (<:2*k) % 4*k
+ (x pi 1r2) - s * x sqrt 2*z
+)
+
+asin0=: 4 : 0
+ k=. 1x + 2 * i.<._0.5*x%10^.y
+ +/ (y^k) * k %~ }: 1 , */\ k % 1+k
+)
+
+arcsin=: DP&$: : (4 : 0) " 0
+ assert. 1>:|y
+ y1=. | (1+x) round x:!.0 y
+ if. 0.5<:|y do. (*y)*x asin1 y1 else. (*y)*x asin0 y1 end.
+)
+
+arccos=: DP&$: : (4 : 0) " 0
+ (x pi 1r2) - x arcsin y
+)
+
+arctan=: DP&$: : (4 : 0) " 0
+ if. 0=y do. 0 return. end.
+ if. 1>:|y do. x arctan1 y else. x arctan0 y end.
+)
+
+arctan0=: DP&$: : (4 : 0) " 0
+ y1=. x:!.0 |y
+ r =. %^:(1<|y)            y1
+ r2=. %^:(1<|y) x round *: y1
+ n=. >.-x*r2^.10
+ a=. r * -/(1+2*i.n)%~*/\1,(n-1)$r2
+ if. 1>|y do. (*y)*a else. (*y)*a-~(2*t)%~<.@o. t=. 10x^1+x end.
+)
+
+arctan1=: DP&$: : (4 : 0) " 0
+ y1=. x:!.0 y
+ r=. x round (%>:) *: y1
+ n=. >.-x*r^.10
+ y1 %~ +/ */\ r * (1>.4x**:i.n) % */"1]1>.i.n,2
+)
+
+sinh=: DP&$: : (4 : 0) " 0
+ if. x>10^.|y do. (1r2*_1^0>y)*x exp |y end.
+ if. 1<|y do. -:-/x exp y,-y end.
+ e=. 0.1^x
+ n=. e (>i.1:) y (^%!@]) 1+2*i.>.0.5*y^.e
+ +/(x:!.0 y) (^%!@]) 1+2x*i.n
+)
+
+cosh=: DP&$: : (4 : 0) " 0
+ if. x>10^.|y do. (1r2*_1^0>y)*x exp |y end.
+ if. 1<|y do. -:+/x exp y,-y end.
+ e=. 0.1^x
+ n=. e (>i.1:) y (^%!@]) 2*i.>.0.5*y^.e
+ +/(x:!.0 y) (^%!@]) 2x*i.n
+)
+
+erf=: DP&$: : (4 : 0) " 0
+ e=. 0.5p0.5*0.1^1+x
+ y1=. |x:^:_1 y=. x: y
+ if. 1>y1 do. m=. >.-:y1^.e else. m=. >.2p1**:y1 end.
+ n=. (^.e) (>i.1:) (^.y1)+(i*2*^.y1)-(^.1+2*i)++/\^.1>.i=. i.m
+ (2 % x sqrt x pi 1) * -/(1+2*i.n)%~*/\(y,(n-1)$*:y)%1>.i.n
+)
+
+n01cdf=: DP&$: : (4 : 0) " 0
+ 2 %~ 1 + x erf (x: y) * x sqrt 1r2
+)
 
 '==================== [uu] rational ===================='
 
 0 :0
-Tuesday 19 March 2019  17:10:47
+Friday 12 April 2019  11:59:16
 -
 from: tempuu 76
 -
@@ -358,18 +573,23 @@ Be suspicious of: __r1&".
 
 cocurrent 'uu'
 
-notFloat=: 3 : 0
+s4x=: 16 ddefine
 
--. (datatype y) -: 'floating'
+
+P=. ":y
+if. x<#P do. P=. x{.P end.
+".P,'r1',(<:#P)#'0'
 )
 
-derat=: derationalized=: _1&x:
-
-rat=: rational=: 3 : 0 "0
-
-
-reval ":y
-)
+rat_z_=: rational_z_=: x:!.0
+float_z_=: _1&x:
+extended_z_=: x:!.0
+numDenom_z_=: 2&x:
+rat4pair_z_=: (_2&x:)&x:
+isRational=: 64 128 e.~ 3!:0
+isExtended=: 64 = 3!:0
+isFloating=: 8 = 3!:0
+notFloat=: 8 ~: 3!:0
 
 reval=: 3 : 0 "1
 
@@ -383,10 +603,12 @@ elseif. y-: ,'_' do. _r1
 elseif. y-: '__' do. __r1
 elseif. all y e. n9,'._' do. rat4sc y
 elseif. 'e' e. y do. rat4sc y
-elseif. 'p' e. y do. rat4pi y
+elseif. 'E' e. y do. rat4sc y
 elseif. 'r' e. y do. rat4r y
 elseif. 'x'= {:y do. rat4x y
-elseif. do. _r1 [ssw '>>> reval: cannot handle y=[(y)]'
+elseif. y begins '10^' do. rat4pt ::rat4po y
+elseif. '^' e. y do. rat4po y
+elseif. 0=nc <y  do. rat4pn y
 end.
 )
 
@@ -399,34 +621,65 @@ else. 0r1
 end.
 )
 
+rat4pn=: 3 : 0 "1
+
+msg '... rat4pn: y=(y) [(float ".y)]'
+try.
+  assert. 0= 4!:0 <y
+  y~
+catch.
+  ssw '>>> rat4pn: cannot handle y=''(y)'''
+  BADRAT
+end.
+)
+
 rat4x=: 3 : 0 "1
 
-msg '... rat4x: y=(y) [(derationalized ".y)]'
+msg '... rat4x: y=(y) [(float ".y)]'
 ".y
 )
 
 rat4r=: 3 : 0 "1
 
-msg '... rat4r: y=(y) [(derationalized ".y)]'
+msg '... rat4r: y=(y) [(float ".y)]'
 ".y
 )
 
-rat4pi=: 3 : 0 "1
+rat4pt=: 3 : 0 "1
 
+msg '... rat4pt: y=(y) [(float ".y)]'
+if. (y begins '10^_') or (y begins '10^-') do. ". NN=:'1r1',(".4}.y)#'0'
+elseif. y begins '10^' do. ". NN=:'x' ,~ '1',(".3}.y)#'0'
+end.
+)
+0 :0
+rat4pt '10^21'
+rat4pt '10^3'
+rat4pt '10^-21'
+rat4pt '10^-5'
+rat4pt '10^_5'
+)
 
-'c d'=. <;._2 y,'p'
-a=. ".c
-b=. ".d
-". sw '(a)*PI^(b)'
+rat4po=: 3 : 0 "1
+
+msg '... rat4po: y=(y) [(float ".y)]'
+rat ".y
+)
+0 :0
+rat4po'10^1.0001'
+rat4po'10^-5.0001'
+rat4po'10^_5.0001'
 )
 
 rat4sc=: 3 : 0 "1
 
+y=. y rplc 'E' ; 'e' ; '-' ; '_'
 c=. 'e' taketo y
 a=. ".c-.DT
 b=. ".y
 scale=. rnd 10^. a%b
-if. 'rational'-:datatype b do. b
+msg '... rat4sc: y=(y) [(float ".y)] scale=(scale) c=(c) a=(a) b=(b)'
+if. isRational b do. b
 elseif. scale<0      do. ". ((c-.DT) , (|scale)#'0') , 'r1'
 elseif.              do. ". (c-.DT) , 'r1' , scale#'0'
 end.
@@ -436,15 +689,53 @@ rat4sc '_1.23e_5'
 rat4sc '_1.23E_5'
 rat4sc '_1.23E-5'
 rat4sc '-1.23E-5'
+reval '_1.23e_5'
+reval '_1.23E_5'
+reval '_1.23E-5'
+reval '-1.23E-5'
 )
 
 rat_check=: 3 : 0
 
-assert. all uvalu = derationalized rvalu
-assert. all uvald = derationalized rvald
-assert. all uvalc = derationalized rvalc
-assert. -. 0 e. uvalc
+try.
+assert. all boo=. uvalu = float rvalu
+assert. all boo=. uvald = float rvald
+assert. all boo=. uvalc = float rvalc
+assert. all boo=. -. uvalc e. 0 _ __
+
+catch.
+  bads=. I. -.boo
+  smoutput '>>> rat_check: failed at these UUC rows…'
+  smoutput vt bads
+  wd'beep'
+end.
 )
+
+test_reval=: 3 : 0
+
+
+z=. _123r10000000
+assert. z -: reval '_1.23e_5'
+assert. z -: reval '_1.23E_5'
+assert. z -: reval '_1.23E-5'
+assert. z -: reval '-1.23E-5'
+z=. 1000000000000000000000
+assert. z -: reval '10^21'
+z=. 1r1000000000000000000000
+assert. z -: reval '10^-21'
+z=. 6832167611r683374095687762
+assert. z -: reval '10^-5.0001'
+assert. z -: reval '10^_5.0001'
+assert. z -: reval '6832167611r683374095687762'
+z=. 6832167611683374095687762x
+assert. z -: reval '6832167611683374095687762x'
+z=. PI
+assert. z -: reval 'PI'
+smoutput '--- test_reval: completed'
+)
+
+onload 'test_reval$0'
+
 
 '==================== [uu] syntax_machines ===================='
 0 :0
@@ -666,15 +957,6 @@ end.
 )
 
 exrate=: exrate_exch_
-getversion=: 3 : 0
-
-VERSION=: 'v.v.v'
-assert. fexist y
-load y sl 'manifest.ijs'
-assert. -. NaNoun 'VERSION'
-erase 'FILES RELEASE LABCATEGORY PLATFORMS'
-VERSION return.
-)
 
 hy=: '_-' charsub ]
 isNaN=: 128!:5
@@ -846,12 +1128,13 @@ ssymb=: <;._1 '|π|Å|Ω|⁻¹|⁻²|⁻³|⁻⁴|²|³|⁴'
 cspel=: sspel, <;._1 ' deg amin asec'
 csymb=: ssymb, <;._1 '|°|′|″'
 'v uv us'=: <"1 |: cutuuc UUC
+openv=: >v
 unitv=: deb each uv -.each TAB
 units=: deb each us
-uvald=: imag eval >v
-assert. notFloat rvald=: ieval >v
-uvalu=: real eval >v
-assert. notFloat rvalu=: reval >v
+uvald=: imag eval openv
+assert. notFloat rvald=: ieval openv
+uvalu=: real eval openv
+assert. notFloat rvalu=: reval openv
 i.0 0
 )
 
@@ -917,7 +1200,6 @@ else.
   msg=: empty
   sllog=: empty
 end.
-smoutput '+++ trace ',":y
 i.0 0
 )
 
@@ -967,7 +1249,7 @@ isGoodCode=: ([: -. (ZEROCODE,%ZEROCODE) e.~ ])"0
 make_unitc=: 1 ddefine
 
 
-
+ssw=. empty
 pass=. x
 rebuild=. pass<:1
 ssw '+++ make_unitc: pass=(pass) rebuild=(rebuild) #UUC=(#UUC)'
@@ -1244,9 +1526,8 @@ elseif. do.
 	sllog 'uu_1 targ unit'
 	sllog 'uu_1 coeft coefu rcoeft rcoefu codet codeu'
   if. codet ~: codeu do.
-    emsg '>>> uu: incompatible units: x=(x) targ=(targ) unit=(unit)'
-    emsg '... coeft=(coeft) coefu=(coefu) rcoeft=(coeft) rcoefu=(coefu) codet=(codet) codeu=(codeu)'
-    BADQTY return.
+    z=. sw'>>> uu: incompatible units: x=[(x)] targ=[(targ)] unit=[(unit)]'
+    z return.
   end.
 end.
 
@@ -1690,11 +1971,17 @@ end.
 )
 
 '==================== [uu] start ===================='
+0 :0
+Saturday 13 April 2019  18:48:04
+)
 
 cocurrent 'uu'
 
+VERSION=: '0.0.0'
+
 DIAGNOSTICS=: 0
-blink=: empty
+
+CAPPED=: 40
 
 start=: 3 : 0
 
@@ -1702,24 +1989,52 @@ start=: 3 : 0
 
 
 
-ssw '+++ [uu] start: ENTERED. y=(y)'
-if. isNo y do. SIC=: y end.
+
+trace DIAGNOSTICS
+msg '+++ [uu] start: ENTERED. y=(y)'
+
+try.	load (pathof CREATOR) sl 'tpathdev.ijs'
+catch.	load (pathof CREATOR) sl 'tpathjal.ijs'
+end.
+load TPMU sl 'manifest.ijs'
+
+erase'CAPTION FILES DESCRIPTION RELEASE FOLDER LABCATEGORY PLATFORMS'
+
 trace 0
-sess=: empty
 factory''
-VERSION=: getversion jpath'~UU'
-load jpath'~UUC'
-load jpath'~UUF'
-load jpath'~UUM'
+if. isNo y do. SIC=: y end.
+
+RT2_z_=:   CAPPED s4x REF_RT2
+EXP_z_=:   CAPPED s4x REF_EXP
+PI_z_=:    CAPPED s4x REF_PI
+PI2_z_=:   PI * 2
+PI4_z_=:   PI * 4
+PIb2_z_=:  PI * 1r2
+PIb3_z_=:  PI * 1r3
+PIb4_z_=:  PI * 1r4
+PI4b3_z_=: PI * 4r3
+
+load TPUC sl 'uuc.ijs'
+load TPUF sl 'uuf.ijs'
+load TPUM sl 'uum.ijs'
 make_units''
 make_unitc''
 rat_check''
-
 report_complex_nouns''
 trace DIAGNOSTICS
-ssw '+++ [uu] start: COMPLETED.'
+msg '--- [uu] start: COMPLETED.'
 )
 
 create=: start
 destroy=: codestroy
+
+runlab_z_=: runlab_uu_
+uu_z_=: uu_uu_
+blink=: empty
+
+0 :0
+uuinit_z_=: 3 : 0
+ulo=. y conew 'uu'
+)
+
 start''
