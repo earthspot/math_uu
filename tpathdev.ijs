@@ -1,7 +1,7 @@
 NB. tpathdev.ijs - defines symbolic paths for UU
-NB. DEVELOPMENT (GitHub) VERSION
+NB. DEVELOPMENT (GitHub) VERSION for Gitruu !!!
 0 :0
-Saturday 13 April 2019  18:29:02
+Wednesday 24 April 2019  00:48:22
 )
 
 cocurrent 'z'
@@ -27,7 +27,7 @@ TPUT	TAB 	usertools.ijs
 TPUU	CAL  	uu.ijs
 )
 
-TPUU=: jpath'~Gituu'                   NB. path to UU build
+TPUU=: jpath'~Gitruu'                   NB. path to UU build
 TPMU=: TPUU                            NB. manifest in UU
 TPUC=: TPUU                            NB. uuc.ijs
 TPUF=: TPUU                            NB. uuf.ijs
