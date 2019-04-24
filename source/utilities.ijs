@@ -116,30 +116,7 @@ catch.
 end.
 )
 
-originalsin=: 3 : 0
-  NB. restore the floating pt trig defns
-cocurrent 'z'
-sin=: 1&o."0
-cos=: 2&o."0
-tan=: 3&o."0
-
-sinh=: 5&o."0
-cosh=: 6&o."0
-tanh=: 7&o."0
-
-arcsin=: _1&o."0
-arccos=: _2&o."0
-arctan=: _3&o."0
-
-arcsinh=: _5&o."0
-arccosh=: _6&o."0
-arctanh=: _7&o."0
-i.0 0
-)
-
-NB. ======================================
-NB. SCIENTIFIC UTILITIES
-NB. ======================================
+'========= [uu] utilities -- visible to cal too ============='
 
 cocurrent 'z'  NB. <<<<< MAKE VISIBLE TO CAL TOO
 

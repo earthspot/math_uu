@@ -2,6 +2,15 @@
 '==================== [uu] handy4uu ===================='
 cocurrent 'z'
 
+ddefine=: 1 : 'm&$: : (4 : 0)'
+
+AZ=: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+CO=: ':'
+DT=: '.'
+NUL=: 0{a.
+az=: 'abcdefghijklmnopqrstuvwxyz'
+n9=: '0123456789'
+
 Cut=: <;._1
 
 real=: 9&o.
@@ -16,7 +25,6 @@ isNo=: isNum *. isScalar
    
 daterev=: 3 : 'if. 31<2{y do. |.3{.y else. 3{.y end.'
 dayy=: (Cut ' Sunday Monday Tuesday Wednesday Thursday Friday Saturday') pick~ [: weekday 3 {. ]
-ddefine=: 1 : 'm&$: : (4 : 0)'
 isBoxed=: 0 < L.
 llog=: (1 { ":)@(,@([: ] ;: ,. [: ".&.> ;:))
   NB. smresolve=. is only used by Swift-string verb: sw
@@ -41,20 +49,8 @@ nb=: [: ([: }. [: ; ' ' ,&.> ]) ":&.>	 NB. embed nums in string
 or=:  +.
 not=: -.
 to=:    [ + [: i. [: >: -~	NB. eg: 3 to 5 <--> 3 4 5
-
-
-
-
-AZ=: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-CO=: ':'
-DT=: '.'
-NUL=: 0{a.
-az=: 'abcdefghijklmnopqrstuvwxyz'
-
 NaNoun=: 0 ~: [: nc ;:  NB. y==open list, recommended for: absent
-
 cmx=: [: > <;._2   NB. use with (0 : 0) --needs LF-: {:y
-
 date=: 6!:0@('YYYY-MM-DD  hh:mm:ss'"_)
 day=: dayy&daterev
 
@@ -70,7 +66,6 @@ if. 0<: 4!:0 <y do. y~ return. end.
 )
 
 min=: $:/ :<.
-n9=: '0123456789'
 paren=: 1 |. ')(' , ":
 rnd=: 0&$: :(4 : '(<. 0.5 + y*10^x)%10^x')
 

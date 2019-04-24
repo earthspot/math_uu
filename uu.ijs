@@ -1,5 +1,5 @@
 0 :0
-Wednesday 10 April 2019  05:35:01
+Thursday 25 April 2019  00:45:09
 -
 UU: scientific units conversion package
 )
@@ -8,34 +8,92 @@ onload_z_=: empty
 
 CREATOR=: ;(4!:4<'zx'){4!:3''[zx=.''
 
-AABUILT=: '2019-04-10  06:00:04'
-AABUILT=: '2019-04-10  06:00:46'
-AABUILT=: '2019-04-10  06:06:40'
-AABUILT=: '2019-04-10  06:27:37'
-AABUILT=: '2019-04-10  06:29:32'
-AABUILT=: '2019-04-10  06:32:00'
-AABUILT=: '2019-04-10  23:26:05'
-AABUILT=: '2019-04-10  23:28:51'
-AABUILT=: '2019-04-12  11:58:10'
-AABUILT=: '2019-04-12  12:01:31'
-AABUILT=: '2019-04-12  12:01:50'
-AABUILT=: '2019-04-12  12:03:15'
-AABUILT=: '2019-04-12  12:04:53'
-AABUILT=: '2019-04-12  12:07:02'
-AABUILT=: '2019-04-12  12:10:29'
-AABUILT=: '2019-04-12  12:33:34'
-AABUILT=: '2019-04-12  12:43:00'
-AABUILT=: '2019-04-12  12:43:53'
-AABUILT=: '2019-04-12  12:50:38'
-AABUILT=: '2019-04-12  13:16:27'
-AABUILT=: '2019-04-12  13:19:00'
-AABUILT=: '2019-04-12  13:44:21'
-AABUILT=: '2019-04-13  03:22:49'
-AABUILT=: '2019-04-13  03:42:02'
-AABUILT=: '2019-04-13  06:14:43'
-AABUILT=: '2019-04-13  18:48:08'
-AABUILT=: '2019-04-13  18:51:59'
-AABUILT=: '2019-04-15  06:24:02'
+AABUILT=: '2019-04-25  00:45:14'
+
+'==================== [uu] handy4uu ===================='
+cocurrent 'z'
+
+ddefine=: 1 : 'm&$: : (4 : 0)'
+
+AZ=: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+CO=: ':'
+DT=: '.'
+NUL=: 0{a.
+az=: 'abcdefghijklmnopqrstuvwxyz'
+n9=: '0123456789'
+
+Cut=: <;._1
+
+real=: 9&o.
+imag=: 11&o.
+
+ifdefined=: 0 <: [: 4!:0 <
+
+isLit=: 2 2048 e.~ 3!:0
+isNum=: 1 4 8 64 128 e.~ 3!:0
+isScalar=: [: {. 0 = [: $ $
+isNo=: isNum *. isScalar
+   
+daterev=: 3 : 'if. 31<2{y do. |.3{.y else. 3{.y end.'
+dayy=: (Cut ' Sunday Monday Tuesday Wednesday Thursday Friday Saturday') pick~ [: weekday 3 {. ]
+isBoxed=: 0 < L.
+llog=: (1 { ":)@(,@([: ] ;: ,. [: ".&.> ;:))
+
+smresolve=: (((<0),(<3 3 2$1 0 0 0 0 0 2 1 2 1 2 1 2 0 0 3 2 0),<'(';')') ;: ucp)"1
+sw=: ] rplc [: , (paren&.> ,. ":&".&.>)&smresolve
+emsg=: smoutput&sw
+ssw=: smoutput&sw
+zeroifabsent=: [: {. ".
+ifabsent=: 4 : 'if. ifdefined y do. ".y else. x end.'
+
+all=: *./
+and=: *.
+any=: +./
+o4b=: b2o=:	}.@((<SP) ;@,. ])
+b4o=: o2b=:	[: <;._1 SP , ]
+b4f=: f2b=:	[: <;._1 LF , ]
+
+
+begins=: beginsWith=: ] -: [ {.~ [: # ]
+brack=:	1 |. '][' , ":
+nb=: [: ([: }. [: ; ' ' ,&.> ]) ":&.>
+or=:  +.
+not=: -.
+to=:    [ + [: i. [: >: -~
+NaNoun=: 0 ~: [: nc ;:
+cmx=: [: > <;._2
+date=: 6!:0@('YYYY-MM-DD  hh:mm:ss'"_)
+day=: dayy&daterev
+
+default=: 0&$: :(4 : 0)
+
+
+
+
+
+
+if. 0<: 4!:0 <y do. y~ return. end.
+(y)=:x
+)
+
+min=: $:/ :<.
+paren=: 1 |. ')(' , ":
+rnd=: 0&$: :(4 : '(<. 0.5 + y*10^x)%10^x')
+
+sl=: 4 : 0
+
+
+SL=. '/'
+if. SL={:x do. x=. }:x end.
+if. SL={.y do. x=. }.y end.
+x,SL,y
+)
+
+term=: 3 : '>{:{. wd''sm get term'''
+edwn=: 3 : '>{:{. wd''sm get edit'''
+
+vv=: ":@|:@,:
+x2f=: }.@((<10{a.) ;@,. ])@([: (#~ ([: +./\. ' '&~:))&.> <"1)
 
 '==================== [uu] constants ===================='
 
@@ -291,26 +349,8 @@ catch.
 end.
 )
 
-originalsin=: 3 : 0
+'========= [uu] utilities -- visible to cal too ============='
 
-cocurrent 'z'
-sin=: 1&o."0
-cos=: 2&o."0
-tan=: 3&o."0
-
-sinh=: 5&o."0
-cosh=: 6&o."0
-tanh=: 7&o."0
-
-arcsin=: _1&o."0
-arccos=: _2&o."0
-arctan=: _3&o."0
-
-arcsinh=: _5&o."0
-arccosh=: _6&o."0
-arctanh=: _7&o."0
-i.0 0
-)
 cocurrent 'z'
 
 choice=: 4 : '((0>.1<.x)){y'
@@ -321,237 +361,6 @@ div=: %
 int=: [: <. ] + 0 > ]
 mod=: |~
 times=: *
-
-'==================== [uu] handy4uu ===================='
-cocurrent 'z'
-
-Cut=: <;._1
-
-real=: 9&o.
-imag=: 11&o.
-
-ifdefined=: 0 <: [: 4!:0 <
-
-isLit=: 2 2048 e.~ 3!:0
-isNum=: 1 4 8 64 128 e.~ 3!:0
-isScalar=: [: {. 0 = [: $ $
-isNo=: isNum *. isScalar
-   
-daterev=: 3 : 'if. 31<2{y do. |.3{.y else. 3{.y end.'
-dayy=: (Cut ' Sunday Monday Tuesday Wednesday Thursday Friday Saturday') pick~ [: weekday 3 {. ]
-ddefine=: 1 : 'm&$: : (4 : 0)'
-isBoxed=: 0 < L.
-llog=: (1 { ":)@(,@([: ] ;: ,. [: ".&.> ;:))
-
-smresolve=: (((<0),(<3 3 2$1 0 0 0 0 0 2 1 2 1 2 1 2 0 0 3 2 0),<'(';')') ;: ucp)"1
-sw=: ] rplc [: , (paren&.> ,. ":&".&.>)&smresolve
-emsg=: smoutput&sw
-ssw=: smoutput&sw
-zeroifabsent=: [: {. ".
-ifabsent=: 4 : 'if. ifdefined y do. ".y else. x end.'
-
-all=: *./
-and=: *.
-any=: +./
-o4b=: b2o=:	}.@((<SP) ;@,. ])
-b4o=: o2b=:	[: <;._1 SP , ]
-b4f=: f2b=:	[: <;._1 LF , ]
-
-
-begins=: beginsWith=: ] -: [ {.~ [: # ]
-brack=:	1 |. '][' , ":
-nb=: [: ([: }. [: ; ' ' ,&.> ]) ":&.>
-or=:  +.
-not=: -.
-to=:    [ + [: i. [: >: -~
-
-
-
-
-AZ=: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-CO=: ':'
-DT=: '.'
-NUL=: 0{a.
-az=: 'abcdefghijklmnopqrstuvwxyz'
-
-NaNoun=: 0 ~: [: nc ;:
-
-cmx=: [: > <;._2
-
-date=: 6!:0@('YYYY-MM-DD  hh:mm:ss'"_)
-day=: dayy&daterev
-
-default=: 0&$: :(4 : 0)
-
-
-
-
-
-
-if. 0<: 4!:0 <y do. y~ return. end.
-(y)=:x
-)
-
-min=: $:/ :<.
-n9=: '0123456789'
-paren=: 1 |. ')(' , ":
-rnd=: 0&$: :(4 : '(<. 0.5 + y*10^x)%10^x')
-
-sl=: 4 : 0
-
-
-SL=. '/'
-if. SL={:x do. x=. }:x end.
-if. SL={.y do. x=. }.y end.
-x,SL,y
-)
-
-term=: 3 : '>{:{. wd''sm get term'''
-edwn=: 3 : '>{:{. wd''sm get edit'''
-
-vv=: ":@|:@,:
-x2f=: }.@((<10{a.) ;@,. ])@([: (#~ ([: +./\. ' '&~:))&.> <"1)
-
-'==================== [z] extended ===================='
-
-0 :0
-Saturday 6 April 2019  18:44:46
--
-https://code.jsoftware.com/wiki/Essays/Extended_Precision_Functions
--
-These words are into _z_ overwriting the trig verbs there…
- arccos arcsin arctan arctan0 arctan1 asin0 asin1 cnt
- cos cosh erf exp ln n01cdf pi round sin sinh sqrt
--
-sel=: (<1 1) pick wd'sm get term'
-)
-
-cocurrent 'z'
-
-DP=: 40
-
-round=: DP&$: : (4 : 0)
- b %~ <.1r2+y*b=. 10x^x
-)
-
-pi=: DP&$: : (4 : 0)
- b %~ (x:!.0 y) * <.@o. b=. 10x^x+8+0>.>.10^.>./|y
-)
-
-ln=: DP&$: : (4 : 0) " 0
- assert. 0<y
- m=. <.0.5+2^.y
- t=. (<:%>:) (x:!.0 y)%2x^m
- if. x<-:#":t do. t=. (1+x) round t end.
- ln2=. 2*+/1r3 (^%]) 1+2*i.>.0.5*(%3)^.0.5*0.1^x+>.10^.1>.m
- lnr=. 2*+/t   (^%]) 1+2*i.>.0.5*(|t)^.0.5*0.1^x
- lnr + m * ln2
-)
-
-exp=: DP&$: : (4 : 0) " 0
- m=. <.0.5+y%^.2
- xm=. x+>.m*10^.2
- d=. (x:!.0 y)-m*xm ln 2
- if. xm<-:#":d do. d=. xm round d end.
- e=. 0.1^xm
- n=. e (>i.1:) a (^%!@]) i.>.a^.e [ a=. |y-m*^.2
- (2x^m) * 1++/*/\d%1+i.n
-)
-
-sqrt=: DP&$: : (4 : 0) " 0
- assert. 0<:y
- %/ <.@%: (2 x: (2*x) round y)*10x^2*x+0>.>.10^.y
-)
-
-cnt=: 4 : 0
- t=. ((x+0>.>.(10^.|y)-10^.2p1) pi 2)|x:!.0 y
- c=. (1,0.25p1*2+i.6) I. x:^:_1 t
- t=. (1+x) round +/(_1x^c+0 1)*t,(1r2*>.c%2)*(1+x) pi 1
- e=. 0.1^x
- n=. e (>i.1:) d (^%!@]) 2*i.x>.<.0.5*d^.e [ d=. x:^:_1 t
- c;n;t
-)
-
-sin=: DP&$: : (4 : 0) " 0
- 'c n t'=. x cnt y
- (_1^c e. 4 5 6 7) * -/ t (^%!@]) (2x*i.n) + c e. 0 3 4 7
-)
-
-cos=: DP&$: : (4 : 0) " 0
- 'c n t'=. x cnt y
- (_1^c e. 2 3 4 5) * -/ t (^%!@]) (2x*i.n) + c e. 1 2 5 6
-)
-
-asin1=: 4 : 0
- z=. 1-y
- k=. 1x + i.<.-x%10^.z%2
- s=. 1x + +/ (z^k) * (>:2*k) %~ */\ (<:2*k) % 4*k
- (x pi 1r2) - s * x sqrt 2*z
-)
-
-asin0=: 4 : 0
- k=. 1x + 2 * i.<._0.5*x%10^.y
- +/ (y^k) * k %~ }: 1 , */\ k % 1+k
-)
-
-arcsin=: DP&$: : (4 : 0) " 0
- assert. 1>:|y
- y1=. | (1+x) round x:!.0 y
- if. 0.5<:|y do. (*y)*x asin1 y1 else. (*y)*x asin0 y1 end.
-)
-
-arccos=: DP&$: : (4 : 0) " 0
- (x pi 1r2) - x arcsin y
-)
-
-arctan=: DP&$: : (4 : 0) " 0
- if. 0=y do. 0 return. end.
- if. 1>:|y do. x arctan1 y else. x arctan0 y end.
-)
-
-arctan0=: DP&$: : (4 : 0) " 0
- y1=. x:!.0 |y
- r =. %^:(1<|y)            y1
- r2=. %^:(1<|y) x round *: y1
- n=. >.-x*r2^.10
- a=. r * -/(1+2*i.n)%~*/\1,(n-1)$r2
- if. 1>|y do. (*y)*a else. (*y)*a-~(2*t)%~<.@o. t=. 10x^1+x end.
-)
-
-arctan1=: DP&$: : (4 : 0) " 0
- y1=. x:!.0 y
- r=. x round (%>:) *: y1
- n=. >.-x*r^.10
- y1 %~ +/ */\ r * (1>.4x**:i.n) % */"1]1>.i.n,2
-)
-
-sinh=: DP&$: : (4 : 0) " 0
- if. x>10^.|y do. (1r2*_1^0>y)*x exp |y end.
- if. 1<|y do. -:-/x exp y,-y end.
- e=. 0.1^x
- n=. e (>i.1:) y (^%!@]) 1+2*i.>.0.5*y^.e
- +/(x:!.0 y) (^%!@]) 1+2x*i.n
-)
-
-cosh=: DP&$: : (4 : 0) " 0
- if. x>10^.|y do. (1r2*_1^0>y)*x exp |y end.
- if. 1<|y do. -:+/x exp y,-y end.
- e=. 0.1^x
- n=. e (>i.1:) y (^%!@]) 2*i.>.0.5*y^.e
- +/(x:!.0 y) (^%!@]) 2x*i.n
-)
-
-erf=: DP&$: : (4 : 0) " 0
- e=. 0.5p0.5*0.1^1+x
- y1=. |x:^:_1 y=. x: y
- if. 1>y1 do. m=. >.-:y1^.e else. m=. >.2p1**:y1 end.
- n=. (^.e) (>i.1:) (^.y1)+(i*2*^.y1)-(^.1+2*i)++/\^.1>.i=. i.m
- (2 % x sqrt x pi 1) * -/(1+2*i.n)%~*/\(y,(n-1)$*:y)%1>.i.n
-)
-
-n01cdf=: DP&$: : (4 : 0) " 0
- 2 %~ 1 + x erf (x: y) * x sqrt 1r2
-)
 
 '==================== [uu] rational ===================='
 
