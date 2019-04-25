@@ -1,6 +1,6 @@
 NB. math_uu repo - run
 0 :0
-Monday 15 April 2019  06:17:47
+Thursday 25 April 2019  01:18:30
 -
 cocurrent 'base'
 open BUILTFILE
@@ -26,7 +26,6 @@ catch.	load BUILTFILE_z_=: GIT,'/uu.ijs'
 end.
 )
 
-smclear''
 smoutput '--- run.ijs: BUILTFILE loaded: ',BUILTFILE
 
 NB. create an instance of class UU for testing...

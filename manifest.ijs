@@ -2,7 +2,7 @@ NB. math/uu manifest
 
 CAPTION=: 'Scientific units conversion package'
 
-VERSION=: '2.1.07'
+VERSION=: '2.1.08'
 
 DEPENDS=: ''
 
