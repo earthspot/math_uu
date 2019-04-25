@@ -12,6 +12,8 @@ AABUILT=: '2019-04-25  00:45:14'
 AABUILT=: '2019-04-25  01:12:00'
 AABUILT=: '2019-04-25  01:18:58'
 AABUILT=: '2019-04-25  01:23:48'
+AABUILT=: '2019-04-25  22:42:28'
+AABUILT=: '2019-04-25  22:54:16'
 
 '==================== [uu] handy4uu ===================='
 cocurrent 'z'
@@ -1807,10 +1809,10 @@ start=: 3 : 0
 trace DIAGNOSTICS
 msg '+++ [uu] start: ENTERED. y=(y)'
 
-if. fexist p=. (pathof CREATOR) sl 'tpathdev.ijs' do. load p
-else.     load (pathof CREATOR) sl 'tpathjal.ijs'
+if. fexist p=. (pathof CREATOR) sl 'tpathdev.ijs' do. loadFixed p
+else.     loadFixed (pathof CREATOR) sl 'tpathjal.ijs'
 end.
-load TPMU sl 'manifest.ijs'
+loadFixed TPMU sl 'manifest.ijs'
 
 erase'CAPTION FILES DESCRIPTION RELEASE FOLDER LABCATEGORY PLATFORMS'
 
@@ -1828,9 +1830,9 @@ PIb3_z_=:  PI * 1r3
 PIb4_z_=:  PI * 1r4
 PI4b3_z_=: PI * 4r3
 
-load TPUC sl 'uuc.ijs'
-load TPUF sl 'uuf.ijs'
-load TPUM sl 'uum.ijs'
+loadFixed TPUC sl 'uuc.ijs'
+loadFixed TPUF sl 'uuf.ijs'
+loadFixed TPUM sl 'uum.ijs'
 make_units''
 make_unitc''
 rat_check''
@@ -1838,6 +1840,8 @@ report_complex_nouns''
 trace DIAGNOSTICS
 msg '--- [uu] start: COMPLETED.'
 )
+
+loadFixed=: load&dquote
 
 create=: start
 destroy=: codestroy
