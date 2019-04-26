@@ -14,6 +14,9 @@ AABUILT=: '2019-04-25  01:18:58'
 AABUILT=: '2019-04-25  01:23:48'
 AABUILT=: '2019-04-25  22:42:28'
 AABUILT=: '2019-04-25  22:54:16'
+AABUILT=: '2019-04-26  04:16:44'
+AABUILT=: '2019-04-26  05:16:43'
+AABUILT=: '2019-04-26  05:20:06'
 
 '==================== [uu] handy4uu ===================='
 cocurrent 'z'
@@ -1451,9 +1454,23 @@ give_0_angle=: 4 : 0
 register'give_0_angle'
 
 assert. x -: 'deg'
-ds=. deg_symbol''
 d=. scino y
-sw'(d)(ds)' [ NO_UNITS_NEEDED=: 1
+if. SIC=0 do. z=. sw'(d) deg'
+else.   z=. ucode sw'(d)deg'
+end.
+z [ NO_UNITS_NEEDED=: 1
+)
+
+give_0_dms=: 4 : 0
+register'give_0_dms'
+
+asec4deg=. 3600 * ]
+assert. x -: 'dms'
+'d m s'=.":each <.each 360 60 60 #: asec4deg |y
+if. SIC=0 do. z=. sw'(d) deg (m)'' (s)"'
+else.   z=. ucode sw'(d)deg (m)amin (s)asec'
+end.
+z [ NO_UNITS_NEEDED=: 1
 )
 
 give_0_yesno=: 4 : 0
@@ -1534,16 +1551,6 @@ if. 10>".hh do. hh=. '0',hh end.
 if. 10>".mm do. mm=. '0',mm end.
 if. 10>".ss do. ss=. '0',ss end.
 sw'(hh):(mm):(ss)'
-)
-
-give_0_dms=: 4 : 0
-register'give_0_dms'
-
-asec4deg=. 3600 * ]
-assert. x -: 'dms'
-'d m s'=.":each <.each 360 60 60 #: asec4deg |y
-ds=. deg_symbol''
-sw'(d)(ds) (m)(QT) (s)"' [ NO_UNITS_NEEDED=: 1
 )
 
 give_2_note=: 4 : 0
@@ -1643,6 +1650,28 @@ yb=. (bris y) rplc 'deg' ; ' deg'
 ]unit=. deb unitsOf yb
 assert. (unit-:'deg')or(unit-:'rad')
 yb return.
+)
+
+take_0_dms=: 3 : 0
+registerIN 'take_0_dms'
+blink'green'
+
+
+
+z=. ;: (bris y) rplc 'deg' ; ' deg' ; 'amin' ; ' amin' ; 'asec' ; ' asec'
+assert. (t=. ;:'deg asec amin') -: 3{.sortd z
+'d m s'=. ".each z-.t
+' deg',~ ": d + (m%60) + (s%3600) return.
+)
+
+take_1_hms=: 3 : 0
+registerIN 'take_1_hms'
+blink'green'
+
+assert. 2= +/CO=y
+z=. CO cut y-.SP
+'h m s'=. ".each z
+' s',~ ": (h*3600) + (m*60) + s return.
 )
 
 take_8_misc=: 3 : 0

@@ -81,6 +81,28 @@ assert. (unit-:'deg')or(unit-:'rad')
 yb return.
 )
 
+take_0_dms=: 3 : 0
+registerIN 'take_0_dms'
+blink'green'
+  NB. inputs angle y (deg amin asec); outputs fractional y in [deg]
+  NB. since angle is scalable, does not need to convert to rad
+  NB. Ensure postfixed 'deg' 'amin' 'asec' haven't run-into their values…
+z=. ;: (bris y) rplc 'deg' ; ' deg' ; 'amin' ; ' amin' ; 'asec' ; ' asec'
+assert. (t=. ;:'deg asec amin') -: 3{.sortd z
+'d m s'=. ".each z-.t
+' deg',~ ": d + (m%60) + (s%3600) return.
+)
+
+take_1_hms=: 3 : 0
+registerIN 'take_1_hms'
+blink'green'
+  NB. inputs time: y in format: 'hh:mm:ss'; outputs y in [s]
+assert. 2= +/CO=y  NB. must contain 2 colons
+z=. CO cut y-.SP
+'h m s'=. ".each z
+' s',~ ": (h*3600) + (m*60) + s return.
+)
+
 take_8_misc=: 3 : 0
 registerIN'take_8_misc'
 blink 'blue'

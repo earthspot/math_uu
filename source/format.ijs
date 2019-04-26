@@ -72,9 +72,24 @@ give_0_angle=: 4 : 0
 register'give_0_angle'
   NB. outputs degrees y [deg] as degrees of angle
 assert. x -: 'deg'  NB. force error if wrong verb
-ds=. deg_symbol'' NB. SI-compliant
 d=. scino y  NB. rad-->deg conversion specd already in UUC
-sw'(d)(ds)' [ NO_UNITS_NEEDED=: 1
+if. SIC=0 do. z=. sw'(d) deg'
+else.   z=. ucode sw'(d)deg'
+end.
+z [ NO_UNITS_NEEDED=: 1
+)
+
+give_0_dms=: 4 : 0
+register'give_0_dms'
+  NB. converts degrees [deg] to d° m' s"
+asec4deg=. 3600 * ]
+assert. x -: 'dms'  NB. force error if wrong verb
+NB. if. y-:'' do. y=. d4dms 3 59 59 end. ---WRONG
+'d m s'=.":each <.each 360 60 60 #: asec4deg |y
+if. SIC=0 do. z=. sw'(d) deg (m)'' (s)"'
+else.   z=. ucode sw'(d)deg (m)amin (s)asec'
+end.
+z [ NO_UNITS_NEEDED=: 1
 )
 
 give_0_yesno=: 4 : 0
@@ -157,17 +172,6 @@ if. 10>".hh do. hh=. '0',hh end.
 if. 10>".mm do. mm=. '0',mm end.
 if. 10>".ss do. ss=. '0',ss end.
 sw'(hh):(mm):(ss)'
-)
-
-give_0_dms=: 4 : 0
-register'give_0_dms'
-  NB. converts degrees [deg] to d° m' s"
-asec4deg=. 3600 * ]
-assert. x -: 'dms'  NB. force error if wrong verb
-NB. if. y-:'' do. y=. d4dms 3 59 59 end. ---WRONG
-'d m s'=.":each <.each 360 60 60 #: asec4deg |y
-ds=. deg_symbol''  NB. SI-compliant
-sw'(d)(ds) (m)(QT) (s)"' [ NO_UNITS_NEEDED=: 1
 )
 
 give_2_note=: 4 : 0
