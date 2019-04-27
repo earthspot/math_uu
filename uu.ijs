@@ -1,27 +1,15 @@
 0 :0
-Thursday 25 April 2019  00:45:09
+Saturday 27 April 2019  18:27:07
 -
 UU: scientific units conversion package
 )
 coclass 'uu'
 onload_z_=: empty
 
-CREATOR=: ;(4!:4<'zx'){4!:3''[zx=.''
+PARENTDIR=: (zx i: IFWIN{'/\'){.zx=.>(4!:4<'zx'){4!:3''[zx=.''
 
-AABUILT=: '2019-04-25  00:45:14'
-AABUILT=: '2019-04-25  01:12:00'
-AABUILT=: '2019-04-25  01:18:58'
-AABUILT=: '2019-04-25  01:23:48'
-AABUILT=: '2019-04-25  22:42:28'
-AABUILT=: '2019-04-25  22:54:16'
-AABUILT=: '2019-04-26  04:16:44'
-AABUILT=: '2019-04-26  05:16:43'
-AABUILT=: '2019-04-26  05:20:06'
-AABUILT=: '2019-04-26  16:04:45'
-AABUILT=: '2019-04-27  02:19:15'
-AABUILT=: '2019-04-27  02:44:25'
-AABUILT=: '2019-04-27  02:50:21'
-AABUILT=: '2019-04-27  03:04:25'
+AABUILT=: '2019-04-27  18:27:12'
+AABUILT=: '2019-04-27  18:29:27'
 
 '==================== [uu] handy4uu ===================='
 cocurrent 'z'
@@ -72,6 +60,7 @@ brack=:	1 |. '][' , ":
 nb=: [: ([: }. [: ; ' ' ,&.> ]) ":&.>
 or=:  +.
 not=: -.
+sl=: ('//';'/') stringreplace ('\';'/') stringreplace [ , '/' , ]
 to=:    [ + [: i. [: >: -~
 NaNoun=: 0 ~: [: nc ;:
 cmx=: [: > <;._2
@@ -91,18 +80,7 @@ if. 0<: 4!:0 <y do. y~ return. end.
 
 min=: $:/ :<.
 paren=: 1 |. ')(' , ":
-pathof=: ] {.~ [: >: '/' i:~ ]
 rnd=: 0&$: :(4 : '(<. 0.5 + y*10^x)%10^x')
-
-sl=: 4 : 0
-
-
-SL=. '/'
-if. SL={:x do. x=. }:x end.
-if. SL={.y do. x=. }.y end.
-x,SL,y
-)
-
 term=: 3 : '>{:{. wd''sm get term'''
 edwn=: 3 : '>{:{. wd''sm get edit'''
 
@@ -242,7 +220,6 @@ REF_EXP=: 2718281828459045235360287471352662497757247093699959574966967627724076
 
 
 REF_RT2=: 141421356237309504880168872420969807856967187537694807317667973799073247846210703885038753432764157x
-assert (_1&x: 2 - REF_RT2*REF_RT2) = _2e196
 
 ICE_F=: 32x
 ICE_C=: 0x
@@ -302,7 +279,7 @@ z=. sp1 y
 z=. (z e. SP,SL) <;.1 z
 )
 
-vt=: viewtable=: '' ddefine
+vt=: viewtable=: ''&$: :(4 : 0)
 
 
 
@@ -406,25 +383,12 @@ test_z_=: test_uu_
 '==================== [uu] rational ===================='
 
 0 :0
-Friday 12 April 2019  11:59:16
--
-from: tempuu 76
--
-NOW just needs to handle: 4p1/3 -or is it: 4/3p3
-  accept 1/2p1, also 1r2p1
-  -but these are formally floating !!
--
-assert 'rational'-:datatype z
-	in all rat4* verbs?
-make reval recursive where it matters.
--
-Be suspicious of: __r1&". 
--How might number-detection actually fail?
+Saturday 27 April 2019  17:52:49
 )
 
 cocurrent 'uu'
 
-s4x=: 16 ddefine
+s4x=: 16&$: :(4 : 0)
 
 
 P=. ":y
@@ -600,7 +564,7 @@ Syntax machines defined in this script:
 
 cocurrent 'uu'
 
-spout=: 3 ddefine
+spout=: 3&$: :(4 : 0)
 
 w=. {:$z=. vv y
 for_k. i.x-w do.
@@ -909,7 +873,7 @@ hasutf=: [: +./ 127 < a. i. ]
 isascii=: [: *./ 128 > a. i. ]
 undeslash=: 0&deslash
 
-ucode=: 1 ddefine
+ucode=: 1&$: :(4 : 0)
 
 
 
@@ -968,7 +932,7 @@ udumb=: 3 : 0
 zdesc; znits; 1
 )
 
-make_units=: 0 ddefine
+make_units=: 0&$: :(4 : 0)
 
 
 
@@ -997,7 +961,7 @@ y=. '/%-_Ee'charsub >y
 try. {.".y catch. UNDEFINED end.
 )
 
-uniform=: '' ddefine
+uniform=: ''&$: :(4 : 0)
 0 pushme 'uniform'
 
 savedSIC=. SIC
@@ -1075,7 +1039,7 @@ decodedx=: 3 : 'x:^:_1 Nmks q: y'
 decodedr=: 3 : 'x:^:_1 -/decodedx 2 x: y'
 decoded=: decodedx :: decodedr
 
-expandcode=: (0 ddefine)"0
+expandcode=: (0&$: :(4 : 0))"0
 
 if. y=0 do. ,ST return. end.
 asTokens=. x
@@ -1097,7 +1061,7 @@ if. asTokens do. z else. dlb z end.
 )
 isGoodCode=: ([: -. (ZEROCODE,%ZEROCODE) e.~ ])"0
 
-make_unitc=: 1 ddefine
+make_unitc=: 1&$: :(4 : 0)
 
 
 ssw=. empty
@@ -1352,7 +1316,7 @@ elseif. do. 0 return.
 end.
 )
 
-uu=: ('' ddefine)"1
+uu=: (''&$: :(4 : 0))"1
 
 if. '*'={.y do. uuengine }.y return. end.
 pushme 'uu'
@@ -1454,7 +1418,7 @@ for_no. ;:'eur gbp usd deg ! c eV Hz rad / *' do.
 end.
 )
 
-format=: formatOUT=: '' ddefine
+format=: formatOUT=: ''&$: :(4 : 0)
 0 pushme'formatOUT'
 msg '+++ formatOUT: ENTERED, x=[(x)] y=[(y)]'
 NO_UNITS_NEEDED=: 0
@@ -1728,7 +1692,7 @@ msg '... take_9_general: y=(y) --> z=(z)'
 z return.
 )
 
-sval_unit=: '' ddefine
+sval_unit=: ''&$: :(4 : 0)
 
 sval=. SP taketo y -. '°'
 if. 0<#x do. 
@@ -1849,15 +1813,14 @@ end.
 
 '==================== [uu] start ===================='
 0 :0
-Saturday 13 April 2019  18:48:04
+Saturday 27 April 2019  18:28:19
 )
 
 cocurrent 'uu'
 
-VERSION=: '0.0.0'
+VERSION=: '?.?.?'
 
 DIAGNOSTICS=: 0
-
 CAPPED=: 40
 
 start=: 3 : 0
@@ -1870,9 +1833,10 @@ start=: 3 : 0
 trace DIAGNOSTICS
 msg '+++ [uu] start: ENTERED. y=(y)'
 
-]p=. (pathof CREATOR) sl 'tpathdev.ijs'
+]p=. PARENTDIR sl 'tpathdev.ijs'
+
 if. any ;fexist each p;dquote p do. loadFixed p
-else. loadFixed (pathof CREATOR) sl 'tpathjal.ijs'
+else. loadFixed PARENTDIR sl 'tpathjal.ijs'
 end.
 loadFixed TPMU sl 'manifest.ijs'
 
@@ -1920,10 +1884,5 @@ destroy=: codestroy
 runlab_z_=: runlab_uu_
 uu_z_=: uu_uu_
 blink=: empty
-
-0 :0
-uuinit_z_=: 3 : 0
-ulo=. y conew 'uu'
-)
 
 start''

@@ -221,7 +221,7 @@ NB. isascii 'able'
 
 undeslash=: 0&deslash
 
-ucode=: 1 ddefine
+ucode=: 1&$: :(4 : 0)
   NB. Substitutes (for) correct utf-8 symbols in (string) y
   NB. x==1 kosher-->unicoded
   NB. x==0 unicoded-->kosher
@@ -281,7 +281,7 @@ udumb=: 3 : 0
 zdesc; znits; 1  NB. assume 1 nominal unit is only ever required
 )
 
-make_units=: 0 ddefine
+make_units=: 0&$: :(4 : 0)
   NB. makes globals: cspel csymb units unitv uvalu uvald
   NB. x=0: DONT adjust currency
   NB. (cspel csymb) -used by: ucode to convert units: unicode<-->ascii
@@ -312,7 +312,7 @@ y=. '/%-_Ee'charsub >y
 try. {.".y catch. UNDEFINED end.
 )
 
-uniform=: '' ddefine
+uniform=: ''&$: :(4 : 0)
 0 pushme 'uniform'
   NB. x== SI-conformance level, temporarily replaces SIC
 savedSIC=. SIC

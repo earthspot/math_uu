@@ -29,7 +29,7 @@ decodedx=: 3 : 'x:^:_1 Nmks q: y'	NB. (extended)code-> pp
 decodedr=: 3 : 'x:^:_1 -/decodedx 2 x: y'  NB. (rational)code-> pp
 decoded=: decodedx :: decodedr
 
-expandcode=: (0 ddefine)"0
+expandcode=: (0&$: :(4 : 0))"0
   NB. the canonical expansion (xunit) of code: y
 NB. if. y=0 do. '' return. end.  NB. AVOIDS J HANGING <<<<<<<<<<<<<
 if. y=0 do. ,ST return. end.  NB. code 0 is KILLERCODE --> '*'
@@ -54,7 +54,7 @@ if. asTokens do. z else. dlb z end.
 NB. isGoodCode=: 13 : '-. y e. ZEROCODE,%ZEROCODE' "0
 isGoodCode=: ([: -. (ZEROCODE,%ZEROCODE) e.~ ])"0
 
-make_unitc=: 1 ddefine
+make_unitc=: 1&$: :(4 : 0)
   NB. x=pass# (1,2,3…)
   NB. does NOT use: msg or sllog, but ssw instead
 ssw=. empty  NB. -to suppress smoutput, set: ssw to: empty
@@ -315,7 +315,7 @@ elseif. do. 0 return.  NB. not a temperature scale
 end.
 )
 
-uu=: ('' ddefine)"1
+uu=: (''&$: :(4 : 0))"1
   NB. convert str: y (e.g. '212 degF') to target units (x)
 if. '*'={.y do. uuengine }.y return. end. NB. uuengine call-thru
 pushme 'uu'

@@ -40,7 +40,7 @@ for_no. ;:'eur gbp usd deg ! c eV Hz rad / *' do.
 end.
 )
 
-format=: formatOUT=: '' ddefine
+format=: formatOUT=: ''&$: :(4 : 0)
 0 pushme'formatOUT'
 msg '+++ formatOUT: ENTERED, x=[(x)] y=[(y)]'
 NO_UNITS_NEEDED=: 0

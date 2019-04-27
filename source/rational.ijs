@@ -2,25 +2,12 @@
 '==================== [uu] rational ===================='
 
 0 :0
-Friday 12 April 2019  11:59:16
--
-from: tempuu 76
--
-NOW just needs to handle: 4p1/3 -or is it: 4/3p3
-  accept 1/2p1, also 1r2p1
-  -but these are formally floating !!
--
-assert 'rational'-:datatype z
-	in all rat4* verbs?
-make reval recursive where it matters.
--
-Be suspicious of: __r1&". 
--How might number-detection actually fail?
+Saturday 27 April 2019  17:52:49
 )
 
 cocurrent 'uu'
 
-s4x=: 16 ddefine
+s4x=: 16&$: :(4 : 0)
   NB. make rational number in interval (1,10) out of integer|extended (y)
   NB. Cap #P at (x) digits
 P=. ":y

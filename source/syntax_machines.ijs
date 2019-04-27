@@ -11,7 +11,7 @@ Syntax machines defined in this script:
 
 cocurrent 'uu'
 
-spout=: 3 ddefine
+spout=: 3&$: :(4 : 0)
   NB. space out vector: y
 w=. {:$z=. vv y
 for_k. i.x-w do.

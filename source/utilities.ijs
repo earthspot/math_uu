@@ -55,7 +55,7 @@ z=. sp1 y	NB. ensure leading sign-byte: SP|SL
 z=. (z e. SP,SL) <;.1 z
 )
 
-vt=: viewtable=: '' ddefine
+vt=: viewtable=: ''&$: :(4 : 0)
   NB. y == list of indexes into UUC -- OR ALTERNATIVELY...
   NB.   y == single index (expands to a block of VIEWTABLE lines)
   NB.   y == nominal unit, e.g. 'G'

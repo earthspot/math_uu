@@ -1,9 +1,11 @@
 NB. math_uu repo - build
 0 :0
-Monday 15 April 2019  06:22:39
+Saturday 27 April 2019  18:03:06
 -
 open BUILTFILE
 )
+
+cocurrent 'base'
 
 NB.==================================
 GIT=. '~Gitruu'  NB. for JAL release

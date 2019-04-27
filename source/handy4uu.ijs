@@ -48,6 +48,7 @@ brack=:	1 |. '][' , ":  NB. layout tool for message string ->'[y]'
 nb=: [: ([: }. [: ; ' ' ,&.> ]) ":&.>	 NB. embed nums in string
 or=:  +.
 not=: -.
+sl=: ('//';'/') stringreplace ('\';'/') stringreplace [ , '/' , ]
 to=:    [ + [: i. [: >: -~	NB. eg: 3 to 5 <--> 3 4 5
 NaNoun=: 0 ~: [: nc ;:  NB. y==open list, recommended for: absent
 cmx=: [: > <;._2   NB. use with (0 : 0) --needs LF-: {:y
@@ -67,18 +68,7 @@ if. 0<: 4!:0 <y do. y~ return. end.
 
 min=: $:/ :<.
 paren=: 1 |. ')(' , ":
-pathof=: ] {.~ [: >: '/' i:~ ]
 rnd=: 0&$: :(4 : '(<. 0.5 + y*10^x)%10^x')
-
-sl=: 4 : 0
-  NB. RELIABLE path catenator
-  NB. IAC Thursday 30 August 2018  16:42:51
-SL=. '/'
-if. SL={:x do. x=. }:x end.
-if. SL={.y do. x=. }.y end.
-x,SL,y
-)
-
 term=: 3 : '>{:{. wd''sm get term'''  NB. (string) from Term window
 edwn=: 3 : '>{:{. wd''sm get edit'''  NB. (string) from Edit window
 

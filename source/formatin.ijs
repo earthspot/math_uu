@@ -125,7 +125,7 @@ msg '... take_9_general: y=(y) --> z=(z)'
 z return.
 )
 
-sval_unit=: '' ddefine
+sval_unit=: ''&$: :(4 : 0)
   NB. returns combined string with val,SP,unit
 sval=. SP taketo y -. '°'
 if. 0<#x do. 
