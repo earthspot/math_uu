@@ -1,6 +1,16 @@
 	NB. uu - utilities.ijs
 '==================== [uu] utilities ===================='
 
+cocurrent 'z'  NB. <<<<< MAKE THESE VISIBLE TO CAL TOO
+
+choice=: 4 : '((0>.1<.x)){y'
+abs=: |
+avg=: +/ % #
+div=: %
+int=: [: <. ] + 0 > ]
+mod=: |~
+times=: *
+
 cocurrent 'uu'
 
   NB. NEEDS CHECKING against long PI again >>>>>>>>>>>>>>>>>>>>
@@ -116,15 +126,32 @@ catch.
 end.
 )
 
-'========= [uu] utilities -- visible to cal too ============='
+test=: 3 : 0
+  NB. builtin test of UU - to run it press fkey 5
+smoutput '+++ BUILTIN TEST OF UU'
+smoutput '--- VERSION of UU -- ',VERSION_uu_
+try. smoutput '--- VERSION of CAL -- ',VERSION_cal_ catch. end.
+try. smoutput '--- VERSION of TABULA -- ',VERSION_tabby_ catch. end.
+  NB. tpaths.ijs - check TABULA TP*vars in _z_
+smoutput '--- TP*_z_ paths:'
+zz=. 0 2$a:
+xx=. 3 : '". y,''_z_'''
+zz=.zz ,  (xx z) ;~ z=:'TPAR'	NB. ttarchive
+zz=.zz ,  (xx z) ;~ z=:'TPAT'	NB. patch.ijs
+zz=.zz ,  (xx z) ;~ z=:'TPCA'	NB. cal.ijs
+zz=.zz ,  (xx z) ;~ z=:'TPCL'	NB. cal_log.txt
+zz=.zz ,  (xx z) ;~ z=:'TPMC'	NB. manifest (CAL)
+zz=.zz ,  (xx z) ;~ z=:'TPMT'	NB. manifest (TABULA)
+zz=.zz ,  (xx z) ;~ z=:'TPMU'	NB. manifest (UU)
+zz=.zz ,  (xx z) ;~ z=:'TPNG'	NB. toolbar.png
+zz=.zz ,  (xx z) ;~ z=:'TPSA'	NB. (SAMPLE*)
+zz=.zz ,  (xx z) ;~ z=:'TPTA'	NB. tabula.ijs
+zz=.zz ,  (xx z) ;~ z=:'TPTT'	NB. (ttables)
+zz=.zz ,  (xx z) ;~ z=:'TPUC'	NB. uuc.ijs
+zz=.zz ,  (xx z) ;~ z=:'TPUF'	NB. uuf.ijs
+zz=.zz ,  (xx z) ;~ z=:'TPUM'	NB. uum.ijs
+zz=.zz ,  (xx z) ;~ z=:'TPUT'	NB. usertools.ijs
+zz=.zz ,  (xx z) ;~ z=:'TPUU'	NB. uu.ijs
+)
 
-cocurrent 'z'  NB. <<<<< MAKE VISIBLE TO CAL TOO
-
-choice=: 4 : '((0>.1<.x)){y'
-
-abs=: |
-avg=: +/ % #
-div=: %
-int=: [: <. ] + 0 > ]
-mod=: |~
-times=: *
+test_z_=: test_uu_

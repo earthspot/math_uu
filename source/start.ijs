@@ -22,8 +22,9 @@ start=: 3 : 0
 trace DIAGNOSTICS  NB. enable tracing if DIAGNOSTICS=1
 msg '+++ [uu] start: ENTERED. y=(y)'
   NB. Create the TP*_z_ nouns (the JAL addon lacks tpathdev)
-if. fexist p=. (pathof CREATOR) sl 'tpathdev.ijs' do. loadFixed p
-else.     loadFixed (pathof CREATOR) sl 'tpathjal.ijs'
+]p=. (pathof CREATOR) sl 'tpathdev.ijs'
+if. any ;fexist each p;dquote p do. loadFixed p
+else. loadFixed (pathof CREATOR) sl 'tpathjal.ijs'
 end.
 loadFixed TPMU sl 'manifest.ijs'  NB. to get VERSION
   NB. erase unwanted globals loaded by manifest
@@ -54,7 +55,16 @@ trace DIAGNOSTICS  NB. re-enable tracing if DIAGNOSTICS=1
 msg '--- [uu] start: COMPLETED.'
 )
 
-loadFixed=: load&dquote
+loadFixed=: 3 : 0
+try. load y
+catch.
+  try. load z=. dquote y
+  catch.
+    smoutput '>>> start_uu_ cannot load script at path: ',z
+    assert 0 ['abort start_uu_'
+  end.
+end.
+)
 
 create=: start
 destroy=: codestroy

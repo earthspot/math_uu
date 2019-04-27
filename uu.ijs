@@ -17,6 +17,11 @@ AABUILT=: '2019-04-25  22:54:16'
 AABUILT=: '2019-04-26  04:16:44'
 AABUILT=: '2019-04-26  05:16:43'
 AABUILT=: '2019-04-26  05:20:06'
+AABUILT=: '2019-04-26  16:04:45'
+AABUILT=: '2019-04-27  02:19:15'
+AABUILT=: '2019-04-27  02:44:25'
+AABUILT=: '2019-04-27  02:50:21'
+AABUILT=: '2019-04-27  03:04:25'
 
 '==================== [uu] handy4uu ===================='
 cocurrent 'z'
@@ -248,6 +253,16 @@ BOIL_K=: 100x + ICE_K
 
 '==================== [uu] utilities ===================='
 
+cocurrent 'z'
+
+choice=: 4 : '((0>.1<.x)){y'
+abs=: |
+avg=: +/ % #
+div=: %
+int=: [: <. ] + 0 > ]
+mod=: |~
+times=: *
+
 cocurrent 'uu'
 
 
@@ -358,18 +373,35 @@ catch.
 end.
 )
 
-'========= [uu] utilities -- visible to cal too ============='
+test=: 3 : 0
 
-cocurrent 'z'
+smoutput '+++ BUILTIN TEST OF UU'
+smoutput '--- VERSION of UU -- ',VERSION_uu_
+try. smoutput '--- VERSION of CAL -- ',VERSION_cal_ catch. end.
+try. smoutput '--- VERSION of TABULA -- ',VERSION_tabby_ catch. end.
 
-choice=: 4 : '((0>.1<.x)){y'
+smoutput '--- TP*_z_ paths:'
+zz=. 0 2$a:
+xx=. 3 : '". y,''_z_'''
+zz=.zz ,  (xx z) ;~ z=:'TPAR'
+zz=.zz ,  (xx z) ;~ z=:'TPAT'
+zz=.zz ,  (xx z) ;~ z=:'TPCA'
+zz=.zz ,  (xx z) ;~ z=:'TPCL'
+zz=.zz ,  (xx z) ;~ z=:'TPMC'
+zz=.zz ,  (xx z) ;~ z=:'TPMT'
+zz=.zz ,  (xx z) ;~ z=:'TPMU'
+zz=.zz ,  (xx z) ;~ z=:'TPNG'
+zz=.zz ,  (xx z) ;~ z=:'TPSA'
+zz=.zz ,  (xx z) ;~ z=:'TPTA'
+zz=.zz ,  (xx z) ;~ z=:'TPTT'
+zz=.zz ,  (xx z) ;~ z=:'TPUC'
+zz=.zz ,  (xx z) ;~ z=:'TPUF'
+zz=.zz ,  (xx z) ;~ z=:'TPUM'
+zz=.zz ,  (xx z) ;~ z=:'TPUT'
+zz=.zz ,  (xx z) ;~ z=:'TPUU'
+)
 
-abs=: |
-avg=: +/ % #
-div=: %
-int=: [: <. ] + 0 > ]
-mod=: |~
-times=: *
+test_z_=: test_uu_
 
 '==================== [uu] rational ===================='
 
@@ -1838,8 +1870,9 @@ start=: 3 : 0
 trace DIAGNOSTICS
 msg '+++ [uu] start: ENTERED. y=(y)'
 
-if. fexist p=. (pathof CREATOR) sl 'tpathdev.ijs' do. loadFixed p
-else.     loadFixed (pathof CREATOR) sl 'tpathjal.ijs'
+]p=. (pathof CREATOR) sl 'tpathdev.ijs'
+if. any ;fexist each p;dquote p do. loadFixed p
+else. loadFixed (pathof CREATOR) sl 'tpathjal.ijs'
 end.
 loadFixed TPMU sl 'manifest.ijs'
 
@@ -1870,7 +1903,16 @@ trace DIAGNOSTICS
 msg '--- [uu] start: COMPLETED.'
 )
 
-loadFixed=: load&dquote
+loadFixed=: 3 : 0
+try. load y
+catch.
+  try. load z=. dquote y
+  catch.
+    smoutput '>>> start_uu_ cannot load script at path: ',z
+    assert 0 ['abort start_uu_'
+  end.
+end.
+)
 
 create=: start
 destroy=: codestroy
