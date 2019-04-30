@@ -1,5 +1,5 @@
 	NB. uu - utilities.ijs
-'==================== [uu] utilities ===================='
+'==================== [z] utilities ===================='
 
 cocurrent 'z'  NB. <<<<< MAKE THESE VISIBLE TO CAL TOO
 
@@ -10,6 +10,72 @@ div=: %
 int=: [: <. ] + 0 > ]
 mod=: |~
 times=: *
+
+test_z_=: test_uu_
+
+ot1=: open bind '~Gitcal/test/test1.ijs'
+ot1r=: open bind '~Gitrcal/test/test1.ijs'
+ocal=: open bind '~Gitcal/cal.ijs'
+ocalr=: open bind '~Gitrcal/cal.ijs'
+
+uut=: openlab=: open bind '~Gituu/uu.ijt'  NB. cf runlab
+uucr=:open bind '~Gitruu/uuc.ijs'	NB. UUC in math_uu <<<<<<
+cal=: open bind '~Gitcal/source/cal_interface.ijs'
+uuu=: open bind '~Gituu/source/uu_interface.ijs'
+
+uuc=: open bind '~addons/math/uu/uuc.ijs'
+uuf=: open bind '~addons/math/uu/uuf.ijs'
+uum=: open bind '~addons/math/uu/uum.ijs'
+
+test=: 3 : 0
+  NB. builtin test of UU - to run it press fkey 5
+smoutput '+++ BUILTIN TEST OF UU [CAL, TABULA]'
+try. smoutput '--- VERSION of UU -- ',VERSION_uu_ catch. end.
+try. smoutput '--- VERSION of CAL -- ',VERSION_cal_ catch. end.
+try. smoutput '--- VERSION of TABULA -- ',VERSION_tabby_ catch. end.
+  NB. tpaths.ijs - check TABULA TP*vars in _z_
+smoutput '--- TP*_z_ paths:'
+zz=. 0 2$a:
+xx=. 3 : '". y,''_z_'''
+zz=.zz ,  (xx z) ;~ z=:'TPAR'	NB. ttarchive
+zz=.zz ,  (xx z) ;~ z=:'TPAT'	NB. patch.ijs
+zz=.zz ,  (xx z) ;~ z=:'TPCA'	NB. cal.ijs
+zz=.zz ,  (xx z) ;~ z=:'TPCL'	NB. cal_log.txt
+zz=.zz ,  (xx z) ;~ z=:'TPMC'	NB. manifest (CAL)
+zz=.zz ,  (xx z) ;~ z=:'TPMT'	NB. manifest (TABULA)
+zz=.zz ,  (xx z) ;~ z=:'TPMU'	NB. manifest (UU)
+zz=.zz ,  (xx z) ;~ z=:'TPNG'	NB. toolbar.png
+zz=.zz ,  (xx z) ;~ z=:'TPSA'	NB. (SAMPLE*)
+zz=.zz ,  (xx z) ;~ z=:'TPTA'	NB. tabula.ijs
+zz=.zz ,  (xx z) ;~ z=:'TPTT'	NB. (ttables)
+zz=.zz ,  (xx z) ;~ z=:'TPUC'	NB. uuc.ijs
+zz=.zz ,  (xx z) ;~ z=:'TPUF'	NB. uuf.ijs
+zz=.zz ,  (xx z) ;~ z=:'TPUM'	NB. uum.ijs
+zz=.zz ,  (xx z) ;~ z=:'TPUT'	NB. usertools.ijs
+zz=.zz ,  (xx z) ;~ z=:'TPUU'	NB. uu.ijs
+)
+
+runlabuu=: 3 : 0
+  NB. private way to run uu.ijt in j807
+  NB.   see: temp 16
+if. 0=#y do.
+  ]y=. jpath TPUU,'/uu.ijt'
+end.  NB. THE LAB UNDER DEVT
+if. -.fexist y do.
+  smoutput '>>> runlab: file not found: ',y
+  return.
+end.
+]thelab_z_=: y
+trace 0	NB. to reset existing verb tracing
+require '~addons/labs/labs/labs.ijs'
+try. lab_jlab_ thelab
+catch.
+  require '~addons/labs/labs/labs805.ijs'
+  lab_jlab805_ thelab
+end.
+)
+
+'==================== [uu] utilities ===================='
 
 cocurrent 'uu'
 
@@ -105,53 +171,3 @@ ID=: 3 : 0
   NB. vt ID 'm kWh gbp'
 units i. ;:y
 )
-
-runlabuu_z_=: 3 : 0
-  NB. private way to run uu.ijt in j807
-  NB.   see: temp 16
-if. 0=#y do.
-  ]y=. jpath TPUU,'/uu.ijt'
-end.  NB. THE LAB UNDER DEVT
-if. -.fexist y do.
-  smoutput '>>> runlab: file not found: ',y
-  return.
-end.
-]thelab_z_=: y
-trace 0	NB. to reset existing verb tracing
-require '~addons/labs/labs/labs.ijs'
-try. lab_jlab_ thelab
-catch.
-  require '~addons/labs/labs/labs805.ijs'
-  lab_jlab805_ thelab
-end.
-)
-
-test=: 3 : 0
-  NB. builtin test of UU - to run it press fkey 5
-smoutput '+++ BUILTIN TEST OF UU'
-smoutput '--- VERSION of UU -- ',VERSION_uu_
-try. smoutput '--- VERSION of CAL -- ',VERSION_cal_ catch. end.
-try. smoutput '--- VERSION of TABULA -- ',VERSION_tabby_ catch. end.
-  NB. tpaths.ijs - check TABULA TP*vars in _z_
-smoutput '--- TP*_z_ paths:'
-zz=. 0 2$a:
-xx=. 3 : '". y,''_z_'''
-zz=.zz ,  (xx z) ;~ z=:'TPAR'	NB. ttarchive
-zz=.zz ,  (xx z) ;~ z=:'TPAT'	NB. patch.ijs
-zz=.zz ,  (xx z) ;~ z=:'TPCA'	NB. cal.ijs
-zz=.zz ,  (xx z) ;~ z=:'TPCL'	NB. cal_log.txt
-zz=.zz ,  (xx z) ;~ z=:'TPMC'	NB. manifest (CAL)
-zz=.zz ,  (xx z) ;~ z=:'TPMT'	NB. manifest (TABULA)
-zz=.zz ,  (xx z) ;~ z=:'TPMU'	NB. manifest (UU)
-zz=.zz ,  (xx z) ;~ z=:'TPNG'	NB. toolbar.png
-zz=.zz ,  (xx z) ;~ z=:'TPSA'	NB. (SAMPLE*)
-zz=.zz ,  (xx z) ;~ z=:'TPTA'	NB. tabula.ijs
-zz=.zz ,  (xx z) ;~ z=:'TPTT'	NB. (ttables)
-zz=.zz ,  (xx z) ;~ z=:'TPUC'	NB. uuc.ijs
-zz=.zz ,  (xx z) ;~ z=:'TPUF'	NB. uuf.ijs
-zz=.zz ,  (xx z) ;~ z=:'TPUM'	NB. uum.ijs
-zz=.zz ,  (xx z) ;~ z=:'TPUT'	NB. usertools.ijs
-zz=.zz ,  (xx z) ;~ z=:'TPUU'	NB. uu.ijs
-)
-
-test_z_=: test_uu_

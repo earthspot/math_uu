@@ -32,7 +32,7 @@ NB. ...because they interfere with orderly re-scaling by menu
 cocurrent 'uu'
 
 UUC=: cmx 0 : 0
-1 /	[saved]	Wednesday 24 April 2019  04:12:24
+1 /	[saved]	Monday 29 April 2019  00:34:02
 1 m	[m]	base unit - metre (distance)
 1 kg	[kg]	base unit - kilogramme (mass)
 1 s	[s]	base unit - second (time)
@@ -322,8 +322,9 @@ _2r3j373.15 K	[degDe]	temperature; Delisle
 1500 m/s	[snd.sea]	speed of sound in ocean/approx
 11.2 km/s	[ea.esc]	earth escape velocity
 350 ppm	[p.S]	est sulphur content of gasoline
-170 kg	[wt.human]	weight of typical man
 1.9 m	[ht.human]	height of typical man
+170 kg	[wt.human]	weight of typical man
+8e9 wt.human	[wt.humanity]	weight of all mankind
 1 cal/cm^2	[langley]	langley
 1.381e_23 J/K	[Boltzmann]	Boltzmann constant
 6.62606957e_34 J s	[Planck]	Planck constant

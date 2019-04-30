@@ -4,6 +4,14 @@ cocurrent 'z'
 
 ddefine=: 1 : 'm&$: : (4 : 0)'
 
+ide=: 3 : 0
+select. y
+  case. 0 do. wd 'ide hide' [IDE_z_=: y
+  case. 1 do. wd 'ide show' [IDE_z_=: y
+  case.   do. ide -.IDE_z_	NB. toggle status
+end.
+)
+
 AZ=: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 CO=: ':'
 DT=: '.'

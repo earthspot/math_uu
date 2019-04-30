@@ -1,5 +1,5 @@
 0 :0
-Saturday 27 April 2019  18:27:07
+Sunday 28 April 2019  21:48:20
 -
 UU: scientific units conversion package
 )
@@ -8,7 +8,7 @@ NB. clear 'uu'	NB. >>>>> DISABLE THIS LINE IN RELEASED ADDON
 coclass 'uu'
 onload_z_=: empty
 
-PARENTDIR=: (zx i: IFWIN{'/\'){.zx=.>(4!:4<'zx'){4!:3''[zx=.''
+PARENTDIR=: (zx i:'/'){.zx=.jpathsep>(4!:4<'zx'){4!:3''[zx=.''
 
-AABUILT=: '2019-04-27  18:27:12'
-AABUILT=: '2019-04-27  18:29:27'
+AABUILT=: '2019-04-29  23:14:45'
+AABUILT=: '2019-04-29  23:18:11'

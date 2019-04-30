@@ -1,20 +1,28 @@
 0 :0
-Saturday 27 April 2019  18:27:07
+Sunday 28 April 2019  21:48:20
 -
 UU: scientific units conversion package
 )
 coclass 'uu'
 onload_z_=: empty
 
-PARENTDIR=: (zx i: IFWIN{'/\'){.zx=.>(4!:4<'zx'){4!:3''[zx=.''
+PARENTDIR=: (zx i:'/'){.zx=.jpathsep>(4!:4<'zx'){4!:3''[zx=.''
 
-AABUILT=: '2019-04-27  18:27:12'
-AABUILT=: '2019-04-27  18:29:27'
+AABUILT=: '2019-04-29  23:14:45'
+AABUILT=: '2019-04-29  23:18:11'
 
 '==================== [uu] handy4uu ===================='
 cocurrent 'z'
 
 ddefine=: 1 : 'm&$: : (4 : 0)'
+
+ide=: 3 : 0
+select. y
+  case. 0 do. wd 'ide hide' [IDE_z_=: y
+  case. 1 do. wd 'ide show' [IDE_z_=: y
+  case.   do. ide -.IDE_z_
+end.
+)
 
 AZ=: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 CO=: ':'
@@ -228,7 +236,7 @@ BOIL_F=: 180x + ICE_F
 BOIL_C=: 100x + ICE_C
 BOIL_K=: 100x + ICE_K
 
-'==================== [uu] utilities ===================='
+'==================== [z] utilities ===================='
 
 cocurrent 'z'
 
@@ -239,6 +247,72 @@ div=: %
 int=: [: <. ] + 0 > ]
 mod=: |~
 times=: *
+
+test_z_=: test_uu_
+
+ot1=: open bind '~Gitcal/test/test1.ijs'
+ot1r=: open bind '~Gitrcal/test/test1.ijs'
+ocal=: open bind '~Gitcal/cal.ijs'
+ocalr=: open bind '~Gitrcal/cal.ijs'
+
+uut=: openlab=: open bind '~Gituu/uu.ijt'
+uucr=:open bind '~Gitruu/uuc.ijs'
+cal=: open bind '~Gitcal/source/cal_interface.ijs'
+uuu=: open bind '~Gituu/source/uu_interface.ijs'
+
+uuc=: open bind '~addons/math/uu/uuc.ijs'
+uuf=: open bind '~addons/math/uu/uuf.ijs'
+uum=: open bind '~addons/math/uu/uum.ijs'
+
+test=: 3 : 0
+
+smoutput '+++ BUILTIN TEST OF UU [CAL, TABULA]'
+try. smoutput '--- VERSION of UU -- ',VERSION_uu_ catch. end.
+try. smoutput '--- VERSION of CAL -- ',VERSION_cal_ catch. end.
+try. smoutput '--- VERSION of TABULA -- ',VERSION_tabby_ catch. end.
+
+smoutput '--- TP*_z_ paths:'
+zz=. 0 2$a:
+xx=. 3 : '". y,''_z_'''
+zz=.zz ,  (xx z) ;~ z=:'TPAR'
+zz=.zz ,  (xx z) ;~ z=:'TPAT'
+zz=.zz ,  (xx z) ;~ z=:'TPCA'
+zz=.zz ,  (xx z) ;~ z=:'TPCL'
+zz=.zz ,  (xx z) ;~ z=:'TPMC'
+zz=.zz ,  (xx z) ;~ z=:'TPMT'
+zz=.zz ,  (xx z) ;~ z=:'TPMU'
+zz=.zz ,  (xx z) ;~ z=:'TPNG'
+zz=.zz ,  (xx z) ;~ z=:'TPSA'
+zz=.zz ,  (xx z) ;~ z=:'TPTA'
+zz=.zz ,  (xx z) ;~ z=:'TPTT'
+zz=.zz ,  (xx z) ;~ z=:'TPUC'
+zz=.zz ,  (xx z) ;~ z=:'TPUF'
+zz=.zz ,  (xx z) ;~ z=:'TPUM'
+zz=.zz ,  (xx z) ;~ z=:'TPUT'
+zz=.zz ,  (xx z) ;~ z=:'TPUU'
+)
+
+runlabuu=: 3 : 0
+
+
+if. 0=#y do.
+  ]y=. jpath TPUU,'/uu.ijt'
+end.
+if. -.fexist y do.
+  smoutput '>>> runlab: file not found: ',y
+  return.
+end.
+]thelab_z_=: y
+trace 0
+require '~addons/labs/labs/labs.ijs'
+try. lab_jlab_ thelab
+catch.
+  require '~addons/labs/labs/labs805.ijs'
+  lab_jlab805_ thelab
+end.
+)
+
+'==================== [uu] utilities ===================='
 
 cocurrent 'uu'
 
@@ -329,56 +403,6 @@ ID=: 3 : 0
 
 units i. ;:y
 )
-
-runlabuu_z_=: 3 : 0
-
-
-if. 0=#y do.
-  ]y=. jpath TPUU,'/uu.ijt'
-end.
-if. -.fexist y do.
-  smoutput '>>> runlab: file not found: ',y
-  return.
-end.
-]thelab_z_=: y
-trace 0
-require '~addons/labs/labs/labs.ijs'
-try. lab_jlab_ thelab
-catch.
-  require '~addons/labs/labs/labs805.ijs'
-  lab_jlab805_ thelab
-end.
-)
-
-test=: 3 : 0
-
-smoutput '+++ BUILTIN TEST OF UU'
-smoutput '--- VERSION of UU -- ',VERSION_uu_
-try. smoutput '--- VERSION of CAL -- ',VERSION_cal_ catch. end.
-try. smoutput '--- VERSION of TABULA -- ',VERSION_tabby_ catch. end.
-
-smoutput '--- TP*_z_ paths:'
-zz=. 0 2$a:
-xx=. 3 : '". y,''_z_'''
-zz=.zz ,  (xx z) ;~ z=:'TPAR'
-zz=.zz ,  (xx z) ;~ z=:'TPAT'
-zz=.zz ,  (xx z) ;~ z=:'TPCA'
-zz=.zz ,  (xx z) ;~ z=:'TPCL'
-zz=.zz ,  (xx z) ;~ z=:'TPMC'
-zz=.zz ,  (xx z) ;~ z=:'TPMT'
-zz=.zz ,  (xx z) ;~ z=:'TPMU'
-zz=.zz ,  (xx z) ;~ z=:'TPNG'
-zz=.zz ,  (xx z) ;~ z=:'TPSA'
-zz=.zz ,  (xx z) ;~ z=:'TPTA'
-zz=.zz ,  (xx z) ;~ z=:'TPTT'
-zz=.zz ,  (xx z) ;~ z=:'TPUC'
-zz=.zz ,  (xx z) ;~ z=:'TPUF'
-zz=.zz ,  (xx z) ;~ z=:'TPUM'
-zz=.zz ,  (xx z) ;~ z=:'TPUT'
-zz=.zz ,  (xx z) ;~ z=:'TPUU'
-)
-
-test_z_=: test_uu_
 
 '==================== [uu] rational ===================='
 
