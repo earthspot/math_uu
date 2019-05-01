@@ -1,15 +1,16 @@
 	NB. uu - start.ijs
 '==================== [uu] start ===================='
 0 :0
-Saturday 27 April 2019  18:28:19
+Wednesday 1 May 2019  03:47:30
 )
 
+require 'format/zulu'
 cocurrent 'uu'
 
 VERSION=: '?.?.?'  NB. overridden by: manifest.ijs
 
-DIAGNOSTICS=: 0	NB. LOCAL NOUN: y==0 sets msg=:sllog=:empty
-CAPPED=: 40	NB. LOCAL NOUN: apped digits in a rational number
+DIAGNOSTICS=: 0	NB. y==0 sets msg=:sllog=:empty
+CAPPED=: 40	NB. capped digits in a rational number
 
 start=: 3 : 0
   NB. start the UU locale - which may be a numbered one.
@@ -20,6 +21,7 @@ start=: 3 : 0
   NB. But not needed if only the functions library (UUF) changed
 trace DIAGNOSTICS  NB. enable tracing if DIAGNOSTICS=1
 msg '+++ [uu] start: ENTERED. y=(y)'
+loadFixed PARENTDIR sl 'handy4uu.ijs'
   NB. Create TPMU TPUC TPUF TPUM by loading one of tpath*.ijs
 ]p=. PARENTDIR sl 'tpathdev.ijs'
   NB. JAL addon lacks tpathdev.ijs. Only has tpathjal.ijs

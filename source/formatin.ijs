@@ -50,13 +50,6 @@ try. val=. ". strValueOf y
 catch. _. end.
 )
 
-rvalueOf=: 3 : 0
-  NB. extract the (RATIONAL) value of (qty-string) y
-  NB. c/f eval, valueOf
-try. val=. reval strValueOf y	NB. <<<<< rational
-catch. _. end.
-)
-
 strValueOf=: 3 : 0
   NB. extract the (numeral-string) value of (qty-string) y
   NB. c/f eval

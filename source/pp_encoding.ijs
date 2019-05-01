@@ -5,7 +5,7 @@
 cocurrent 'uu'
 
 0 :0
-Wednesday 20 March 2019  19:21:15
+Tuesday 30 April 2019  22:46:22
 )
 
 UNSETCODE=: BADCODE=: KILLERCODE=: ZEROCODE=: 0x
@@ -314,87 +314,3 @@ elseif. by e. 2 {.each TEMPERATURE_SCALES do. 1 return.
 elseif. do. 0 return.  NB. not a temperature scale
 end.
 )
-
-uu=: (''&$: :(4 : 0))"1
-  NB. convert str: y (e.g. '212 degF') to target units (x)
-if. '*'={.y do. uuengine }.y return. end. NB. uuengine call-thru
-pushme 'uu'
-yf=: dltb formatIN y  NB. y--> SI units, esp Fahrenheit--> K
-valu=: valueOf yf
-ralu=: rvalueOf yf	NB. <<<<< rational
-unit=: bris unitsOf yf
-	sllog 'uu_0 x y yf valu ralu unit'
-if. 0=#x do.		NB. (x) is empty | monadic invocation
-  'coefu rcoefu code'=. qtcode4anyunit unit
-  coeft=. 1
-  rcoeft=. 1r1	NB. <<<<< rational
-  codet=. codeu=. code
-  targ=. canon expandcode code  NB. infer target units from: (code)
-	sllog 'uu_1 targ unit'
-elseif. x-:'=' do.		NB. target units are the nominal units
-  targ=. unit
-elseif. do.		NB. target units are (x)
-  targ=. bris x  NB. (x) in kosher: 'm/s^2' ...NOT 'm s⁻²'
-  'coeft rcoeft codet'=. qtcode4anyunit targ
-  'coefu rcoefu codeu'=. qtcode4anyunit unit
-	sllog 'uu_1 targ unit'
-	sllog 'uu_1 coeft coefu rcoeft rcoefu codet codeu'
-  if. codet ~: codeu do.
-    z=. sw'>>> uu: incompatible units: x=[(x)] targ=[(targ)] unit=[(unit)]'
-NB. z=. z,LF, '... coeft=(coeft) coefu=(coefu) rcoeft=(coeft) rcoefu=(coefu) codet=(codet) codeu=(codeu)'
-    z return.
-  end.
-end.
-  NB. compute target value: vatarg
-if. (cannotScale unit) or (x-:'=') do.
-  vatarg=. valu  NB. then formatOUT must itself scale and displace
-  ratarg=. ralu	NB. <<<<< rational
-else.
-  dispt=. displacement targ
-  dispu=. displacement unit
-  rdispt=. rdisplacement targ	NB. <<<<< rational
-  rdispu=. rdisplacement unit	NB. <<<<< rational
-  vatarg=. valu scale_displace~ coeft,coefu,dispt,dispu
-  assert. notFloat ratarg=. ralu scale_displace~ rcoeft,rcoefu,rdispt,rdispu	NB. <<<<< rational
-end.
-  NB. cache the exact value, obtained from the rational calculations
-UU_VALUE=: ratarg	NB. <<<<< rational
-  NB. Format the target value: vatarg
-  NB. ONLY USE the (floating) value, vatarg <<<<<
-z=. targ formatOUT vatarg
-	sllog 'uu_3 z vatarg VEXIN VEX'
-  NB. The effective "take_" verb in formatOUT sets NO_UNITS_NEEDED
-if. NO_UNITS_NEEDED do. z else. deb z,SP,uniform targ end.
-)
-
-scale_displace=: 4 : 0
-  NB. apply factors and displacements between two UUC constants
-  NB. x== coeft,coefu,dispt,dispu
-  NB. y== (valu) -value of qty with coefu,dispu
-  NB. returned: target value
-'coeft coefu dispt dispu'=. z=: x,(4-~#x){.1 1 0 0
-vaSI=. dispu + y*coefu  NB. the SI-value of y
-(vaSI-dispt)%coeft  NB. undoes SI using dispt;coeft
-)
-NB. ]F0=. 459.67 * 5r9	NB. exact definition
-NB. ]C0=. 273.15 	NB. exact definition
-NB. smoutput (1 0.555648 0 _0.0455)	scale_displace 491.67	NB. Ra-->K
-NB. smoutput (1 0.555648 0 _0.0455)	scale_displace 671.64	NB. Ra-->K
-NB. smoutput (1 1.25 0 273.15)	scale_displace 0	NB. Re-->K
-NB. smoutput (1 1.25 0 273.15)	scale_displace 80	NB. Re-->K
-NB. smoutput (1 1 0,C0)	scale_displace 0	NB. C-->K
-NB. smoutput (1 1 0,C0)	scale_displace 100	NB. C-->K
-NB. smoutput (1 5r9 0,F0)	scale_displace 32	NB. F-->K
-NB. smoutput (1 5r9 0,F0)	scale_displace 212	NB. F-->K
-NB. smoutput (1 5r9,C0,F0)	scale_displace 32	NB. F-->C
-NB. smoutput (1 5r9,C0,F0)	scale_displace 212	NB. F-->C
-NB. smoutput (0.555648 1,F0,C0)	scale_displace 0	NB. C-->F (32)
-NB. smoutput (0.555648 1,F0,C0)	scale_displace 100	NB. C-->F (212)
-NB. smoutput (0.555648 1 _0.0455,C0)	scale_displace 0	NB. C-->Ra (491.67)
-NB. smoutput (0.555648 1 _0.0455,C0)	scale_displace 100	NB. C-->Ra (671.64)
-NB. smoutput (1.90476 1 258.8644,C0)	scale_displace 0	NB. C-->Ro (7.5)
-NB. smoutput (1.90476 1 258.8644,C0)	scale_displace 100	NB. C-->Ro (60)
-NB. smoutput (3.0303 1 273.15 ,C0)	scale_displace 0	NB. C-->N (0)
-NB. smoutput (3.0303 1 273.15 ,C0)	scale_displace 100	NB. C-->N (33)
-NB. smoutput (_2r3 1 373.15 ,C0)	scale_displace 0	NB. C-->De (150)
-NB. smoutput (_2r3 1 373.15 ,C0)	scale_displace 100	NB. C-->De (0)

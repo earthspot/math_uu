@@ -10,90 +10,8 @@ PARENTDIR=: (zx i:'/'){.zx=.jpathsep>(4!:4<'zx'){4!:3''[zx=.''
 
 AABUILT=: '2019-04-29  23:14:45'
 AABUILT=: '2019-04-29  23:18:11'
-
-'==================== [uu] handy4uu ===================='
-cocurrent 'z'
-
-ddefine=: 1 : 'm&$: : (4 : 0)'
-
-ide=: 3 : 0
-select. y
-  case. 0 do. wd 'ide hide' [IDE_z_=: y
-  case. 1 do. wd 'ide show' [IDE_z_=: y
-  case.   do. ide -.IDE_z_
-end.
-)
-
-AZ=: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-CO=: ':'
-DT=: '.'
-NUL=: 0{a.
-az=: 'abcdefghijklmnopqrstuvwxyz'
-n9=: '0123456789'
-
-Cut=: <;._1
-
-real=: 9&o.
-imag=: 11&o.
-
-ifdefined=: 0 <: [: 4!:0 <
-
-isLit=: 2 2048 e.~ 3!:0
-isNum=: 1 4 8 64 128 e.~ 3!:0
-isScalar=: [: {. 0 = [: $ $
-isNo=: isNum *. isScalar
-   
-daterev=: 3 : 'if. 31<2{y do. |.3{.y else. 3{.y end.'
-dayy=: (Cut ' Sunday Monday Tuesday Wednesday Thursday Friday Saturday') pick~ [: weekday 3 {. ]
-isBoxed=: 0 < L.
-llog=: (1 { ":)@(,@([: ] ;: ,. [: ".&.> ;:))
-
-smresolve=: (((<0),(<3 3 2$1 0 0 0 0 0 2 1 2 1 2 1 2 0 0 3 2 0),<'(';')') ;: ucp)"1
-sw=: ] rplc [: , (paren&.> ,. ":&".&.>)&smresolve
-emsg=: smoutput&sw
-ssw=: smoutput&sw
-zeroifabsent=: [: {. ".
-ifabsent=: 4 : 'if. ifdefined y do. ".y else. x end.'
-
-all=: *./
-and=: *.
-any=: +./
-o4b=: b2o=:	}.@((<SP) ;@,. ])
-b4o=: o2b=:	[: <;._1 SP , ]
-b4f=: f2b=:	[: <;._1 LF , ]
-
-
-begins=: beginsWith=: ] -: [ {.~ [: # ]
-brack=:	1 |. '][' , ":
-nb=: [: ([: }. [: ; ' ' ,&.> ]) ":&.>
-or=:  +.
-not=: -.
-sl=: ('//';'/') stringreplace ('\';'/') stringreplace [ , '/' , ]
-to=:    [ + [: i. [: >: -~
-NaNoun=: 0 ~: [: nc ;:
-cmx=: [: > <;._2
-date=: 6!:0@('YYYY-MM-DD  hh:mm:ss'"_)
-day=: dayy&daterev
-
-default=: 0&$: :(4 : 0)
-
-
-
-
-
-
-if. 0<: 4!:0 <y do. y~ return. end.
-(y)=:x
-)
-
-min=: $:/ :<.
-paren=: 1 |. ')(' , ":
-rnd=: 0&$: :(4 : '(<. 0.5 + y*10^x)%10^x')
-term=: 3 : '>{:{. wd''sm get term'''
-edwn=: 3 : '>{:{. wd''sm get edit'''
-
-vv=: ":@|:@,:
-x2f=: }.@((<10{a.) ;@,. ])@([: (#~ ([: +./\. ' '&~:))&.> <"1)
+AABUILT=: '2019-05-01  03:47:33'
+AABUILT=: '2019-05-01  03:48:44'
 
 '==================== [uu] constants ===================='
 
@@ -407,7 +325,7 @@ units i. ;:y
 '==================== [uu] rational ===================='
 
 0 :0
-Saturday 27 April 2019  17:52:49
+Wednesday 1 May 2019  00:57:07
 )
 
 cocurrent 'uu'
@@ -448,6 +366,7 @@ elseif. 'x'= {:y do. rat4x y
 elseif. y begins '10^' do. rat4pt ::rat4po y
 elseif. '^' e. y do. rat4po y
 elseif. 0=nc <y  do. rat4pn y
+elseif.          do. BADRAT
 end.
 )
 
@@ -1042,13 +961,99 @@ end.
 i.0 0
 )
 
+'==================== [uu] uuverb.ijs ===================='
+
+cocurrent 'uu'
+
+0 :0
+Tuesday 30 April 2019  23:57:36
+)
+
+uu=: (''&$: :(4 : 0))"1
+
+if. '*'={.y do. uuengine }.y return. end.
+pushme 'uu'
+yf=: dltb formatIN y
+valu=: valueOf yf
+ralu=: rvalueOf yf
+	assert. notFloat RALU__=: ralu
+unit=: bris unitsOf yf
+	sllog 'uu_0 x y yf valu ralu unit'
+if. 0=#x do.
+  'coefu rcoefu code'=. qtcode4anyunit unit
+  coeft=. 1
+  rcoeft=. 1r1
+  codet=. codeu=. code
+  targ=. canon expandcode code
+	sllog 'uu_1 targ unit'
+elseif. x-:'=' do.
+  targ=. unit
+elseif. do.
+  targ=. bris x
+  'coeft rcoeft codet'=. qtcode4anyunit targ
+  'coefu rcoefu codeu'=. qtcode4anyunit unit
+	sllog 'uu_1 targ unit'
+	sllog 'uu_1 coeft coefu rcoeft rcoefu codet codeu'
+  if. codet ~: codeu do.
+    z=. sw'>>> uu: incompatible units: x=[(x)] targ=[(targ)] unit=[(unit)]'
+    z return.
+  end.
+end.
+
+if. (cannotScale unit) or (x-:'=') do.
+  vatarg=. valu
+  ratarg=. ralu
+else.
+  dispt=. displacement targ
+  dispu=. displacement unit
+  rdispt=. rdisplacement targ
+  rdispu=. rdisplacement unit
+	X__  =: coeft,coefu,dispt,dispu
+  vatarg=. valu scale_displace~ coeft,coefu,dispt,dispu
+	RX__  =: rcoeft,rcoefu,rdispt,rdispu
+  ratarg=. ralu scale_displace~ rcoeft,rcoefu,rdispt,rdispu
+	assert. notFloat RATARG__=: ratarg
+end.
+
+UU_VALUE=: ratarg
+
+
+z=. targ formatOUT vatarg
+	sllog 'uu_3 z vatarg VEXIN VEX'
+
+if. NO_UNITS_NEEDED do. z else. deb z,SP,uniform targ end.
+)
+
+rvalueOf=: 3 : 0
+
+
+try. val=. reval strValueOf y
+catch. BADRAT end.
+)
+
+scale_displace=: 4 : 0
+
+
+
+
+'coeft coefu dispt dispu'=. z=: x,(4-~#x){.1 1 0 0
+vaSI=. dispu + y*coefu
+(vaSI-dispt)%coeft
+)
+onload }: 0 :0
+smoutput uu 100 ; 'ft'
+)
+0 :0
+smoutput uu '212 degF'
+)
+
 '==================== [uu] pp_encoding.ijs ===================='
 
 
 cocurrent 'uu'
 
 0 :0
-Wednesday 20 March 2019  19:21:15
+Tuesday 30 April 2019  22:46:22
 )
 
 UNSETCODE=: BADCODE=: KILLERCODE=: ZEROCODE=: 0x
@@ -1340,67 +1345,6 @@ elseif. do. 0 return.
 end.
 )
 
-uu=: (''&$: :(4 : 0))"1
-
-if. '*'={.y do. uuengine }.y return. end.
-pushme 'uu'
-yf=: dltb formatIN y
-valu=: valueOf yf
-ralu=: rvalueOf yf
-unit=: bris unitsOf yf
-	sllog 'uu_0 x y yf valu ralu unit'
-if. 0=#x do.
-  'coefu rcoefu code'=. qtcode4anyunit unit
-  coeft=. 1
-  rcoeft=. 1r1
-  codet=. codeu=. code
-  targ=. canon expandcode code
-	sllog 'uu_1 targ unit'
-elseif. x-:'=' do.
-  targ=. unit
-elseif. do.
-  targ=. bris x
-  'coeft rcoeft codet'=. qtcode4anyunit targ
-  'coefu rcoefu codeu'=. qtcode4anyunit unit
-	sllog 'uu_1 targ unit'
-	sllog 'uu_1 coeft coefu rcoeft rcoefu codet codeu'
-  if. codet ~: codeu do.
-    z=. sw'>>> uu: incompatible units: x=[(x)] targ=[(targ)] unit=[(unit)]'
-    z return.
-  end.
-end.
-
-if. (cannotScale unit) or (x-:'=') do.
-  vatarg=. valu
-  ratarg=. ralu
-else.
-  dispt=. displacement targ
-  dispu=. displacement unit
-  rdispt=. rdisplacement targ
-  rdispu=. rdisplacement unit
-  vatarg=. valu scale_displace~ coeft,coefu,dispt,dispu
-  assert. notFloat ratarg=. ralu scale_displace~ rcoeft,rcoefu,rdispt,rdispu
-end.
-
-UU_VALUE=: ratarg
-
-
-z=. targ formatOUT vatarg
-	sllog 'uu_3 z vatarg VEXIN VEX'
-
-if. NO_UNITS_NEEDED do. z else. deb z,SP,uniform targ end.
-)
-
-scale_displace=: 4 : 0
-
-
-
-
-'coeft coefu dispt dispu'=. z=: x,(4-~#x){.1 1 0 0
-vaSI=. dispu + y*coefu
-(vaSI-dispt)%coeft
-)
-
 '==================== [uu] format.ijs =================='
 
 cocurrent 'uu'
@@ -1641,13 +1585,6 @@ try. val=. ". strValueOf y
 catch. _. end.
 )
 
-rvalueOf=: 3 : 0
-
-
-try. val=. reval strValueOf y
-catch. _. end.
-)
-
 strValueOf=: 3 : 0
 
 
@@ -1837,9 +1774,10 @@ end.
 
 '==================== [uu] start ===================='
 0 :0
-Saturday 27 April 2019  18:28:19
+Wednesday 1 May 2019  03:47:30
 )
 
+require 'format/zulu'
 cocurrent 'uu'
 
 VERSION=: '?.?.?'
@@ -1856,6 +1794,7 @@ start=: 3 : 0
 
 trace DIAGNOSTICS
 msg '+++ [uu] start: ENTERED. y=(y)'
+loadFixed PARENTDIR sl 'handy4uu.ijs'
 
 ]p=. PARENTDIR sl 'tpathdev.ijs'
 

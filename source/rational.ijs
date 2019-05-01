@@ -2,7 +2,7 @@
 '==================== [uu] rational ===================='
 
 0 :0
-Saturday 27 April 2019  17:52:49
+Wednesday 1 May 2019  00:57:07
 )
 
 cocurrent 'uu'
@@ -46,6 +46,7 @@ elseif. 'x'= {:y do. rat4x y
 elseif. y begins '10^' do. rat4pt ::rat4po y
 elseif. '^' e. y do. rat4po y
 elseif. 0=nc <y  do. rat4pn y
+elseif.          do. BADRAT
 end.
 )
 
