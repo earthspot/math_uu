@@ -1,19 +1,17 @@
 0 :0
-Wednesday 1 May 2019  05:37:38
+Wednesday 1 May 2019  07:28:06
 -
 UU: scientific units conversion package
 )
 
 require 'format/zulu'
 require 'math/uu/handy4uu'
-
 coclass 'uu'
 onload_z_=: empty
 
 PARENTDIR=: (zx i:'/'){.zx=.jpathsep>(4!:4<'zx'){4!:3''[zx=.''
 
-AABUILT=: '2019-05-01  05:37:43'
-AABUILT=: '2019-05-01  05:47:40'
+AABUILT=: '2019-05-01  07:28:13'
 
 '==================== [uu] constants ===================='
 
@@ -975,12 +973,18 @@ uu=: (''&$: :(4 : 0))"1
 
 if. '*'={.y do. uuengine }.y return. end.
 pushme 'uu'
-yf=: dltb formatIN y
-valu=: valueOf yf
-ralu=: rvalueOf yf
+if. isBoxed y do.
+  'valu unit'=. y
+  unit=. bris unit
+  ralu=. rat valu
+else.
+  yf=: dltb formatIN y
+  valu=: valueOf yf
+  ralu=: rvalueOf yf
 	assert. notFloat RALU__=: ralu
-unit=: bris unitsOf yf
-	sllog 'uu_0 x y yf valu ralu unit'
+  unit=: bris unitsOf yf
+end.
+	sllog 'uu x y valu ralu unit'
 if. 0=#x do.
   'coefu rcoefu code'=. qtcode4anyunit unit
   coeft=. 1
@@ -1043,7 +1047,7 @@ vaSI=. dispu + y*coefu
 (vaSI-dispt)%coeft
 )
 onload }: 0 :0
-smoutput uu 100 ; 'ft'
+smoutput uu 2r3 ; 'ft'
 )
 0 :0
 smoutput uu '212 degF'

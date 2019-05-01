@@ -18,9 +18,11 @@ end.
 )
 
 AZ=: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+CM=: ','
 CO=: ':'
 DT=: '.'
 NUL=: 0{a.
+QT=: ''''
 SP=: ' '
 az=: 'abcdefghijklmnopqrstuvwxyz'
 n9=: '0123456789'
@@ -37,6 +39,7 @@ daterev=: 3 : 'if. 31<2{y do. |.3{.y else. 3{.y end.'
 dayy=: (Cut ' Sunday Monday Tuesday Wednesday Thursday Friday Saturday') pick~ [: weekday 3 {. ]
 isBoxed=: 0 < L.
 llog=: (1 { ":)@(,@([: ] ;: ,. [: ".&.> ;:))
+q1=: '''' , '''' ,~ [: ": >
 smclear=: 3 : 'wd ''sm set term text *'',y'
   NB. smresolve=. is only used by Swift-string verb: sw
 smresolve=: (((<0),(<3 3 2$1 0 0 0 0 0 2 1 2 1 2 1 2 0 0 3 2 0),<'(';')') ;: ucp)"1

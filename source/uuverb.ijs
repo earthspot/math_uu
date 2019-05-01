@@ -11,12 +11,18 @@ uu=: (''&$: :(4 : 0))"1
   NB. convert str: y (e.g. '212 degF') to target units (x)
 if. '*'={.y do. uuengine }.y return. end. NB. uuengine call-thru
 pushme 'uu'
-yf=: dltb formatIN y  NB. y--> SI units, esp Fahrenheit--> K
-valu=: valueOf yf
-ralu=: rvalueOf yf	NB. <<<<< rational
+if. isBoxed y do.
+  'valu unit'=. y
+  unit=. bris unit
+  ralu=. rat valu
+else.
+  yf=: dltb formatIN y  NB. y--> SI units, esp Fahrenheit--> K
+  valu=: valueOf yf
+  ralu=: rvalueOf yf	NB. <<<<< rational
 	assert. notFloat RALU__=: ralu
-unit=: bris unitsOf yf
-	sllog 'uu_0 x y yf valu ralu unit'
+  unit=: bris unitsOf yf
+end.
+	sllog 'uu x y valu ralu unit'
 if. 0=#x do.		NB. (x) is empty | monadic invocation
   'coefu rcoefu code'=. qtcode4anyunit unit
   coeft=. 1
@@ -82,7 +88,7 @@ vaSI=. dispu + y*coefu  NB. the SI-value of y
 
 NB. onload 'load temp 94'
 onload }: 0 :0
-smoutput uu 100 ; 'ft'
+smoutput uu 2r3 ; 'ft'
 )
 0 :0
 smoutput uu '212 degF'

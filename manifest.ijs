@@ -2,9 +2,11 @@ NB. math/uu manifest
 
 CAPTION=: 'Scientific units conversion package'
 
-VERSION=: '2.1.13'
+VERSION=: '2.1.14'
 
-DEPENDS=: ''
+DEPENDS=: 0 : 0
+format/zulu
+)
 
 FILES=: 0 : 0
 manifest.ijs
