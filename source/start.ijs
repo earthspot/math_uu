@@ -4,7 +4,6 @@
 Wednesday 1 May 2019  03:47:30
 )
 
-require 'format/zulu'
 cocurrent 'uu'
 
 VERSION=: '?.?.?'  NB. overridden by: manifest.ijs
