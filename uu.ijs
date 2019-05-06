@@ -12,6 +12,14 @@ onload_z_=: empty
 PARENTDIR=: (zx i:'/'){.zx=.jpathsep>(4!:4<'zx'){4!:3''[zx=.''
 
 AABUILT=: '2019-05-01  07:28:13'
+AABUILT=: '2019-05-05  03:18:56'
+AABUILT=: '2019-05-05  04:51:55'
+AABUILT=: '2019-05-05  11:14:56'
+AABUILT=: '2019-05-06  02:24:04'
+AABUILT=: '2019-05-06  02:32:56'
+AABUILT=: '2019-05-06  05:43:32'
+AABUILT=: '2019-05-06  05:47:07'
+AABUILT=: '2019-05-06  06:29:29'
 
 '==================== [uu] constants ===================='
 
@@ -157,6 +165,8 @@ BOIL_K=: 100x + ICE_K
 '==================== [z] utilities ===================='
 
 cocurrent 'z'
+
+ident=: ([: , [) -: ([: , ])
 
 choice=: 4 : '((0>.1<.x)){y'
 abs=: |
@@ -615,7 +625,6 @@ end.
 )
 
 canon=: 3 : 0
-pushme 'canon'
 
 
 
@@ -631,7 +640,6 @@ end.
 z=. debnSL dlb ; sort utoks z
 if. 0=#z do. z=. ,SL end.
 msg '--- canon: EXITS: z=(z)'
-0 popme 'canon'
 z return.
 )
 
@@ -648,7 +656,6 @@ zz return.
 )
 
 coll=: 4 : 0
-pushme 'coll'
 
 
 
@@ -661,7 +668,6 @@ for_p. 4 3 2 do.
   z=. z rplc ((p*$n)$n);(n,P,":p) ; ((p*$d)$d);(d,P,":p)
   msg '+++ coll:   z=(z) power:p=(p)'
 end.
-0 popme 'coll'
 z return.
 )
 
@@ -677,7 +683,6 @@ end.
 )
 
 deslash=: 1&$: : (4 : 0)
-pushme 'deslash'
 
 
 
@@ -694,7 +699,6 @@ for_cu. utoks y do. cunit=. >cu
   end.
   r=. r,cunit
 end.
-popme 'deslash'
 dlb r return.
 )
 
@@ -766,7 +770,6 @@ z return.
 )
 
 selfcanc=: 3 : 0
-pushme 'selfcanc'
 msg '+++ selfcanc: ENTERED'
 
 
@@ -779,7 +782,6 @@ end.
 z=. dlb canon z
 z=. z rplc '/^2';'/';'/^3';'/';'/^4';'/';'/^5';'/';'/^6';'/';'/^7';'/';'/^8';'/';'/^9';'/'
 msg '--- selfcanc: EXITS: z=(z)'
-0 popme 'selfcanc'
 z return.
 )
 
@@ -788,7 +790,6 @@ slash1=: 1&$: : (4 : 0)
 
 z=. deb y
 if. x do.
-  if. SIC>:2 do. y return. end.
   if. ')'={:z do. y return. end.
   z=. canon z
   a=. '/' taketo z
@@ -903,50 +904,42 @@ eval=: 3 : 0 "1
 y=. '/%-_Ee'charsub >y
 try. {.".y catch. UNDEFINED end.
 )
-
 uniform=: ''&$: :(4 : 0)
-0 pushme 'uniform'
 
-savedSIC=. SIC
-if. -. x-:'' do. SIC=: x end.
-msg '+++ uniform: ENTERED: x=(x) y=(y)'
+
+
+if. 0=#x do. sic=. SIC else. sic=. x end.
+msg '+++ uniform: ENTERED: x=(x) sic=(sic)  y=(y)'
 
 y=. utf8 deb y
-select. SIC
- case. 0 do.
+select. sic
+case. 0 do.
   z=. unucode undotted y
- case. 1 do.
-  ]z=. undotted y
-  if. 1< +/SL=y do.
-    ]z=. slash1 z
-  end.
-  ]z=. ucode z
-fcase. 2 do.
- case. 3 do.
-  if. y-: ,SL do.
-    msg '--- uniform: y=SL returns NIL'
-    0 popme 'uniform'
-    '' [SIC=: savedSIC return.
+case. 1 do.
+  z=. undotted y
+
+  if. 1< +/SL=y do. z=. slash1 z end.
+  z=. ucode z
+fcase.2 do.
+case. 3 do.
+  if. SL ident y do.
+    msg '--- uniform: y=(crex y) returns NIL'
+    NIL return.
   end.
   ]z=. unucode undotted y
   ]z=. ucode deslash unslash1 z
-  if. SIC=3 do. z=. dotted z end.
+  if. sic=3 do. z=. dotted z end.
 end.
-popme 'uniform'
-z [SIC=: savedSIC return.
+z return.
 )
 
 undeg=: 3600 %~ _ 60 60 #. 3 {. ]
 undotted=: 0&dotted
 unslash1=: 0&slash1
 unucode=: 0&ucode
-upost=: 4 : 'y,(x#~*SIC)'
 uurowsc=: 4 : '(UUC ssmx y){UUC [UCASE=: x'
 uurowsf=: 4 : '(UUF ssmx y){UUF [UCASE=: x'
 listedUnits=: 3 : 'units e.~ <,y'
-pushme=: empty
-popme=: empty
-
 trace=: 3 : 0
 
 
@@ -966,66 +959,40 @@ i.0 0
 cocurrent 'uu'
 
 0 :0
-Tuesday 30 April 2019  23:57:36
+Monday 6 May 2019  02:17:12
+-
+'ft/s^2' uu '1 Å h⁻²'
+	FAILS
 )
 
 uu=: (''&$: :(4 : 0))"1
 
 if. '*'={.y do. uuengine }.y return. end.
-pushme 'uu'
 if. isBoxed y do.
   'valu unit'=. y
-  unit=. bris unit
-  ralu=. rat valu
+  rvalu=. rat valu
 else.
   yf=: dltb formatIN y
   valu=: valueOf yf
-  ralu=: rvalueOf yf
-	assert. notFloat RALU__=: ralu
-  unit=: bris unitsOf yf
+  rvalu=: rvalueOf yf
+  unit=: unitsOf yf
 end.
-	sllog 'uu x y valu ralu unit'
+	sllog 'uu x y valu rvalu unit'
 if. 0=#x do.
-  'coefu rcoefu code'=. qtcode4anyunit unit
-  coeft=. 1
-  rcoeft=. 1r1
-  codet=. codeu=. code
-  targ=. canon expandcode code
-	sllog 'uu_1 targ unit'
-elseif. x-:'=' do.
-  targ=. unit
-elseif. do.
-  targ=. bris x
-  'coeft rcoeft codet'=. qtcode4anyunit targ
-  'coefu rcoefu codeu'=. qtcode4anyunit unit
-	sllog 'uu_1 targ unit'
-	sllog 'uu_1 coeft coefu rcoeft rcoefu codet codeu'
-  if. codet ~: codeu do.
-    z=. sw'>>> uu: incompatible units: x=[(x)] targ=[(targ)] unit=[(unit)]'
-    z return.
-  end.
-end.
-
-if. (cannotScale unit) or (x-:'=') do.
-  vatarg=. valu
-  ratarg=. ralu
+  'targ rdisp rfactor'=. convert unit
 else.
-  dispt=. displacement targ
-  dispu=. displacement unit
-  rdispt=. rdisplacement targ
-  rdispu=. rdisplacement unit
-	X__  =: coeft,coefu,dispt,dispu
-  vatarg=. valu scale_displace~ coeft,coefu,dispt,dispu
-	RX__  =: rcoeft,rcoefu,rdispt,rdispu
-  ratarg=. ralu scale_displace~ rcoeft,rcoefu,rdispt,rdispu
-	assert. notFloat RATARG__=: ratarg
+  'targ rdisp rfactor'=. x convert unit
 end.
 
-UU_VALUE=: ratarg
+if. cannotScale unit do.
+  rvtarg=. rvalu
+else.
+  rvtarg=. rfactor * rdisp + rvalu
+end.
 
-
-z=. targ formatOUT vatarg
-	sllog 'uu_3 z vatarg VEXIN VEX'
+UU_VALUE=: rvtarg
+z=. targ formatOUT rvtarg
+	sllog 'uu_3 z rvtarg VEXIN VEX'
 
 if. NO_UNITS_NEEDED do. z else. deb z,SP,uniform targ end.
 )
@@ -1037,19 +1004,30 @@ try. val=. reval strValueOf y
 catch. BADRAT end.
 )
 
-scale_displace=: 4 : 0
+valueOf=: 3 : 0
+
+
+try. val=. ". strValueOf y
+catch. _. end.
+)
+
+strValueOf=: 3 : 0
 
 
 
+SP taketo deb y rplc '°' ; SP ; 'deg' ; SP
+)
 
-'coeft coefu dispt dispu'=. z=: x,(4-~#x){.1 1 0 0
-vaSI=. dispu + y*coefu
-(vaSI-dispt)%coeft
+unitsOf=: 3 : 0
+
+numeral=. strValueOf y
+deb y }.~ #numeral
 )
 onload }: 0 :0
-smoutput uu 2r3 ; 'ft'
+smoutput (x=:'ft/s^2') uu y=:'1 Å h⁻²'
 )
 0 :0
+smoutput 'yd' uu 2r3 ; 'ft'
 smoutput uu '212 degF'
 )
 
@@ -1128,7 +1106,6 @@ n return.
 )
 
 qtcode4i=: (3 : 0)"0
-pushme 'qtcode4i'
 
 if. (y<0) or (y>:#UUC) do. 0;BADCODE return. end.
 ]valu=.    y{uvalu
@@ -1168,7 +1145,6 @@ end.
 )
 
 qtcode4bareunit=: 3 : 0
-pushme 'qtcode4bareunit'
 
 
 i=. units i. <,y
@@ -1178,12 +1154,10 @@ valc=. i{uvalc
 ralc=. i{rvalc
 code=. i{unitc
 msg '--- qtcode4bareunit[(y)] id=(i) valc=(valc) ralc=(ralc) code=(crex code)'
-popme 'qtcode4bareunit'
 valc;ralc;code
 )
 
 qtcode4anyunit=: 3 : 0
-pushme 'qtcode4anyunit'
 
 
 
@@ -1212,12 +1186,10 @@ muv=. */v
 mur=. */r
 muz=. */z
 msg '--- qtcode4anyunit: y=[(y)] v=[(v)] muv=(muv) mur=(mur); z=[(crex z)] muz=(muz)'
-popme 'qtcode4anyunit'
 muv;mur;muz return.
 )
 
 cnvCunit=: 3 : 0
-pushme 'cnvCunit'
 
 z=. dltb y
 k=. p=. 1
@@ -1238,7 +1210,6 @@ if. (-.iskg z) and (-.listedUnits z) do.
   'k z'=. scale4bareunit z
 end.
 msg '--- cnvCunit: j=(j) k=(k) z=(z) p=(p)'
-popme 'cnvCunit'
 j ; k ; z ; p return.
 )
 
@@ -1299,12 +1270,11 @@ k ; z
 compatible=: 4 : 0
 
 
-ident=. ([: , [) -: ([: , ])
     if. ('*' ident x) or ('*' ident y) do. 1 return.
 elseif. ('!' ident x) or ('!' ident y) do. 1 return.
 end.
-xcode=. >{: qtcode4anyunit x
-ycode=. >{: qtcode4anyunit y
+xcode=. >{: qtcode4anyunit bris x
+ycode=. >{: qtcode4anyunit bris y
 xcode -: ycode
 )
 
@@ -1314,20 +1284,36 @@ compatlist=: 3 : 0
 (ycode=unitc) # units
 )
 
-convert=: 1&$: : (4 : 0)"1
-pushme 'convert'
-
+convert=: 3 : 0"1
 
 yb=. bris y
 disp=. displacement yb
 rdisp=. rdisplacement yb
-msg '+++ convert: ENTERED: x=(x) y=(y) yb=(yb) disp=(disp) rdisp=(rdisp)'
+msg '+++ convert: ENTERED: y=(y) yb=(yb) disp=(disp) rdisp=(rdisp)'
 'factor rfactor code'=. qtcode4anyunit yb
 targ=. canon expandcode code
 msg '--- convert: EXITS'
 wd'msgs'
-popme 'convert'
-targ ; rdisp ; rfactor return.
+targ ; rdisp ; rfactor
+:
+
+
+'xtarg xrdisp xrfactor'=. convert x
+'ytarg yrdisp yrfactor'=. convert y
+if. xtarg -: ytarg do.
+  rfactor=. yrfactor % xrfactor
+  rdisp=. (yrdisp-xrdisp)%yrfactor
+  x ; rdisp ; rfactor
+else.
+  sw'>>> convert: incompatible units: x=[(x)] y=[(y)]'
+end.
+)
+0 :0
+'t d f'=: 'degC' convert_uu_ 'degF'
+]float C=: f*(F+d)  [F=:212
+]t
+'t d f'=: 'degF' convert_uu_ 'degC'
+]float F=: f*(C+d)  [C=:100
 )
 
 uniformD=: 3 : 0
@@ -1357,53 +1343,22 @@ cocurrent 'uu'
 
 0 :0
 Thursday 15 November 2018  04:10:53
--
--cloned into: temp 45 pre-purge of FahR etc: 15 November 2018
-NOTE: temp 45 may have some useful test expressions purged from here.
--
-New format verb based on daisychain
-Tries each give (give_* verb) in turn until one exits normally,
- or giverr (the last one) is reached.
-If a give fails, the next give gets tried.
-If a give knows it's inappropriate, it calls: errif
- to force an error.
-If it simply crashes, the same thing happens.
--
-This arrangement allows ad-hoc 'give_' and 'take_' verbs
-to be defined in the t-table itself (which is a J script).
--
-x-arg is a units, e.g. 'gbp'
- and y is the value to be formatted, e.g. to become: '£1.00'.
-giverr is only called if no "give-" verbs chime with: x.
 )
-
 register=: 3 : 0
 
 
 VEX=: y
 )
 
-testf=: 3 : 0
-
-if. 0=#y do. y=. 123.4567 end.
-for_no. ;:'eur gbp usd deg ! c eV Hz rad / *' do.
-  nom=. ,>no
-  smoutput nb nom ; TAB ; nom format y
-end.
-)
-
 format=: formatOUT=: ''&$: :(4 : 0)
-0 pushme'formatOUT'
-msg '+++ formatOUT: ENTERED, x=[(x)] y=[(y)]'
+msg '+++ formatOUT: x=[(x)] y=[(y)]'
 NO_UNITS_NEEDED=: 0
-kx=. bris x
-z=. kx daisychain y
-msg '--- formatOUT: EXITS, last give_ verb: (VEX) -returns z=(z)'
-0 popme'formatOUT'
-z return.
+kunits=. bris x
+z=. kunits daisychain y
+z [msg '--- formatOUT: returns qty:[(z)] by daisy:(VEX)'
 )
 
-make_daisychain=: 3 : 0
+make_daisychainOUT=: 3 : 0
 
 >z=. 'give_' nl 3
 ]z=. (; z,each <' ::'),'giverr'
@@ -1413,11 +1368,7 @@ i.0 0
 
 giverr=: 4 : 0
 msg '>>> giverr: none chime: x=(x) y=(y)'
-sw'(y) [??]'
-)
-
-deg_symbol=: 3 : 0
-if. SIC>0 do. '°' else. 'deg' end.
+sw'(y) [(x)??]'
 )
 
 give_0_angle=: 4 : 0
@@ -1539,15 +1490,16 @@ z return.
 
 give_2_sig=: give_2_sci
 
-make_daisychain''
+make_daisychainOUT''
 
-'==================== [uu] formatin.ijs =================='
+'==================== [uu] formatIN.ijs =================='
 0 :0
-Thursday 15 November 2018  04:11:02
+Monday 6 May 2019  03:42:54
 -
-formatIN -- input-counterpart to: format
--cloned into: temp 44 pre-purge of FahR etc: 15 November 2018
-NOTE: temp 44 may have some useful test expressions purged from here.
+defines formatIN - input-counterpart to: format
+-
+cloned into: tempuu 44 pre-purge of FahR etc: 15 November 2018
+NOTE: tempuu 44 has useful test expressions purged from here.
 )
 
 cocurrent 'uu'
@@ -1559,14 +1511,12 @@ VEXIN=: y
 )
 
 formatIN=: 3 : 0
-0 pushme'formatIN'
 msg '+++ formatIN: ENTERED, y=[(y)]'
 
 blink 0
 VEXIN=: '<UNSET>'
 z=. daisychainIN y
 msg '--- formatIN: EXITS, last take_ verb: (VEXIN) kuy=(kuy) -returns z=(z)'
-0 popme'formatIN'
 z return.
 )
 
@@ -1582,25 +1532,6 @@ i.0 0
 takerr=: 3 : 0
 msg '>>> takerr: none chime: x=(x) y=(y)'
 sw'(y) [???]'
-)
-
-valueOf=: 3 : 0
-
-
-try. val=. ". strValueOf y
-catch. _. end.
-)
-
-strValueOf=: 3 : 0
-
-
-SP taketo y rplc (deg_symbol 0) ; SP
-)
-
-unitsOf=: 3 : 0
-
-numeral=. strValueOf y
-deb y }.~ #numeral
 )
 
 take_0_angle=: 3 : 0
@@ -1657,24 +1588,6 @@ blink'white'
 z=. y
 msg '... take_9_general: y=(y) --> z=(z)'
 z return.
-)
-
-sval_unit=: ''&$: :(4 : 0)
-
-sval=. SP taketo y -. '°'
-if. 0<#x do. 
-  unit=. bris x
-else.
-  unit=. bris SP takeafter y
-end.
-sval,SP,unit
-)
-
-split_val_unit=: 3 : 0
-
-val=. ". SP taketo y -. '°'
-unit=. bris SP takeafter y
-val ; unit
 )
 
 make_daisychainIN''

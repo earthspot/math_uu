@@ -5,53 +5,39 @@ cocurrent 'uu'
 
 0 :0
 Thursday 15 November 2018  04:10:53
--
--cloned into: temp 45 pre-purge of FahR etc: 15 November 2018
-NOTE: temp 45 may have some useful test expressions purged from here.
--
-New format verb based on daisychain
-Tries each give (give_* verb) in turn until one exits normally,
- or giverr (the last one) is reached.
-If a give fails, the next give gets tried.
-If a give knows it's inappropriate, it calls: errif
- to force an error.
-If it simply crashes, the same thing happens.
--
-This arrangement allows ad-hoc 'give_' and 'take_' verbs
-to be defined in the t-table itself (which is a J script).
--
-x-arg is a units, e.g. 'gbp'
- and y is the value to be formatted, e.g. to become: '£1.00'.
-giverr is only called if no "give-" verbs chime with: x.
 )
 
+NB. Daisychain design tries each give_* in turn until one "chimes"
+NB.  (i.e. runs to complation and returns a value)
+NB.  or giverr is reached (i.e. the end of the daisychain).
+NB. If a give_* fails the next give_* in daisychain is run.
+NB. If a give_* knows it's wrong it calls assert.0 to force error.
+NB. Simply crashing has the same effect.
+NB. Design allows ad-hoc give_* and take_* verbs to be introduced.
+NB.
+NB. x-arg is a units, e.g. 'gbp'
+NB.  and y is the value to be formatted, e.g. to become: '£1.00'.
+NB. Chiming give_* NEED NOT APPEND nominal units (typically x_arg).
+NB. (It doesn't for 'gbp' or 'hms' or 'deg')
+NB. If nominal units can be inferred from value itself
+NB.  then give_* sets NO_UNITS_NEEDED=:1
+NB.  to tell uu not to append (given) nominal units
+
 register=: 3 : 0
-  NB. for use in give_ verbs only
+  NB. for use in give_* verbs only
   NB. reports the last give_* verb to be entered
 VEX=: y
 )
 
-testf=: 3 : 0
-  NB. test: format (and friends) with special-needs units
-if. 0=#y do. y=. 123.4567 end.
-for_no. ;:'eur gbp usd deg ! c eV Hz rad / *' do.
-  nom=. ,>no
-  smoutput nb nom ; TAB ; nom format y
-end.
-)
-
 format=: formatOUT=: ''&$: :(4 : 0)
-0 pushme'formatOUT'
-msg '+++ formatOUT: ENTERED, x=[(x)] y=[(y)]'
-NO_UNITS_NEEDED=: 0
-kx=. bris x  NB. work internally in kosher units
-z=. kx daisychain y
-msg '--- formatOUT: EXITS, last give_ verb: (VEX) -returns z=(z)'
-0 popme'formatOUT'
-z return.
+msg '+++ formatOUT: x=[(x)] y=[(y)]'
+NO_UNITS_NEEDED=: 0  NB. reset the flag, overridden below
+kunits=. bris x  NB. work internally in kosher units
+z=. kunits daisychain y
+z [msg '--- formatOUT: returns qty:[(z)] by daisy:(VEX)'
 )
 
-make_daisychain=: 3 : 0
+make_daisychainOUT=: 3 : 0
   NB. makes the daisychain for: formatOUT
 >z=. 'give_' nl 3
 ]z=. (; z,each <' ::'),'giverr'
@@ -61,11 +47,7 @@ i.0 0
 
 giverr=: 4 : 0
 msg '>>> giverr: none chime: x=(x) y=(y)'
-sw'(y) [??]'
-)
-
-deg_symbol=: 3 : 0
-if. SIC>0 do. '°' else. 'deg' end.
+sw'(y) [(x)??]'  NB. return an "error" dummy value
 )
 
 give_0_angle=: 4 : 0
@@ -190,4 +172,4 @@ z return.
 
 give_2_sig=: give_2_sci
 
-make_daisychain''
+make_daisychainOUT''

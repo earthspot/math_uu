@@ -3,7 +3,7 @@
 
 cocurrent 'uu'
 
-bris=: unucode@unslash1@undotted@deb"1  NB. circumcises units: y
+bris=: unucode@unslash1@undotted@deb"1  NB. c(y)--> "kosher"
 
 canc=: 4 : 0
 	NB. cancel-out (serves: canon)
@@ -17,7 +17,6 @@ end.
 )
 
 canon=: 3 : 0
-pushme 'canon'
 	NB. Sort units (str y) into canonical order
 	NB. y must be fully-resolved units, ie all from boxed list: mks
 	NB. Sort tokens EACH REVERSED. This brings num+denom terms together
@@ -33,7 +32,6 @@ end.
 z=. debnSL dlb ; sort utoks z	NB. k-m-s order, with denominators gathered behind
 if. 0=#z do. z=. ,SL end.  	NB. CONVENTION: (empty z) --> ,'/'
 msg '--- canon: EXITS: z=(z)'
-0 popme 'canon'
 z return.
 )
 
@@ -50,7 +48,6 @@ zz return.
 )
 
 coll=: 4 : 0
-pushme 'coll'
 	NB. collects-terms (no cancel-out)
 	NB. serves: canon
 	NB. eg: ' m kg kg/kg/kg s/s' coll 'kg'
@@ -63,7 +60,6 @@ for_p. 4 3 2 do.	NB. 4th-power units are highest recognised
   z=. z rplc ((p*$n)$n);(n,P,":p) ; ((p*$d)$d);(d,P,":p)
   msg '+++ coll:   z=(z) power:p=(p)'
 end.
-0 popme 'coll'
 z return.
 )
 
@@ -79,7 +75,6 @@ end.
 )
 
 deslash=: 1&$: : (4 : 0)
-pushme 'deslash'
   NB. deslash
   NB. x=1 --converts cunits with '/' into '^_n' form
   NB. x=0 --converts '^_n' cunits back into '/'
@@ -96,7 +91,6 @@ for_cu. utoks y do. cunit=. >cu
   end.
   r=. r,cunit
 end.
-popme 'deslash'
 dlb r return.
 )
 
@@ -168,7 +162,6 @@ z return.
 )
 
 selfcanc=: 3 : 0
-pushme 'selfcanc'
 msg '+++ selfcanc: ENTERED'
   NB. Self-cancel unitstr (y) without reducing to mks
   NB. Sort tokens EACH REVERSED -collects num+denom terms
@@ -181,7 +174,6 @@ end.
 z=. dlb canon z
 z=. z rplc '/^2';'/';'/^3';'/';'/^4';'/';'/^5';'/';'/^6';'/';'/^7';'/';'/^8';'/';'/^9';'/'
 msg '--- selfcanc: EXITS: z=(z)'
-0 popme 'selfcanc'
 z return.
 )
 
@@ -190,7 +182,7 @@ slash1=: 1&$: : (4 : 0)
   NB. cf: dotted
 z=. deb y
 if. x do.  NB. apply convention
-  if. SIC>:2 do. y return. end.  NB. convention n/a
+NB.   if. SIC>:2 do. y return. end.  NB. convention n/a
   if. ')'={:z do. y return. end.  NB. convention already applied
   z=. canon z
   a=. '/' taketo z
@@ -312,51 +304,74 @@ y=. '/%-_Ee'charsub >y
 try. {.".y catch. UNDEFINED end.
 )
 
+NB. uniform=: ''&$: :(4 : 0)
+NB.   NB. x== SI-conformance level
+NB.   NB. WARNING: internally temporarily replaces SIC with x
+NB. savedSIC=. SIC
+NB. if. -. x-:'' do. SIC=: x end.
+NB. msg '+++ uniform: ENTERED: x=(x) y=(y)'
+NB.   NB. change units (y) as appropriate for (SIC)
+NB. y=. utf8 deb y  NB. convert (y) from possible datatype=='unicode'
+NB. select. SIC
+NB.  case. 0 do.  NB. ASCII only
+NB.   z=. unucode undotted y
+NB.  case. 1 do.  NB. SI units with /
+NB.   ]z=. undotted y
+NB.   if. 1< +/SL=y do.  NB. if more than 1 slash
+NB.     ]z=. slash1 z
+NB.   end.
+NB.   ]z=. ucode z
+NB. fcase. 2 do.  NB. Standard SI units
+NB.  case. 3 do.  NB. Standard SI units with dots
+NB.   if. y-: ,SL do.  NB. …no bare '/' in Standard SI
+NB.     msg '--- uniform: y=SL returns NIL'
+NB.     '' [SIC=: savedSIC return.
+NB.   end.
+NB.   ]z=. unucode undotted y	NB. c/f case 0
+NB.   ]z=. ucode deslash unslash1 z
+NB.   if. SIC=3 do. z=. dotted z end.
+NB. end.
+NB. z [SIC=: savedSIC return.
+NB. )
+
 uniform=: ''&$: :(4 : 0)
-0 pushme 'uniform'
-  NB. x== SI-conformance level, temporarily replaces SIC
-savedSIC=. SIC
-if. -. x-:'' do. SIC=: x end.
-msg '+++ uniform: ENTERED: x=(x) y=(y)'
-  NB. change units (y) as appropriate for (SIC)
+  NB. enforces SI-conformance on unit: y
+  NB. optional x (default: '') is SI-conformance level (0 to 3)
+  NB. x=='' - uses value of state-variable: SIC
+if. 0=#x do. sic=. SIC else. sic=. x end.
+msg '+++ uniform: ENTERED: x=(x) sic=(sic)  y=(y)'
+  NB. reformat units (y) for SI-conformance level (sic)
 y=. utf8 deb y  NB. convert (y) from possible datatype=='unicode'
-select. SIC
- case. 0 do.  NB. ASCII only
+select. sic
+case. 0 do.  NB. ASCII only ("kosher")
   z=. unucode undotted y
- case. 1 do.  NB. SI units with /
-  ]z=. undotted y
-  if. 1< +/SL=y do.  NB. if more than 1 slash
-    ]z=. slash1 z
+case. 1 do.  NB. Permitted SI units with slashes
+  z=. undotted y
+  NB. If more than 1 slash, convert to parenthesised denominator
+  if. 1< +/SL=y do. z=. slash1 z end.
+  z=. ucode z
+fcase.2 do.  NB. Recommended SI units
+case. 3 do.  NB. Recommended SI units with dots
+  if. SL ident y do.  NB. …no bare SL permitted in SI units
+    msg '--- uniform: y=(crex y) returns NIL'
+    NIL return.
   end.
-  ]z=. ucode z
-fcase. 2 do.  NB. Standard SI units
- case. 3 do.  NB. Standard SI units with dots
-  if. y-: ,SL do.  NB. …no bare '/' in Standard SI
-    msg '--- uniform: y=SL returns NIL'
-    0 popme 'uniform'
-    '' [SIC=: savedSIC return.
-  end.
-  ]z=. unucode undotted y	NB. c/f case 0
+  ]z=. unucode undotted y	NB. "kosher" as safe intermediate
   ]z=. ucode deslash unslash1 z
-  if. SIC=3 do. z=. dotted z end.
+  if. sic=3 do. z=. dotted z end.
 end.
-popme 'uniform'
-z [SIC=: savedSIC return.
+z return.
 )
 
 undeg=: 3600 %~ _ 60 60 #. 3 {. ]
 undotted=: 0&dotted
 unslash1=: 0&slash1
 unucode=: 0&ucode
-upost=: 4 : 'y,(x#~*SIC)'
 uurowsc=: 4 : '(UUC ssmx y){UUC [UCASE=: x'
 uurowsf=: 4 : '(UUF ssmx y){UUF [UCASE=: x'
 listedUnits=: 3 : 'units e.~ <,y'
 
 NB. =========== trace ========================
-pushme=: empty	NB. legacy
-popme=: empty	NB. legacy
-
 trace=: 3 : 0
   NB. enable/disable tracing verbs: msg, sllog
   NB. y== boolean

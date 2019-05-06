@@ -86,7 +86,6 @@ n return.  NB. count of unitc entries reassigned
 )
 
 qtcode4i=: (3 : 0)"0
-pushme 'qtcode4i'
   NB. returns (valu;ralu;code) for index into UUC: (…4i) (y)
 if. (y<0) or (y>:#UUC) do. 0;BADCODE return. end.
 ]valu=.    y{uvalu
@@ -130,7 +129,6 @@ end.
 )
 
 qtcode4bareunit=: 3 : 0
-pushme 'qtcode4bareunit'
   NB. lookup the qty (value;code) for BARE NAMED unit: y
   NB. may be basic or derived, BUT expect to find it in: units
 i=. units i. <,y
@@ -140,12 +138,10 @@ valc=. i{uvalc
 ralc=. i{rvalc	NB. <<<<<<<<<< rational
 code=. i{unitc
 msg '--- qtcode4bareunit[(y)] id=(i) valc=(valc) ralc=(ralc) code=(crex code)'
-popme 'qtcode4bareunit'
 valc;ralc;code
 )
 
 qtcode4anyunit=: 3 : 0
-pushme 'qtcode4anyunit'
   NB. RECALCULATES code for ANY entry (y) in (units)
   NB. …ignores existing code in unitc if product of codes
   NB. multiply the codes for each (powered)token
@@ -159,7 +155,6 @@ for_t. utoks y do.
   rscale=. rational scale
   rpower=. rational power
   'valu ralu code'=. qtcode4bareunit bareunit
-NB. pushme 'qtcode4anyunit'  NB. restore after qtcode4bareunit
 sllog 'cunit invert scale bareunit power code valu ralu rscale rpower'
   if. invert do.
     z=. z , % (code^power)
@@ -175,12 +170,10 @@ muv=. */v  NB. combine all the valu's
 mur=. */r  NB. combine all the ralu's			NB. <<<<< rational
 muz=. */z  NB. combine all the code's
 msg '--- qtcode4anyunit: y=[(y)] v=[(v)] muv=(muv) mur=(mur); z=[(crex z)] muz=(muz)'
-popme 'qtcode4anyunit'
 muv;mur;muz return.
 )
 
 cnvCunit=: 3 : 0
-pushme 'cnvCunit'
   NB. cut prefs/suffs from a cunit (eg: '/kg^3')
 z=. dltb y  NB. (,'m') for y=='m' or y==' m'
 k=. p=. 1   NB. to be overridden below
@@ -201,7 +194,6 @@ if. (-.iskg z) and (-.listedUnits z) do.
   'k z'=. scale4bareunit z
 end.
 msg '--- cnvCunit: j=(j) k=(k) z=(z) p=(p)'
-popme 'cnvCunit'
 j ; k ; z ; p return.
 )
   NB. Scaling prefixes recognised by scale4bareunit (below):
@@ -262,12 +254,11 @@ k ; z
 compatible=: 4 : 0
   NB. =1 iff units x,y compatible
   NB. [*] [!] compatible with everything…
-ident=. ([: , [) -: ([: , ])
     if. ('*' ident x) or ('*' ident y) do. 1 return.
 elseif. ('!' ident x) or ('!' ident y) do. 1 return.
 end.
-xcode=. >{: qtcode4anyunit x
-ycode=. >{: qtcode4anyunit y
+xcode=. >{: qtcode4anyunit bris x
+ycode=. >{: qtcode4anyunit bris y
 xcode -: ycode
 )
 
@@ -277,21 +268,47 @@ compatlist=: 3 : 0
 (ycode=unitc) # units
 )
 
-convert=: 1&$: : (4 : 0)"1
-pushme 'convert'
-  NB. y (units) --> cu ; loop_count ; cf
-  NB. x was speedup flag, but is now unused
+convert=: 3 : 0"1
+  NB. y (units) --> base-units ; displacement ; conversion-factor
 yb=. bris y  NB. kosher of (units) y
 disp=. displacement yb
 rdisp=. rdisplacement yb  	NB. <<<<< rational
-msg '+++ convert: ENTERED: x=(x) y=(y) yb=(yb) disp=(disp) rdisp=(rdisp)'
+msg '+++ convert: ENTERED: y=(y) yb=(yb) disp=(disp) rdisp=(rdisp)'
 'factor rfactor code'=. qtcode4anyunit yb
 targ=. canon expandcode code
 msg '--- convert: EXITS'
 wd'msgs'  NB. is this still needed?
-popme 'convert'
 NB. targ ; disp ; factor return.
-targ ; rdisp ; rfactor return. 	NB. <<<<< rational
+targ ; rdisp ; rfactor	NB. <<<<< rational
+:
+  NB. x,y (units)--> displacement ; factor
+  NB. Add displacement then apply factor
+'xtarg xrdisp xrfactor'=. convert x
+'ytarg yrdisp yrfactor'=. convert y
+if. xtarg -: ytarg do.
+  rfactor=. yrfactor % xrfactor
+  rdisp=. (yrdisp-xrdisp)%yrfactor
+  x ; rdisp ; rfactor	NB. <<<<< rational
+else.
+  sw'>>> convert: incompatible units: x=[(x)] y=[(y)]'
+end.
+NB. if. x compatible y do.
+NB.   'xtarg xrdisp xrfactor'=. convert x
+NB.   'ytarg yrdisp yrfactor'=. convert y
+NB.   rfactor=. yrfactor % xrfactor
+NB.   rdisp=. (yrdisp-xrdisp)%yrfactor
+NB.   assert. xtarg -: ytarg
+NB.   x ; rdisp ; rfactor	NB. <<<<< rational
+NB. else.
+NB.   sw'>>> convert: incompatible units: x=[(x)] y=[(y)]'
+NB. end.
+)
+0 :0
+'t d f'=: 'degC' convert_uu_ 'degF'  NB. °F-->°C
+]float C=: f*(F+d)  [F=:212
+]t
+'t d f'=: 'degF' convert_uu_ 'degC'  NB. °C-->°F
+]float F=: f*(C+d)  [C=:100
 )
 
 uniformD=: 3 : 0

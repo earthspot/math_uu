@@ -1,7 +1,9 @@
 	NB. uu - utilities.ijs
 '==================== [z] utilities ===================='
 
-cocurrent 'z'  NB. <<<<< MAKE THESE VISIBLE TO CAL TOO
+cocurrent 'z'  NB. <<<<< MAKE THESE VISIBLE TO CAL & tests TOO
+
+ident=: ([: , [) -: ([: , ])
 
 choice=: 4 : '((0>.1<.x)){y'
 abs=: |

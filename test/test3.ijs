@@ -24,7 +24,7 @@ uu'*ssiz 0'
 
 uunicode 0	NB. no unicode in units
 assert '1.500E-9 m/s^2' -:	uu '15 Ang/s/s'
-assert '1E7 Ang' -:	'Ang' uu '1 mm'
+assert '10000000 Ang' -:	'Ang' uu '1 mm'
 assert '304800 Ang/s^2' -:	'Ang/s^2' uu '0.0001 ft/s/s'
 z=: '2.532E-17 ft/s^2'
 assert z -:	  	'ft/s^2' uu '1 Å h⁻²'
@@ -34,7 +34,7 @@ assert z -:	 	'ft/s^2' uu '1 Ang/h/h'
 
 uunicode 1	NB. unicoded with slashes
 assert '1.500E-9 m/s²' -:	uu '15 Ang/s/s'
-assert '1E7 Å' -:		'Ang' uu '1 mm'
+assert '10000000 Å' -:	'Ang' uu '1 mm'
 assert '304800 Å/s²' -:	'Ang/s^2' uu '0.0001 ft/s/s'
 z=: '2.532E-17 ft/s²'
 assert z -:	  	'ft/s^2' uu '1 Å h⁻²'
@@ -44,7 +44,7 @@ assert z -:	 	'ft/s^2' uu '1 Ang/h/h'
 
 uunicode 2	NB. unicoded with negative powers
 assert '1.500E-9 m s⁻²' -:	  uu '15 Ang/s/s'
-assert '1E7 Å' -:	  'Ang' uu '1 mm'
+assert '10000000 Å' -:	  'Ang' uu '1 mm'
 assert '304800 Å s⁻²' -:     'Ang/s^2' uu '0.0001 ft/s/s'
 z=: '2.532E-17 ft s⁻²'
 assert z -:	  	'ft/s^2' uu '1 Å h⁻²'

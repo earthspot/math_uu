@@ -1,7 +1,21 @@
 NB. UU test suite
 0 :0
-Saturday 27 April 2019  02:50:12
+Monday 6 May 2019  05:14:34
 )
+
+0 :0
+testf=: 3 : 0
+  NB. test: format (and friends) with special-needs units
+if. 0=#y do. y=. 123.4567 end.
+for_no. ;:'eur gbp usd deg ! c eV Hz rad / *' do.
+  nom=. ,>no
+  smoutput nb nom ; TAB ; nom format y
+end.
+)
+
+NB. ===================
+GIT=. '~Gitruu'
+NB. ===================
 
 cocurrent 'base'
 
@@ -18,10 +32,10 @@ uunicode_z_=: 3 : 'uu_z_ ''*ssic '',":y'
 NB. trace these verbs…
 NB. trv 'start qty4i qty4anyunit qty4bareunit'
 
-load '~Gituu/test/test4.ijs'
-load '~Gituu/test/test2.ijs'
-load '~Gituu/test/test3.ijs'
-load '~Gituu/test/test1.ijs'
+load GIT , '/test/test4.ijs'
+load GIT , '/test/test2.ijs'
+load GIT , '/test/test3.ijs'
+load GIT , '/test/test1.ijs'
 
 require '~proj/redux.ijs'
 redux 14  NB. test SI-conformance with a complex definition
@@ -37,10 +51,10 @@ blink_uu_=: empty
 NB. ---------------------------------------------------------
 0 :0
 Inspect these when analysing failures...
-open '~Gituu/test/test1.ijs'
-open '~Gituu/test/test2.ijs'
-open '~Gituu/test/test3.ijs'
-open '~Gituu/test/test4.ijs'
+open GIT , '/test/test1.ijs'
+open GIT , '/test/test2.ijs'
+open GIT , '/test/test3.ijs'
+open GIT , '/test/test4.ijs'
 )
 
 smoutput PLS,'--- test.ijs - completed',PLS
