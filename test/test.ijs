@@ -7,7 +7,7 @@ Monday 6 May 2019  05:14:34
 testf=: 3 : 0
   NB. test: format (and friends) with special-needs units
 if. 0=#y do. y=. 123.4567 end.
-for_no. ;:'eur gbp usd deg ! c eV Hz rad / *' do.
+for_no. ;:'eur gbp usd deg ! c eV Hz rad / * !' do.
   nom=. ,>no
   smoutput nb nom ; TAB ; nom format y
 end.

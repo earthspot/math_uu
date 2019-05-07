@@ -1,12 +1,8 @@
 NB. math_uu repo - run
 0 :0
-Saturday 27 April 2019  18:06:07
+Tuesday 7 May 2019  01:26:58
 -
 open BUILTFILE
-open '~Gituu/test/test.ijs'
-open '~Gituu/test/test1.ijs'
-open '~Gituu/test/test2.ijs'
-open '~Gituu/test/test3.ijs'
 )
 
 cocurrent 'base'
@@ -16,23 +12,19 @@ GIT=. '~Gitruu'  NB. for JAL release
 NB.=================================
 
 BUILTFILE_z_=: GIT,'/uu.ijs'
-TESTFILE_z_=: GIT,'/test/test.ijs'
+NB. TESTFILE_z_=: GIT,'/test/test.ijs'
+TESTFILE_z_=: '~Test/*.ijs'
 
 NB. ---------------------------------------------------------
 
 clear 'uu'
-
 load BUILTFILE
 
-smoutput '+++ run.ijs: BUILTFILE loaded: ',BUILTFILE
+smoutput sw'+++ run.ijs: BUILTFILE=[(BUILTFILE)] loaded ok'
 
-NB. create an instance of class UU for testing...
-NB. (----at present, start locale: uu as its own instance)
-uu_z_=: uu_uu_
-uuengine_z_=: uuengine_uu_
-uuengine_z_'strt'
+loadall=: [: load&.> ([: pathof&.> <&jpath) ,&.> [: {."1 [: 1!:0 <&jpath
+loadall TESTFILE
 
-load TESTFILE
-smoutput '--- run.ijs: TESTFILE completed without discrepancies:',LF,TESTFILE
+smoutput sw'--- run.ijs: TESTFILE=[(TESTFILE)] completed ok'
 
-onload_z_=: do
+onload_z_=: do  NB. restore for ad-hoc edits of /source/*.ijs

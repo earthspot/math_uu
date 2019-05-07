@@ -292,24 +292,24 @@ if. xtarg -: ytarg do.
 else.
   sw'>>> convert: incompatible units: x=[(x)] y=[(y)]'
 end.
-NB. if. x compatible y do.
-NB.   'xtarg xrdisp xrfactor'=. convert x
-NB.   'ytarg yrdisp yrfactor'=. convert y
-NB.   rfactor=. yrfactor % xrfactor
-NB.   rdisp=. (yrdisp-xrdisp)%yrfactor
-NB.   assert. xtarg -: ytarg
-NB.   x ; rdisp ; rfactor	NB. <<<<< rational
-NB. else.
-NB.   sw'>>> convert: incompatible units: x=[(x)] y=[(y)]'
-NB. end.
 )
 0 :0
 't d f'=: 'degC' convert_uu_ 'degF'  NB. °F-->°C
+]float d,f
 ]float C=: f*(F+d)  [F=:212
 ]t
 't d f'=: 'degF' convert_uu_ 'degC'  NB. °C-->°F
+]float d,f
 ]float F=: f*(C+d)  [C=:100
 )
+
+scale_displace=: 4 : 0
+  NB. FOR REFERENCE ONLY
+'coeft coefu dispt dispu'=. z=: x,(4-~#x){.1 1 0 0
+vaSI=. dispu + y*coefu
+(vaSI-dispt)%coeft
+)
+
 
 uniformD=: 3 : 0
   NB. apply verb: uniform to UNITS ONLY in (qty) y

@@ -1,97 +1,68 @@
-NB. UU: scientific units conversion package - test4
-NB. Hive-off all *_test verbs and inserts from the source code
-NB. (from temp 18)
-NB. component tests of: format compatible ucode uniform
-NB. plus a lot of misc tests as 0:0 inserts
+smoutput(jpathsep>(4!:4<'zx'){4!:3'');~zx=.'uu test4'
 0 :0
-Saturday 6 October 2018  22:50:17
-)
-smoutput PLS,'+++ test4.ijs - entered',PLS
-
-cocurrent 'base'
-
-format_test=: 3 : 0 ''
-formatOUT=. formatOUT_uu_
-smoutput '+++ format_test: ENTER'
-smoutput 'PI rad-->dms' ; 'dms' formatOUT PI
-smoutput 'VEX=',VEX
-smoutput '60 s-->hms' ; 'hms' formatOUT 60
-smoutput 'VEX=',VEX
-smoutput '--- format_test: EXIT'
+Tuesday 7 May 2019  02:01:29
+-
+UU: scientific units conversion package - test4
+Hive-off all *_test verbs and inserts from the source code
+(from temp 18)
+component tests of: format compatible ucode uniform
+plus a lot of misc tests as 0:0 inserts.
 )
 
-compatible_test=: 3 : 0 ''
-compatible=. compatible_uu_
-smoutput '+++ compatible_test: ENTER'
-assert. '*' compatible ,'m'
-assert. '*' compatible 'kg'
-assert. '!' compatible ,'m'
-assert. '!' compatible 'kg'
-assert. (,'*') compatible ,'m'
-assert. (,'*') compatible 'kg'
-assert. (,'!') compatible ,'m'
-assert. (,'!') compatible 'kg'
-assert. (,'J') compatible 'cal'
-assert. (,'J') compatible 'kcal'
-smoutput '--- compatible_test: EXIT'
+cocurrent 'base' [clear''
+
+format_test=: 3 : 0
+assert. '3° 8′ 29″' -: 'dms' formatOUT_uu_ PI
+assert. '00:01:00' -: 'hms' formatOUT_uu_ 60
+smoutput '--- format_test: ok'
 )
 
-ucode_test=: 3 :0 ''
-ucode=. ucode_uu_
-smoutput '+++ ucode_test: ENTER'
-assert. 'm^2/K/s^2'	-: 0 ucode 'm² K⁻¹ s⁻²'  NB. SL not: ⁻¹
-assert. 'm² K⁻¹ s⁻²'	-: 1 ucode 'm² K⁻¹ s⁻²'
-assert. 'ft/(s s)'		-: 0 ucode 'ft/(s·s)'
-assert. 'ft/(s·s)'		-: 1 ucode 'ft/(s·s)'
-assert. 'm²/K/s²'		-:   ucode 'm^2/K/s^2'
-smoutput '--- ucode_test: EXIT'
+format_test''
+
+compatible_test=: 3 : 0
+assert. '*' compatible_uu_ ,'m'
+assert. '*' compatible_uu_ 'kg'
+assert. '!' compatible_uu_ ,'m'
+assert. '!' compatible_uu_ 'kg'
+assert. (,'*') compatible_uu_ ,'m'
+assert. (,'*') compatible_uu_ 'kg'
+assert. (,'!') compatible_uu_ ,'m'
+assert. (,'!') compatible_uu_ 'kg'
+assert. (,'J') compatible_uu_ 'cal'
+assert. (,'J') compatible_uu_ 'kcal'
+smoutput '--- compatible_test: ok'
 )
 
-uniform_test=: 3 : 0 ''
-uniform=. uniform_uu_
-smoutput '+++ uniform_test: ENTER'
-assert. 'm m/(K s s)'	-: 0 uniform 'm m/(K s s)'
-assert. 'm m/(K s s)'	-: 1 uniform 'm m/(K s s)'
-assert. 'm m K⁻¹ s⁻¹ s⁻¹'	-: 2 uniform 'm m/(K s s)'
-assert. 'm·m·K⁻¹·s⁻¹·s⁻¹'	-: 3 uniform 'm m/(K s s)'
-assert. 'm^2/K/s^2'	-: 0 uniform 'm^2/K/s^2'
-assert. 'm²/(K s²)'	-: 1 uniform 'm^2/K/s^2'
-assert. 'm² K⁻¹ s⁻²'	-: 2 uniform 'm^2/K/s^2'
-assert. 'm²·K⁻¹·s⁻²'	-: 3 uniform 'm^2/K/s^2'
-assert. 'ft/s^2'		-: 0 uniform 'ft/s^2'
-assert. 'ft/s²'		-: 1 uniform 'ft/s^2'
-assert. 'ft s⁻²'		-: 2 uniform 'ft/s^2'
-assert. 'ft·s⁻²'		-: 3 uniform 'ft/s^2'
-smoutput '--- uniform_test: EXIT'
+compatible_test''
+
+ucode_test=: 3 :0
+assert. 'm^2/K/s^2'	-: 0 ucode_uu_ 'm² K⁻¹ s⁻²'  NB. SL not: ⁻¹
+assert. 'm² K⁻¹ s⁻²'	-: 1 ucode_uu_ 'm² K⁻¹ s⁻²'
+assert. 'ft/(s s)'		-: 0 ucode_uu_ 'ft/(s·s)'
+assert. 'ft/(s·s)'		-: 1 ucode_uu_ 'ft/(s·s)'
+assert. 'm²/K/s²'		-:   ucode_uu_ 'm^2/K/s^2'
+smoutput '--- ucode_test: ok'
 )
 
-NB. NB. >>> COVERED BY redux 21 ...
-NB. fromKelvin_test=: 3 : 0 ''
-NB. fromKelvin=. fromKelvin_uu_
-NB. smoutput '+++ fromKelvin_test: ENTER'
-NB. assert. 0 100		-: 'C' fromKelvin 273.15 373.15
-NB. assert. 32 212		-: 'F' fromKelvin 273.15 373.15
-NB. assert. 7.5 60		-: 'Ro'fromKelvin 273.15 373.15
-NB. assert. 0 33		-: 'N' fromKelvin 273.15 373.15
-NB. assert. 150 0		-: 'De'fromKelvin 273.15 373.15
-NB. assert. 0 80		-: 'Re'fromKelvin 273.15 373.15
-NB. assert. 273.15 373.15	-: 'K' fromKelvin 273.15 373.15
-NB. assert. 			128!:5 'Ab' fromKelvin 273.15 373.15
-NB.   NB. (no such scale)
-NB. smoutput '--- fromKelvin_test: EXIT'
-NB. )
+ucode_test''
 
-
-0 :0
-'C' toKelvin 0 100
-'F' toKelvin 32 212
-'Ro'toKelvin 7.5 60
-'N' toKelvin 0 33
-'De'toKelvin 150 0
-'Re'toKelvin 0 80
-'K' toKelvin 273.15 373.15
-'Ab' toKelvin 273.15 373.15  NB. _. (no such scale)
+uniform_test=: 3 : 0
+assert. 'm m/(K s s)'	-: 0 uniform_uu_ 'm m/(K s s)'
+assert. 'm m/(K s s)'	-: 1 uniform_uu_ 'm m/(K s s)'
+assert. 'm m K⁻¹ s⁻¹ s⁻¹'	-: 2 uniform_uu_ 'm m/(K s s)'
+assert. 'm·m·K⁻¹·s⁻¹·s⁻¹'	-: 3 uniform_uu_ 'm m/(K s s)'
+assert. 'm^2/K/s^2'	-: 0 uniform_uu_ 'm^2/K/s^2'
+assert. 'm²/(K s²)'	-: 1 uniform_uu_ 'm^2/K/s^2'
+assert. 'm² K⁻¹ s⁻²'	-: 2 uniform_uu_ 'm^2/K/s^2'
+assert. 'm²·K⁻¹·s⁻²'	-: 3 uniform_uu_ 'm^2/K/s^2'
+assert. 'ft/s^2'		-: 0 uniform_uu_ 'ft/s^2'
+assert. 'ft/s²'		-: 1 uniform_uu_ 'ft/s^2'
+assert. 'ft s⁻²'		-: 2 uniform_uu_ 'ft/s^2'
+assert. 'ft·s⁻²'		-: 3 uniform_uu_ 'ft/s^2'
+smoutput '--- uniform_test: ok'
 )
+
+uniform_test''
 
 0 :0
 'degC' give_deg 373.15
@@ -204,5 +175,3 @@ x_uu_=:'ft/s^2' [ y_uu_=: '1 Å h⁻²'
  'degF' uu '212 degF'
  'degC' uu '100 degC'
 )
-
-smoutput PLS,'--- test4.ijs - completed',PLS

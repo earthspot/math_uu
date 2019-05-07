@@ -17,22 +17,21 @@ if. isBoxed y do.
   'valu unit'=. y
   rvalu=. rat valu
 else.
-  yf=: dltb formatIN y  NB. y--> SI units, esp Fahrenheit--> K
-  valu=: valueOf yf
-  rvalu=: rvalueOf yf	NB. <<<<< rational
-  unit=: unitsOf yf
+]  yf=: dltb formatIN y
+]  valu=: valueOf yf
+]  rvalu=: rvalueOf yf	NB. <<<<< rational
+]  unit=: unitsOf yf
 end.
 	sllog 'uu x y valu rvalu unit'
-if. 0=#x do.		NB. (x) is empty | monadic invocation
-  'targ rdisp rfactor'=. convert unit
-else.  NB. target units are (x)
-  'targ rdisp rfactor'=. x convert unit
-end.
-  NB. compute target value: vatarg
-if. cannotScale unit do.  NB. then formatOUT must itself convert
+  NB. compute target value: rvtarg
+if. cannotScale unit do.  NB. formatOUT itself converts given value
   rvtarg=. rvalu	NB. <<<<< rational
-else.
-  rvtarg=. rfactor * rdisp + rvalu
+elseif. 0=#x do.  NB. (x) is empty | monadic invocation
+  'targ rdisp rfactor'=. convert unit
+  rvtarg=. (rfactor * rvalu) + rdisp  NB. rdisp always in BASE UNITS
+elseif. do.  NB. target units are (x)
+  'targ rdisp rfactor'=. x convert unit
+  rvtarg=. rfactor * (rvalu + rdisp)
 end.
   NB. cache the exact value, obtained from the rational calculations
 UU_VALUE=: rvtarg	NB. <<<<< rational
@@ -71,9 +70,10 @@ deb y }.~ #numeral
 
 NB. onload 'load temp 94' >>>> temp 94 REDUNDANT: scale_displace elimd
 onload }: 0 :0
-smoutput (x=:'ft/s^2') uu y=:'1 Å h⁻²'
+smoutput (x=:'degF') uu (y=:'100 degC')
 )
 0 :0
-smoutput 'yd' uu 2r3 ; 'ft'
 smoutput uu '212 degF'
+smoutput (x=:'ft/s^2') uu y=:'1 Å h⁻²'
+smoutput 'yd' uu 2r3 ; 'ft'
 )

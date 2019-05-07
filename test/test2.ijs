@@ -1,13 +1,10 @@
-NB. UU: scientific units conversion package - test2
+smoutput(jpathsep>(4!:4<'zx'){4!:3'');~zx=.'uu test2 component test'
 0 :0
-Wednesday 5 September 2018  17:26:00
+Tuesday 7 May 2019  01:29:27
 -
-Sample statements to test verbs:
- expandcode upp4utok pp4xunit code4xunit encoded decoded
+Test verbs: expandcode upp4utok pp4xunit code4xunit encoded decoded
 )
-smoutput PLS,'+++ test2.ijs - entered',PLS
-
-cocurrent 'base'
+cocurrent 'base' [clear''
 
 noun_table=: 3 :'n ,. (datatype each z) ,. (z=. ".each n=. y nl 0)'
 
@@ -29,8 +26,8 @@ assert. '/kg'	-: expandcode_uu_ 1r3
 assert. ''	-: 1&expandcode_uu_ 1
 assert. (,<' kg')	-: 1&expandcode_uu_ 3
 assert. (,<'/kg')	-: 1&expandcode_uu_ 1r3
-assert. 'm^3/kg^2 s K^2 mol^2 eur^2'                -:   expandcode_uu_ 739944040r9
-assert. (<;._1 '| m^3|/kg^2| s| K^2| mol^2| eur^2') -: 1&expandcode_uu_ 739944040r9
+assert. 'm^3/kg^2 s K^2 cd^2 eur^2'                -:   expandcode_uu_ 739944040r9
+assert. (<;._1 '| m^3|/kg^2| s| K^2| cd^2| eur^2') -: 1&expandcode_uu_ 739944040r9
 assert. ('kg';1)	-: upp4utok 'kg'
 assert. ('kg';_1)	-: upp4utok '/kg'
 assert. ('kg';_2)	-: upp4utok '/kg^2'
@@ -40,7 +37,7 @@ assert. ('kg';2)	-: upp4utok '/kg^-2'
   NB. …double-negation--never (or rare?) in practice
 )
 
-NB. expandcode_test''
+expandcode_test''
 
 encoded_decoded_test=: 3 : 0
 NB. Nmks:               0  1  2  3  4  5  6  7  8
@@ -101,7 +98,3 @@ end.
 )
 
 multiple_expandcode_test''
-
-NB. erase 'noun_table toks4expandcode upp4utok'
-
-smoutput PLS,'--- test2.ijs - completed',PLS

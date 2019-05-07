@@ -20,6 +20,11 @@ AABUILT=: '2019-05-06  02:32:56'
 AABUILT=: '2019-05-06  05:43:32'
 AABUILT=: '2019-05-06  05:47:07'
 AABUILT=: '2019-05-06  06:29:29'
+AABUILT=: '2019-05-06  19:31:03'
+AABUILT=: '2019-05-07  01:13:54'
+AABUILT=: '2019-05-07  01:17:11'
+AABUILT=: '2019-05-07  02:00:30'
+AABUILT=: '2019-05-07  02:13:55'
 
 '==================== [uu] constants ===================='
 
@@ -972,22 +977,21 @@ if. isBoxed y do.
   'valu unit'=. y
   rvalu=. rat valu
 else.
-  yf=: dltb formatIN y
-  valu=: valueOf yf
-  rvalu=: rvalueOf yf
-  unit=: unitsOf yf
+]  yf=: dltb formatIN y
+]  valu=: valueOf yf
+]  rvalu=: rvalueOf yf
+]  unit=: unitsOf yf
 end.
 	sllog 'uu x y valu rvalu unit'
-if. 0=#x do.
-  'targ rdisp rfactor'=. convert unit
-else.
-  'targ rdisp rfactor'=. x convert unit
-end.
 
 if. cannotScale unit do.
   rvtarg=. rvalu
-else.
-  rvtarg=. rfactor * rdisp + rvalu
+elseif. 0=#x do.
+  'targ rdisp rfactor'=. convert unit
+  rvtarg=. (rfactor * rvalu) + rdisp
+elseif. do.
+  'targ rdisp rfactor'=. x convert unit
+  rvtarg=. rfactor * (rvalu + rdisp)
 end.
 
 UU_VALUE=: rvtarg
@@ -1024,11 +1028,12 @@ numeral=. strValueOf y
 deb y }.~ #numeral
 )
 onload }: 0 :0
-smoutput (x=:'ft/s^2') uu y=:'1 Å h⁻²'
+smoutput (x=:'degF') uu (y=:'100 degC')
 )
 0 :0
-smoutput 'yd' uu 2r3 ; 'ft'
 smoutput uu '212 degF'
+smoutput (x=:'ft/s^2') uu y=:'1 Å h⁻²'
+smoutput 'yd' uu 2r3 ; 'ft'
 )
 
 '==================== [uu] pp_encoding.ijs ===================='
@@ -1310,11 +1315,21 @@ end.
 )
 0 :0
 't d f'=: 'degC' convert_uu_ 'degF'
+]float d,f
 ]float C=: f*(F+d)  [F=:212
 ]t
 't d f'=: 'degF' convert_uu_ 'degC'
+]float d,f
 ]float F=: f*(C+d)  [C=:100
 )
+
+scale_displace=: 4 : 0
+
+'coeft coefu dispt dispu'=. z=: x,(4-~#x){.1 1 0 0
+vaSI=. dispu + y*coefu
+(vaSI-dispt)%coeft
+)
+
 
 uniformD=: 3 : 0
 
