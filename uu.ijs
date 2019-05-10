@@ -1,5 +1,5 @@
 0 :0
-Wednesday 1 May 2019  07:28:06
+Friday 10 May 2019  18:45:53
 -
 UU: scientific units conversion package
 )
@@ -11,20 +11,7 @@ onload_z_=: empty
 
 PARENTDIR=: (zx i:'/'){.zx=.jpathsep>(4!:4<'zx'){4!:3''[zx=.''
 
-AABUILT=: '2019-05-01  07:28:13'
-AABUILT=: '2019-05-05  03:18:56'
-AABUILT=: '2019-05-05  04:51:55'
-AABUILT=: '2019-05-05  11:14:56'
-AABUILT=: '2019-05-06  02:24:04'
-AABUILT=: '2019-05-06  02:32:56'
-AABUILT=: '2019-05-06  05:43:32'
-AABUILT=: '2019-05-06  05:47:07'
-AABUILT=: '2019-05-06  06:29:29'
-AABUILT=: '2019-05-06  19:31:03'
-AABUILT=: '2019-05-07  01:13:54'
-AABUILT=: '2019-05-07  01:17:11'
-AABUILT=: '2019-05-07  02:00:30'
-AABUILT=: '2019-05-07  02:13:55'
+AABUILT=: '2019-05-10  18:45:58'
 
 '==================== [uu] constants ===================='
 
@@ -335,6 +322,16 @@ ID=: 3 : 0
 
 
 units i. ;:y
+)
+
+sci2j=: 3 : 0
+
+y rplc '-' ; '_' ; 'E' ; 'e'
+)
+
+sci4j=: 3 : 0
+
+y rplc '_' ; '-' ; 'e' ; 'E'
 )
 
 '==================== [uu] rational ===================='
@@ -857,10 +854,13 @@ udat=: (4 : 0)"1
 'y zdesc'=. 2{. ']'cut y
 zdesc=. dltb zdesc -.TAB
 'y znits'=. 2{. '['cut y
-if. x do.
+select. x
+case. 1 do.
   zfmla=. deb y-.TAB
   zdesc; znits; zfmla
-else.
+case. 0 do.
+  zdesc; znits; 1
+case. _1 do.
   zvalu=. (i=. y i. SP){.y=. deb y-.TAB
   znitv=. }.i}.y
   zdesc; znits; znitv; zvalu
@@ -874,11 +874,6 @@ if. (1=#y) and (y=SL) do. x return. end.
 z=. cnvi utoks y
 z=. selfcanc x , ;z
 z=. z rplc '/^2';'/'
-)
-
-udumb=: 3 : 0
-'zdesc znits znitv zvalu'=. y
-zdesc; znits; 1
 )
 
 make_units=: 0&$: :(4 : 0)
@@ -964,10 +959,7 @@ i.0 0
 cocurrent 'uu'
 
 0 :0
-Monday 6 May 2019  02:17:12
--
-'ft/s^2' uu '1 Å h⁻²'
-	FAILS
+Tuesday 7 May 2019  11:52:16
 )
 
 uu=: (''&$: :(4 : 0))"1
@@ -977,10 +969,10 @@ if. isBoxed y do.
   'valu unit'=. y
   rvalu=. rat valu
 else.
-]  yf=: dltb formatIN y
-]  valu=: valueOf yf
-]  rvalu=: rvalueOf yf
-]  unit=: unitsOf yf
+]  yf=. dltb formatIN y
+]  valu=. valueOf yf
+]  rvalu=. rvalueOf yf
+]  unit=. unitsOf yf
 end.
 	sllog 'uu x y valu rvalu unit'
 
@@ -1303,8 +1295,9 @@ targ ; rdisp ; rfactor
 :
 
 
+'ytarg yrdisp yrfactor'=. z=.convert y
+if. 0=#x do. z return. end.
 'xtarg xrdisp xrfactor'=. convert x
-'ytarg yrdisp yrfactor'=. convert y
 if. xtarg -: ytarg do.
   rfactor=. yrfactor % xrfactor
   rdisp=. (yrdisp-xrdisp)%yrfactor
@@ -1610,99 +1603,111 @@ make_daisychainIN''
 '==================== [uuengine] uu_interface ===================='
 
 0 :0
-Tuesday 19 March 2019  19:05:51
+Friday 10 May 2019  16:11:59
+-
+(Pass-thru CAL instructions are identical to these.)
+(string | boxed) y is a uuengine instruction.
+…Lowercase instructions change the state of UU
+…Uppercase instructions simply return requested info
+ and DO NOT change the state of UU
+-
+uuengine 'UUUU' ; 10 ; 'ft'
+uuengine 'UUUU' ; 10 ; 'ft' ; 'yd'
+uuengine 'WUUC' ; 'moon'
 )
 
 cocurrent 'uu'
 
 uuengine=: 3 : 0
 
+if. isBoxed y do.
+  'inst y1 y2 y3'=. 4{.y
+  select. inst
+  case. 'CONV' do. y2 convert y1
+  case. 'FMTI' do. formatIN nb }.y
+  case. 'FMTO' do. y2 formatOUT y1
+  case. 'UDIV' do. y2 udiv y1
+  case. 'UUUU' do. y3 uu 1 2{y
+  case.        do. '>>> uuengine: bad instruction:';y
+  end.
+  return.
+end.
 
-
-
-
-
-
-if. isBoxed y do. y=. b2o y end.
-uarg=. (0&uniform) arg=. dltb '>' taketo yy=. dltb 4}.y
-utarg=. (0&uniform) targ=. dltb '>' takeafter y
-numarg=. {.0". arg
+yy=. dlb 4}.y=. dltb y
 select. 4{.y
 case. 'CPAT' do.
-		utarg compatible uarg
+	('>'takeafter yy) compatible '>'taketo yy
 case. 'CPLI' do.
-		compatlist uarg
+	compatlist yy
 case. 'CNVJ' do.
-		cnvCunit uarg
+	cnvCunit yy
 case. 'CONV' do.
-		convert uarg
+	('>'takeafter yy) convert '>'taketo yy
 case. 'CONS' do.
-		0&udat arg
+	0&udat yy
 case. 'DISP' do.
-		rdisplacement uarg
-case. 'DUMB' do.
-		udumb arg
+	rdisplacement unucode yy
 case. 'FUNC' do.
-		1&udat arg
+	1&udat yy
 case. 'FMTI' do.
-		formatIN arg
+	formatIN yy
 case. 'FMTO' do.
-		(bris unitsOf arg) format valueOf arg
+	(unitsOf yy) format valueOf yy
 case. 'QRAT' do.
-		UU_VALUE
+	UU_VALUE
 case. 'QSCI' do.
-		SCI
+	SCI
 case. 'QSIC' do.
-		SIC
+	SIC
 case. 'QSIG' do.
-		SIG
+	SIG
 case. 'QSIZ' do.
-		SIZ
+	SIZ
 case. 'QZER' do.
-		ZERO
+	ZERO
 case. 'SCIN' do.
-		scino numarg
+	scino ".sci2j yy
 case. 'SELF' do.
-		selfcanc uarg
+	selfcanc yy
 case. 'UCOD' do.
-		ucode arg
+	ucode yy
 case. 'UCOS' do.
-		ucods arg
+	ucods yy
 case. 'UNUC' do.
-		uarg
+	0&uniform yy
 case. 'UDIV' do.
-		utarg udiv uarg
+	('>'takeafter yy) udiv~ '>'taketo yy
 case. 'UNIF' do.
-		uniform uarg
+	uniform yy
 case. 'UUUU' do.
-		targ uu arg
+	('>'takeafter yy) uu '>'taketo yy
 case. 'VUUC' do.
-		x2f 0 uurowsc arg
+	x2f 0 uurowsc yy
 case. 'VUUF' do.
-		x2f 0 uurowsf arg
+	x2f 0 uurowsf yy
 case. 'VUUM' do.
-		x2f UUM
+	x2f UUM
 case. 'WUUC' do.
-		x2f 1 uurowsc arg
+	x2f 1 uurowsc yy
 case. 'WUUF' do.
-		x2f 1 uurowsf arg
+	x2f 1 uurowsf yy
 case. 'WUUM' do.
-		x2f UUM
+	x2f UUM
 case. 'fcty' do.
-		factory''
+	factory''
 case. 'ssci' do.
-		SCI=: numarg
+	SCI=: {.".yy
 case. 'ssic' do.
-		SIC=: numarg
+	SIC=: {.".yy
 case. 'ssig' do.
-		SIG=: numarg
+	SIG=: {.".yy
 case. 'ssiz' do.
-		SIZ=: numarg
+	SIZ=: {.". sci2j yy
 case. 'strt' do.
-		start''
+	start''
 case. 'szer' do.
-		ZERO=: arg
-case.        do. '>>> uuengine: bad instruction: ';y
+	ZERO=: yy
+case.        do. '>>> uuengine: bad instruction:';y
 end.
 )
 

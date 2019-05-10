@@ -4,10 +4,7 @@
 cocurrent 'uu'
 
 0 :0
-Monday 6 May 2019  02:17:12
--
-'ft/s^2' uu '1 Å h⁻²'
-	FAILS
+Tuesday 7 May 2019  11:52:16
 )
 
 uu=: (''&$: :(4 : 0))"1
@@ -17,10 +14,10 @@ if. isBoxed y do.
   'valu unit'=. y
   rvalu=. rat valu
 else.
-]  yf=: dltb formatIN y
-]  valu=: valueOf yf
-]  rvalu=: rvalueOf yf	NB. <<<<< rational
-]  unit=: unitsOf yf
+]  yf=. dltb formatIN y
+]  valu=. valueOf yf
+]  rvalu=. rvalueOf yf	NB. <<<<< rational
+]  unit=. unitsOf yf
 end.
 	sllog 'uu x y valu rvalu unit'
   NB. compute target value: rvtarg

@@ -243,16 +243,18 @@ z [ 'cspel csymb'=: SAV
 
 udat=: (4 : 0)"1
   NB. cut (UUC/F-type) string into boxed fields
-  NB. x==0 -- const
-  NB. x==1 -- formula
+  NB. x==0 -- to create a constant line
+  NB. x==1 -- to create a formula line
 'y zdesc'=. 2{. ']'cut y
 zdesc=. dltb zdesc -.TAB
 'y znits'=. 2{. '['cut y
-NB. 'z y'=. '}'cut y	NB. WITHDRAWN: leading {**}
-if. x do.		NB. return fields for a formula
+select. x
+case. 1 do.		NB. return boxed data for a formula
   zfmla=. deb y-.TAB
   zdesc; znits; zfmla
-else.
+case. 0 do.		NB. return boxed data for a const item
+  zdesc; znits; 1
+case. _1 do.		NB. return all boxed data (if ever reqd)
   zvalu=. (i=. y i. SP){.y=. deb y-.TAB
   znitv=. }.i}.y
   zdesc; znits; znitv; zvalu
@@ -266,11 +268,6 @@ if. (1=#y) and (y=SL) do. x return. end.
 z=. cnvi utoks y    NB. invert token-list y
 z=. selfcanc x , ;z NB. combine x, z as if multiplied
 z=. z rplc '/^2';'/'
-)
-
-udumb=: 3 : 0
-'zdesc znits znitv zvalu'=. y
-zdesc; znits; 1  NB. assume 1 nominal unit is only ever required
 )
 
 make_units=: 0&$: :(4 : 0)

@@ -2,99 +2,107 @@
 '==================== [uuengine] uu_interface ===================='
 
 0 :0
-Tuesday 19 March 2019  19:05:51
+Friday 10 May 2019  16:11:59
+-
+(Pass-thru CAL instructions are identical to these.)
+(string | boxed) y is a uuengine instruction.
+…Lowercase instructions change the state of UU
+…Uppercase instructions simply return requested info
+ and DO NOT change the state of UU
 )
 
 cocurrent 'uu'
 
 uuengine=: 3 : 0
-  NB. The primary interface to UU.
-  NB. ALL usage of UU can be done via this "keyhole" engine.
-  NB. (Pass-thru CAL instructions are identical to these.)
-  NB. (string) y is a uuengine instruction.
-  NB. …Lowercase instructions change the state of UU
-  NB. …Uppercase instructions DO NOT change the state of UU
-  NB.  but simply return information
-if. isBoxed y do. y=. b2o y end.
-uarg=. (0&uniform) arg=. dltb '>' taketo yy=. dltb 4}.y
-utarg=. (0&uniform) targ=. dltb '>' takeafter y
-numarg=. {.0". arg
+  NB. The "keyhole" interface to UU.
+if. isBoxed y do.
+  'inst y1 y2 y3'=. 4{.y
+  select. inst
+  case. 'CONV' do. y2 convert y1
+  case. 'FMTI' do. formatIN nb }.y
+  case. 'FMTO' do. y2 formatOUT y1
+  case. 'UDIV' do. y2 udiv y1
+  case. 'UUUU' do. y3 uu 1 2{y
+  case.        do. '>>> uuengine: bad instruction:';y
+  end.
+  return.
+end.
+  NB. Assume y-arg is string, (4{.y) is instr
+yy=. dlb 4}.y=. dltb y
 select. 4{.y
 case. 'CPAT' do. NB. are 2 units compatible?
-		utarg compatible uarg
-case. 'CPLI' do. NB. list of compatible units
-		compatlist uarg
-case. 'CNVJ' do. NB. cut a cunit, eg: '/km^3' --> 1;1000;(,'m');3
-		cnvCunit uarg
-case. 'CONV' do. NB. convert
-		convert uarg
-case. 'CONS' do. NB. cut "cons" formatted string (c/f UUC)
-		0&udat arg
-case. 'DISP' do. NB. displacement for units
-		rdisplacement uarg	NB. <<<<<<<<<< rational
-case. 'DUMB' do. NB. cut "dumb" formatted string (c/f UUC)
-		udumb arg
-case. 'FUNC' do. NB. cut "func" formatted string (c/f UUC)
-		1&udat arg
-case. 'FMTI' do. NB. format string-qty
-		formatIN arg
-case. 'FMTO' do. NB. format qty: arg as output string
-		(bris unitsOf arg) format valueOf arg
-case. 'QRAT' do. NB. query rational value saved by: uu
-		UU_VALUE
-case. 'QSCI' do. NB. query scientific notation threshold
-		SCI
-case. 'QSIC' do. NB. query SI-conformance level
-		SIC
-case. 'QSIG' do. NB. query significant figures
-		SIG
-case. 'QSIZ' do. NB. query zero attraction threshold
-		SIZ
-case. 'QZER' do. NB. query Boolean ZERO word
-		ZERO
-case. 'SCIN' do. NB. numarg --> (string) scientific notation
-		scino numarg
-case. 'SELF' do. NB. self-cancel units
-		selfcanc uarg
-case. 'UCOD' do. NB. convert special symbols --> "goy"
-		ucode arg
-case. 'UCOS' do. NB. convert special symbols --> "goy" (not currency)
-		ucods arg
-case. 'UNUC' do. NB. un-convert "goy" special symbols --> "kosher"
-		uarg
-case. 'UDIV' do. NB. divide two units symbolically
-		utarg udiv uarg
-case. 'UNIF' do. NB. convert special symbols wrto SI-compliance level
-		uniform uarg
-case. 'UUUU' do. NB. call LOCAL uu via a uuengine-instruction
-		targ uu arg
-case. 'VUUC' do. NB. LF-separated contents of UUC
-		x2f 0 uurowsc arg
-case. 'VUUF' do. NB. LF-separated contents of UUF
-		x2f 0 uurowsf arg
-case. 'VUUM' do. NB. LF-separated contents of UUM
-		x2f UUM
-case. 'WUUC' do. NB. LF-separated contents of UUC
-		x2f 1 uurowsc arg
-case. 'WUUF' do. NB. LF-separated contents of UUF
-		x2f 1 uurowsf arg
-case. 'WUUM' do. NB. LF-separated contents of UUM
-		x2f UUM
-case. 'fcty' do. NB. restore factory settings
-		factory''
-case. 'ssci' do. NB. set scientific notation threshold
-		SCI=: numarg
-case. 'ssic' do. NB. set SI-conformance level
-		SIC=: numarg
-case. 'ssig' do. NB. set significant figures
-		SIG=: numarg
-case. 'ssiz' do. NB. set zero attraction threshold
-		SIZ=: numarg
-case. 'strt' do. NB. restart this instance of UU
-		start''
-case. 'szer' do. NB. set Boolean ZERO word
-		ZERO=: arg
-case.        do. '>>> uuengine: bad instruction: ';y
+	('>'takeafter yy) compatible '>'taketo yy
+case. 'CPLI' do. NB.[uarg] list of compatible units
+	compatlist yy
+case. 'CNVJ' do. NB.[uarg] cut a cunit, eg: '/km^3' --> 1;1000;(,'m');3
+	cnvCunit yy
+case. 'CONV' do. NB.[uarg] convert
+	('>'takeafter yy) convert '>'taketo yy
+case. 'CONS' do. NB.[arg] cut "cons" formatted string (c/f UUC)
+	0&udat yy
+case. 'DISP' do. NB.[uarg] displacement for units
+	rdisplacement unucode yy	NB. <<<<<<<<<< rational
+case. 'FUNC' do. NB.[arg] cut "func" formatted string (c/f UUC)
+	1&udat yy
+case. 'FMTI' do. NB.[arg] format string-qty
+	formatIN yy
+case. 'FMTO' do. NB.[arg] format qty: arg as output string
+	(unitsOf yy) format valueOf yy
+case. 'QRAT' do. NB.[] query rational value saved by: uu
+	UU_VALUE
+case. 'QSCI' do. NB.[] query scientific notation threshold
+	SCI
+case. 'QSIC' do. NB.[] query SI-conformance level
+	SIC
+case. 'QSIG' do. NB.[] query significant figures
+	SIG
+case. 'QSIZ' do. NB.[] query zero attraction threshold
+	SIZ
+case. 'QZER' do. NB.[] query Boolean ZERO word
+	ZERO
+case. 'SCIN' do. NB.[numarg] --> (string numeral) scientific notation
+	scino ".sci2j yy
+case. 'SELF' do. NB.[uarg] self-cancel units
+	selfcanc yy
+case. 'UCOD' do. NB.[arg] convert special symbols --> "goy"
+	ucode yy
+case. 'UCOS' do. NB.[arg] convert special symbols --> "goy" (not currency)
+	ucods yy
+case. 'UNUC' do. NB.[uarg] un-convert "goy" special symbols --> "kosher"
+	0&uniform yy
+case. 'UDIV' do. NB.[uarg utarg] divide two units symbolically
+	('>'takeafter yy) udiv~ '>'taketo yy
+case. 'UNIF' do. NB.[uarg] convert special symbols wrto SI-compliance level
+	uniform yy
+case. 'UUUU' do. NB.[arg targ] call LOCAL uu via a uuengine-instruction
+	('>'takeafter yy) uu '>'taketo yy
+case. 'VUUC' do. NB.[arg] LF-separated contents of UUC
+	x2f 0 uurowsc yy
+case. 'VUUF' do. NB.[arg] LF-separated contents of UUF
+	x2f 0 uurowsf yy
+case. 'VUUM' do. NB.[] LF-separated contents of UUM
+	x2f UUM
+case. 'WUUC' do. NB.[arg] LF-separated contents of UUC
+	x2f 1 uurowsc yy
+case. 'WUUF' do. NB.[arg] LF-separated contents of UUF
+	x2f 1 uurowsf yy
+case. 'WUUM' do. NB.[] LF-separated contents of UUM
+	x2f UUM
+case. 'fcty' do. NB.[] restore factory settings
+	factory''
+case. 'ssci' do. NB.[numarg] set scientific notation threshold
+	SCI=: {.".yy
+case. 'ssic' do. NB.[numarg] set SI-conformance level
+	SIC=: {.".yy
+case. 'ssig' do. NB.[numarg] set significant figures
+	SIG=: {.".yy
+case. 'ssiz' do. NB.[numarg] set zero attraction threshold
+	SIZ=: {.". sci2j yy
+case. 'strt' do. NB.[] restart this instance of UU
+	start''
+case. 'szer' do. NB.[arg] set Boolean ZERO word
+	ZERO=: yy
+case.        do. '>>> uuengine: bad instruction:';y
 end.
 NB. >>>>> NO CODE PAST THIS POINT: return values are waiting
 )

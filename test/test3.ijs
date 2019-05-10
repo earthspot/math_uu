@@ -79,4 +79,3 @@ Q 'ft/s^2' uu '1 Å/h/h'
 A '2.532E-17 ft·s⁻²'
 Q 'ft/s^2' uu '1 Ang/h/h'
 A '2.532E-17 ft·s⁻²'
-

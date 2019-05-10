@@ -283,8 +283,9 @@ targ ; rdisp ; rfactor	NB. <<<<< rational
 :
   NB. x,y (units)--> displacement ; factor
   NB. Add displacement then apply factor
+'ytarg yrdisp yrfactor'=. z=.convert y
+if. 0=#x do. z return. end.  NB. empty x - treat as monad
 'xtarg xrdisp xrfactor'=. convert x
-'ytarg yrdisp yrfactor'=. convert y
 if. xtarg -: ytarg do.
   rfactor=. yrfactor % xrfactor
   rdisp=. (yrdisp-xrdisp)%yrfactor

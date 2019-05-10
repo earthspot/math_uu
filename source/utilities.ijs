@@ -173,3 +173,13 @@ ID=: 3 : 0
   NB. vt ID 'm kWh gbp'
 units i. ;:y
 )
+
+sci2j=: 3 : 0
+  NB. convert scientific numeral to j numeral
+y rplc '-' ; '_' ; 'E' ; 'e'
+)
+
+sci4j=: 3 : 0
+  NB. convert j numeral to scientific numeral
+y rplc '_' ; '-' ; 'e' ; 'E'
+)
