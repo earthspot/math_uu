@@ -1,7 +1,7 @@
 	NB. uu - start.ijs
 '==================== [uu] start ===================='
 0 :0
-Wednesday 1 May 2019  03:47:30
+Sunday 12 May 2019  16:49:54
 )
 
 cocurrent 'uu'
@@ -71,7 +71,6 @@ end.
 create=: start
 destroy=: codestroy
 
-runlab_z_=: runlab_uu_ 	NB. for: runlab''
 uu_z_=: uu_uu_		NB. for: runlab''
 blink=: empty		NB. activate with: op'blink'
 

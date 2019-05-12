@@ -1,5 +1,5 @@
 0 :0
-Friday 10 May 2019  18:45:53
+Sunday 12 May 2019  15:40:59
 -
 UU: scientific units conversion package
 )
@@ -11,31 +11,9 @@ onload_z_=: empty
 
 PARENTDIR=: (zx i:'/'){.zx=.jpathsep>(4!:4<'zx'){4!:3''[zx=.''
 
-AABUILT=: '2019-05-10  18:45:58'
-AABUILT=: '2019-05-11  08:24:23'
-AABUILT=: '2019-05-11  08:39:20'
-AABUILT=: '2019-05-11  09:58:24'
-AABUILT=: '2019-05-11  10:17:16'
-AABUILT=: '2019-05-11  10:18:47'
-AABUILT=: '2019-05-11  11:31:30'
-AABUILT=: '2019-05-11  11:41:04'
-AABUILT=: '2019-05-12  08:44:35'
-AABUILT=: '2019-05-12  09:29:07'
-AABUILT=: '2019-05-12  09:58:21'
-AABUILT=: '2019-05-12  09:58:41'
-AABUILT=: '2019-05-12  10:00:04'
-AABUILT=: '2019-05-12  10:08:49'
-AABUILT=: '2019-05-12  10:09:00'
-AABUILT=: '2019-05-12  10:23:50'
-AABUILT=: '2019-05-12  11:15:33'
-AABUILT=: '2019-05-12  11:16:33'
-AABUILT=: '2019-05-12  11:30:07'
-AABUILT=: '2019-05-12  11:33:38'
-AABUILT=: '2019-05-12  11:37:36'
-AABUILT=: '2019-05-12  11:41:05'
-AABUILT=: '2019-05-12  14:57:03'
-AABUILT=: '2019-05-12  15:04:02'
-AABUILT=: '2019-05-12  15:07:17'
+AABUILT=: '2019-05-12  16:43:37'
+AABUILT=: '2019-05-12  16:50:33'
+AABUILT=: '2019-05-12  16:52:39'
 
 '==================== [uu] constants ===================='
 
@@ -1336,7 +1314,8 @@ if. xtarg -: ytarg do.
   rdisp=. (yrdisp-xrdisp)%yrfactor
   x ; rdisp ; rfactor
 else.
-  sw'>>> convert: incompatible units: x=[(x)] y=[(y)]'
+  msg '>>> convert: incompatible units: x=[(x)] y=[(y)]'
+  x ; 0x ; 0x
 end.
 )
 0 :0
@@ -1742,7 +1721,7 @@ end.
 
 '==================== [uu] start ===================='
 0 :0
-Wednesday 1 May 2019  03:47:30
+Sunday 12 May 2019  16:49:54
 )
 
 cocurrent 'uu'
@@ -1811,7 +1790,6 @@ end.
 create=: start
 destroy=: codestroy
 
-runlab_z_=: runlab_uu_
 uu_z_=: uu_uu_
 blink=: empty
 

@@ -1,6 +1,6 @@
 smoutput(jpathsep>(4!:4<'zx'){4!:3'');~zx=.'uu test4'
 0 :0
-Tuesday 7 May 2019  02:01:29
+Sunday 12 May 2019  16:51:32
 -
 UU: scientific units conversion package - test4
 Hive-off all *_test verbs and inserts from the source code
@@ -14,7 +14,7 @@ cocurrent 'base' [clear''
 format_test=: 3 : 0
 assert. '3° 8′ 29″' -: 'dms' formatOUT_uu_ PI
 assert. '00:01:00' -: 'hms' formatOUT_uu_ 60
-smoutput '--- format_test: ok'
+NB. smoutput '--- format_test: ok'
 )
 
 format_test''
@@ -30,7 +30,7 @@ assert. (,'!') compatible_uu_ ,'m'
 assert. (,'!') compatible_uu_ 'kg'
 assert. (,'J') compatible_uu_ 'cal'
 assert. (,'J') compatible_uu_ 'kcal'
-smoutput '--- compatible_test: ok'
+NB. smoutput '--- compatible_test: ok'
 )
 
 compatible_test''
@@ -41,7 +41,7 @@ assert. 'm² K⁻¹ s⁻²'	-: 1 ucode_uu_ 'm² K⁻¹ s⁻²'
 assert. 'ft/(s s)'		-: 0 ucode_uu_ 'ft/(s·s)'
 assert. 'ft/(s·s)'		-: 1 ucode_uu_ 'ft/(s·s)'
 assert. 'm²/K/s²'		-:   ucode_uu_ 'm^2/K/s^2'
-smoutput '--- ucode_test: ok'
+NB. smoutput '--- ucode_test: ok'
 )
 
 ucode_test''
@@ -59,7 +59,7 @@ assert. 'ft/s^2'		-: 0 uniform_uu_ 'ft/s^2'
 assert. 'ft/s²'		-: 1 uniform_uu_ 'ft/s^2'
 assert. 'ft s⁻²'		-: 2 uniform_uu_ 'ft/s^2'
 assert. 'ft·s⁻²'		-: 3 uniform_uu_ 'ft/s^2'
-smoutput '--- uniform_test: ok'
+NB. smoutput '--- uniform_test: ok'
 )
 
 uniform_test''

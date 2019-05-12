@@ -291,7 +291,8 @@ if. xtarg -: ytarg do.
   rdisp=. (yrdisp-xrdisp)%yrfactor
   x ; rdisp ; rfactor	NB. <<<<< rational
 else.
-  sw'>>> convert: incompatible units: x=[(x)] y=[(y)]'
+  msg '>>> convert: incompatible units: x=[(x)] y=[(y)]'
+  x ; 0x ; 0x		NB. error values <<<<< rational
 end.
 )
 0 :0
