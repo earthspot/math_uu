@@ -1,6 +1,6 @@
 NB. handy4uu.ijs
 0 :0
-Tuesday 30 April 2019  22:09:23
+Sunday 12 May 2019  15:05:47
 -
 Establishes in _z_ all handy verbs actually needed by UU CAL TABULA
 )
@@ -32,12 +32,13 @@ real=: 9&o.
 imag=: 11&o.
 ifdefined=: 0 <: [: 4!:0 <
 isLit=: 2 2048 e.~ 3!:0
-isNum=: 1 4 8 64 128 e.~ 3!:0
+isNum=: 1 4 8 16 64 128 e.~ 3!:0  NB. accepts complex num too (…16…)
 isScalar=: [: {. 0 = [: $ $
 isNo=: isNum *. isScalar
 daterev=: 3 : 'if. 31<2{y do. |.3{.y else. 3{.y end.'
 dayy=: (Cut ' Sunday Monday Tuesday Wednesday Thursday Friday Saturday') pick~ [: weekday 3 {. ]
 isBoxed=: 0 < L.
+loadall=: [: load&.> ([: pathof&.> <&jpath) ,&.> [: {."1 [: 1!:0 <&jpath
 llog=: (1 { ":)@(,@([: ] ;: ,. [: ".&.> ;:))
 q1=: '''' , '''' ,~ [: ": >
 smclear=: 3 : 'wd ''sm set term text *'',y'

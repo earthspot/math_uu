@@ -25,8 +25,9 @@ NB. =========================================================
 NB. General purpose constants
 NB. =========================================================
 
-BADQTY=: '0 ??'	NB. error returned qty by verb: uu
-BADRAT=: _r1	NB. rational infinity - returned by: reval
+BADFLO=: __	NB. "bad" floating numeral - returned by: eval
+BADRAT=: __r1	NB. "bad" rational numeral - returned by: reval
+BADQTY=: '0 ??'	NB. "bad" returned qty by verb: uu
 HD=: '·'		NB. hi-dot, optional SI convention
 MI=: '-'		NB. minus (==HY)
 NUN=: '??'	NB. unrecognised-units placeholder, used by: convert

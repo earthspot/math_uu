@@ -126,7 +126,7 @@ sw'(scino y)'
 give_0_misc=: 4 : 0
 register'give_0_misc'
   NB. picks up miscellaneous forms
-if. undefined y do. 'UNDEFINED' return. end.
+if. isUndefined y do. 'UNDEFINED' return. end.
 if. SIC>0 do. infinity=. '∞'
 else. infinity=. 'infinity'
 end.

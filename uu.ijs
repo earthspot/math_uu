@@ -12,6 +12,30 @@ onload_z_=: empty
 PARENTDIR=: (zx i:'/'){.zx=.jpathsep>(4!:4<'zx'){4!:3''[zx=.''
 
 AABUILT=: '2019-05-10  18:45:58'
+AABUILT=: '2019-05-11  08:24:23'
+AABUILT=: '2019-05-11  08:39:20'
+AABUILT=: '2019-05-11  09:58:24'
+AABUILT=: '2019-05-11  10:17:16'
+AABUILT=: '2019-05-11  10:18:47'
+AABUILT=: '2019-05-11  11:31:30'
+AABUILT=: '2019-05-11  11:41:04'
+AABUILT=: '2019-05-12  08:44:35'
+AABUILT=: '2019-05-12  09:29:07'
+AABUILT=: '2019-05-12  09:58:21'
+AABUILT=: '2019-05-12  09:58:41'
+AABUILT=: '2019-05-12  10:00:04'
+AABUILT=: '2019-05-12  10:08:49'
+AABUILT=: '2019-05-12  10:09:00'
+AABUILT=: '2019-05-12  10:23:50'
+AABUILT=: '2019-05-12  11:15:33'
+AABUILT=: '2019-05-12  11:16:33'
+AABUILT=: '2019-05-12  11:30:07'
+AABUILT=: '2019-05-12  11:33:38'
+AABUILT=: '2019-05-12  11:37:36'
+AABUILT=: '2019-05-12  11:41:05'
+AABUILT=: '2019-05-12  14:57:03'
+AABUILT=: '2019-05-12  15:04:02'
+AABUILT=: '2019-05-12  15:07:17'
 
 '==================== [uu] constants ===================='
 
@@ -30,8 +54,9 @@ UU: scientific quantity converter
 
 CUTAB0=: 2 2$<;._1 ' USD 1.3 GBP 0.8'
 CUTAB=: CUTAB0
+BADFLO=: __
+BADRAT=: __r1
 BADQTY=: '0 ??'
-BADRAT=: _r1
 HD=: '·'
 MI=: '-'
 NUN=: '??'
@@ -256,7 +281,7 @@ end.
 i.0 0
 )
 
-undefined=: (3 : 0)"0
+isUndefined=: (3 : 0)"0
 
 if. -. 128!:5 y do. 0 return. end.
 '_.' -: 5!:6 <'y'
@@ -337,7 +362,9 @@ y rplc '_' ; '-' ; 'e' ; 'E'
 '==================== [uu] rational ===================='
 
 0 :0
-Wednesday 1 May 2019  00:57:07
+Sunday 12 May 2019  15:05:29
+-
+BADRAT - a bona-fide rational, but intended as signalling an error
 )
 
 cocurrent 'uu'
@@ -360,85 +387,59 @@ isExtended=: 64 = 3!:0
 isFloating=: 8 = 3!:0
 notFloat=: 8 ~: 3!:0
 
-reval=: 3 : 0 "1
+rat4sl=: 3 : 0 "1
 
-
-y__=: y
-y=. deb >y
-    if. all y e. n9 do. ". y,'x'
-elseif. '/' e. y do. __r1&". '/r-_'charsub y
-elseif. 'j' e. y do. rat4sc 'j' taketo y
-elseif. y-: ,'_' do. _r1
-elseif. y-: '__' do. __r1
-elseif. all y e. n9,'._' do. rat4sc y
-elseif. 'e' e. y do. rat4sc y
-elseif. 'E' e. y do. rat4sc y
-elseif. 'r' e. y do. rat4r y
-elseif. 'x'= {:y do. rat4x y
-elseif. y begins '10^' do. rat4pt ::rat4po y
-elseif. '^' e. y do. rat4po y
-elseif. 0=nc <y  do. rat4pn y
-elseif.          do. BADRAT
-end.
-)
-
-ieval=: 3 : 0 "1
-
-
-y=. deb >y
-if. 'j' e. y do. rat4sc 'j' takeafter y
-else. 0r1
+msg '... rat4sl: y=[(y)]'
+if. BADRAT = a=: reval '/'taketo y do. BADRAT
+elseif. BADRAT = b=: reval '/'takeafter y do. BADRAT
+elseif. do. rat a%b
 end.
 )
 
 rat4pn=: 3 : 0 "1
 
-msg '... rat4pn: y=(y) [(float ".y)]'
+msg '... rat4pn: y=[(y)]'
 try.
   assert. 0= 4!:0 <y
   y~
 catch.
-  ssw '>>> rat4pn: cannot handle y=''(y)'''
+  msg '>>> rat4pn: cannot handle y=''(y)'''
   BADRAT
 end.
 )
 
-rat4x=: 3 : 0 "1
-
-msg '... rat4x: y=(y) [(float ".y)]'
-".y
-)
-
-rat4r=: 3 : 0 "1
-
-msg '... rat4r: y=(y) [(float ".y)]'
-".y
-)
-
 rat4pt=: 3 : 0 "1
 
-msg '... rat4pt: y=(y) [(float ".y)]'
+msg '... rat4pt: y=[(y)]'
 if. (y begins '10^_') or (y begins '10^-') do. ". NN=:'1r1',(".4}.y)#'0'
 elseif. y begins '10^' do. ". NN=:'x' ,~ '1',(".3}.y)#'0'
+elseif. do.
+  msg '>>> rat4pt: cannot handle y=''(y)'''
+  BADRAT
 end.
-)
-0 :0
-rat4pt '10^21'
-rat4pt '10^3'
-rat4pt '10^-21'
-rat4pt '10^-5'
-rat4pt '10^_5'
 )
 
 rat4po=: 3 : 0 "1
 
-msg '... rat4po: y=(y) [(float ".y)]'
-rat ".y
+msg '... rat4po: y=[(y)]'
+if. BADRAT = a=. reval '^'taketo y do. BADRAT
+elseif. BADRAT = b=. reval '^'takeafter y do. BADRAT
+elseif. do. rat a^b
+end.
 )
-0 :0
-rat4po'10^1.0001'
-rat4po'10^-5.0001'
-rat4po'10^_5.0001'
+
+rat4neg=: 3 : 0 "1
+
+msg '... rat4neg: y=[(y)]'
+if. BADRAT = a=. reval }.y do. BADRAT
+else. rat -a
+end.
+)
+
+rat4bad=: 3 : 0 "1
+
+msg '>>> rat4bad: y=[(y)]'
+BADRAT
 )
 
 rat4sc=: 3 : 0 "1
@@ -448,64 +449,103 @@ c=. 'e' taketo y
 a=. ".c-.DT
 b=. ".y
 scale=. rnd 10^. a%b
-msg '... rat4sc: y=(y) [(float ".y)] scale=(scale) c=(c) a=(a) b=(b)'
+msg '... rat4sc: y=[(y)] scale=(scale) c=(c) a=(a) b=(b)'
 if. isRational b do. b
 elseif. scale<0      do. ". ((c-.DT) , (|scale)#'0') , 'r1'
 elseif.              do. ". (c-.DT) , 'r1' , scale#'0'
 end.
 )
-0 :0
-rat4sc '_1.23e_5'
-rat4sc '_1.23E_5'
-rat4sc '_1.23E-5'
-rat4sc '-1.23E-5'
-reval '_1.23e_5'
-reval '_1.23E_5'
-reval '_1.23E-5'
-reval '-1.23E-5'
-)
 
-rat_check=: 3 : 0
+rat_check=: 3 : 0 "0
 
+if. 0=#y do. rat_check i.6 return. end.
 try.
-assert. all boo=. uvalu = float rvalu
-assert. all boo=. uvald = float rvald
-assert. all boo=. uvalc = float rvalc
-assert. all boo=. -. uvalc e. 0 _ __
+select. y
+case. 0 do. assert. all boo=. uvalu = float rvalu
+case. 1 do. assert. all boo=. uvald = float rvald
+case. 2 do. assert. all boo=. uvalc = float rvalc
+case. 3 do. assert. all boo=. -. uvalu e. 0 _ __
+case. 4 do. assert. all boo=. -. uvald e. _ __
+case. 5 do. assert. all boo=. -. uvalc e. 0 _ __
+end.
 
 catch.
   bads=. I. -.boo
-  smoutput '>>> rat_check: failed at these UUC rows…'
+  smoutput sw'>>> rat_check[(y)] failed at these UUC rows…'
   smoutput vt bads
   wd'beep'
 end.
 )
 
-test_reval=: 3 : 0
+isNum=: 1 4 8 16 64 128 e.~ 3!:0
 
+evalRC=: 4 : 0 "1
 
-z=. _123r10000000
-assert. z -: reval '_1.23e_5'
-assert. z -: reval '_1.23E_5'
-assert. z -: reval '_1.23E-5'
-assert. z -: reval '-1.23E-5'
-z=. 1000000000000000000000
-assert. z -: reval '10^21'
-z=. 1r1000000000000000000000
-assert. z -: reval '10^-21'
-z=. 6832167611r683374095687762
-assert. z -: reval '10^-5.0001'
-assert. z -: reval '10^_5.0001'
-assert. z -: reval '6832167611r683374095687762'
-z=. 6832167611683374095687762x
-assert. z -: reval '6832167611683374095687762x'
-z=. PI
-assert. z -: reval 'PI'
-smoutput '--- test_reval: completed'
+EVAL__=:''
+rc=. (9+2*x)&o.
+try.
+  if. isNo z=.".y do. rc z	[EVAL__=: 'scalar num expression'
+  else. BADFLO		[EVAL__=: 'evaluates -not scalar num'
+  end.
+catch. BADFLO		[EVAL__=: 'fails to evaluate'
+end.
 )
 
-onload 'test_reval$0'
+eval=: 0&$: : (4 : 0)"1
 
+
+
+
+
+EVAL__=:''
+if. 0=#y do. BADFLO	[EVAL__=: 'empty'
+elseif. _1=4!:0<y do. BADFLO	[EVAL__=: 'unassigned id'
+elseif. 0=4!:0<y do. x evalRC y
+elseif. do.
+  x evalRC '/%-_Ee'charsub ,>y
+end.
+)
+
+ieval=: 1&eval
+
+ireval=: 3 : 0 "1
+
+
+y=. deb >y
+if. 'j' e. y do. rat4sc 'j' takeafter y
+else. 0x
+end.
+)
+
+reval=: 3 : 0 "1
+
+
+
+
+msg '+++ reval: y=(y)'
+doo=. ". :: rat4bad
+if. 0=#y=. deb >y do. BADRAT [msg '>>> reval: empty y'
+elseif. ('-'={.y) or ('_'={.y) do. rat4neg y
+elseif. all y e. n9 do. doo y,'x'
+elseif. (all (}:y) e. n9) and ('x'={:y) do. doo y
+elseif. all y e. n9,'r' do. doo y
+elseif. all y e. n9,'/' do. doo '/r'charsub y
+elseif. '/' e. y do. rat4sl y
+elseif. _1=4!:0<y do. BADRAT [msg '>>> reval: empty y'
+elseif. 'j' e. y do. rat4sc :: rat4bad 'j' taketo y
+elseif. y-: ,'_' do. BADRAT
+elseif. y-: '__' do. BADRAT
+elseif. all y e. n9,'._' do. rat4sc :: rat4bad y
+elseif. 'e' e. y do. rat4sc :: rat4bad y
+elseif. 'E' e. y do. rat4sc :: rat4bad y
+elseif. y begins '10^' do. rat4pt ::rat4po y
+elseif. '^' e. y do. rat4po y
+elseif. 0=nc <y  do. rat4pn y
+elseif.          do. rat eval y
+end.
+)
+
+onload 'load temp 101'
 
 '==================== [uu] syntax_machines ===================='
 0 :0
@@ -890,20 +930,13 @@ csymb=: ssymb, <;._1 '|°|′|″'
 openv=: >v
 unitv=: deb each uv -.each TAB
 units=: deb each us
-uvald=: imag eval openv
-assert. notFloat rvald=: ieval openv
-uvalu=: real eval openv
+uvald=: ieval openv
+assert. notFloat rvald=: ireval openv
+uvalu=: eval openv
 assert. notFloat rvalu=: reval openv
 i.0 0
 )
 
-eval=: 3 : 0 "1
-
-
-
-y=. '/%-_Ee'charsub >y
-try. {.".y catch. UNDEFINED end.
-)
 uniform=: ''&$: :(4 : 0)
 
 
@@ -1452,7 +1485,7 @@ sw'(scino y)'
 give_0_misc=: 4 : 0
 register'give_0_misc'
 
-if. undefined y do. 'UNDEFINED' return. end.
+if. isUndefined y do. 'UNDEFINED' return. end.
 if. SIC>0 do. infinity=. '∞'
 else. infinity=. 'infinity'
 end.
@@ -1580,7 +1613,7 @@ take_8_misc=: 3 : 0
 registerIN'take_8_misc'
 blink 'blue'
 
-if. undefined y do. 'UNDEFINED' return. end.
+if. isUndefined y do. 'UNDEFINED' return. end.
 if. SIC>0 do. infinity=. '∞' else. infinity=. 'infinity' end.
 if. y=__ do. '-',infinity return.
 elseif. y=_ do. infinity return.
@@ -1610,10 +1643,6 @@ Friday 10 May 2019  16:11:59
 …Lowercase instructions change the state of UU
 …Uppercase instructions simply return requested info
  and DO NOT change the state of UU
--
-uuengine 'UUUU' ; 10 ; 'ft'
-uuengine 'UUUU' ; 10 ; 'ft' ; 'yd'
-uuengine 'WUUC' ; 'moon'
 )
 
 cocurrent 'uu'

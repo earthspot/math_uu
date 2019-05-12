@@ -1,6 +1,6 @@
 NB. math_uu repo - run
 0 :0
-Tuesday 7 May 2019  01:26:58
+Saturday 11 May 2019  08:39:01
 -
 open BUILTFILE
 )
@@ -12,8 +12,8 @@ GIT=. '~Gitruu'  NB. for JAL release
 NB.=================================
 
 BUILTFILE_z_=: GIT,'/uu.ijs'
-NB. TESTFILE_z_=: GIT,'/test/test.ijs'
-TESTFILE_z_=: '~Test/*.ijs'
+TESTFILE_z_=: GIT,'/test/*.ijs'
+NB. TESTFILE_z_=: '~TestUU/*.ijs'
 
 NB. ---------------------------------------------------------
 
@@ -22,7 +22,6 @@ load BUILTFILE
 
 smoutput sw'+++ run.ijs: BUILTFILE=[(BUILTFILE)] loaded ok'
 
-loadall=: [: load&.> ([: pathof&.> <&jpath) ,&.> [: {."1 [: 1!:0 <&jpath
 loadall TESTFILE
 
 smoutput sw'--- run.ijs: TESTFILE=[(TESTFILE)] completed ok'

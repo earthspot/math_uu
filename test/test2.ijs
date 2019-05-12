@@ -1,6 +1,6 @@
-smoutput(jpathsep>(4!:4<'zx'){4!:3'');~zx=.'uu test2 component test'
+smoutput(jpathsep>(4!:4<'zx'){4!:3'');~zx=.'expandcode component test'
 0 :0
-Tuesday 7 May 2019  01:29:27
+Saturday 11 May 2019  11:38:40
 -
 Test verbs: expandcode upp4utok pp4xunit code4xunit encoded decoded
 )

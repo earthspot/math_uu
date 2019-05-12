@@ -2,8 +2,8 @@ smoutput(jpathsep>(4!:4<'zx'){4!:3'');~zx=.'test uuengine'
 cocurrent 'uu'
 'SIC SIG SIZ'=: 0 3 1e_7
 Q=: 3 : 'q1234__=: y'
-A=: 3 : 'assert. y-:q1234__ [qq=: y;q1234__'
-	NB. uuengine
+A=: 3 : 'assert. y-:q1234__ [qqq__=: y;q1234__'
+	NB. uuengine test
 Q uuengine 'CPAT kg>ton'	NB. are 2 units compatible?
 A 1
 Q uuengine 'CPAT °C>°F'	NB. are 2 units compatible?

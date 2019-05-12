@@ -1,8 +1,8 @@
-smoutput(jpathsep>(4!:4<'zx'){4!:3'');~zx=.'102: uu test1'
+smoutput(jpathsep>(4!:4<'zx'){4!:3'');~zx=.'test uu with SIC=2'
 cocurrent 'uu'
 'SIC SIG SIZ'=: 2 3 1e_7  NB. undotted
 Q=: 3 : 'q1234__=: y'
-A=: 3 : 'assert. y-:q1234__ [qq=: y;q1234__'
+A=: 3 : 'assert. y-:q1234__ [qqq__=: y;q1234__'
 	NB. FROM HERE ON, temps 100 101 102 103 INPUTS are identical
 Q 0 pick 'degF' convert 'degC'
 A 'degF'

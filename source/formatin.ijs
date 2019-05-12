@@ -80,7 +80,7 @@ take_8_misc=: 3 : 0
 registerIN'take_8_misc'
 blink 'blue'
   NB. picks up miscellaneous forms
-if. undefined y do. 'UNDEFINED' return. end.
+if. isUndefined y do. 'UNDEFINED' return. end.
 if. SIC>0 do. infinity=. '∞' else. infinity=. 'infinity' end.
 if. y=__ do. '-',infinity return.
 elseif. y=_ do. infinity return.

@@ -106,8 +106,8 @@ NB. if. nocomplex do. smoutput 'cx: no nouns are complex in: ',loc end.
 i.0 0
 )
 
-undefined=: (3 : 0)"0
-  NB. test for presence of UNDEFINED
+isUndefined=: (3 : 0)"0
+  NB. test for presence of (_.) in numeric(y)
 if. -. 128!:5 y do. 0 return. end.
 '_.' -: 5!:6 <'y'
 )

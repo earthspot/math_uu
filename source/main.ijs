@@ -286,50 +286,12 @@ csymb=: ssymb, <;._1 '|°|′|″'
 openv=: >v
 unitv=: deb each uv -.each TAB  NB. defined units
 units=: deb each us    NB. nominal units
-uvald=: imag eval openv   NB. defined value: displacement
-assert. notFloat rvald=: ieval openv  NB. defined value: rdisplacement <<<<< rational
-uvalu=: real eval openv   NB. defined value: factor
+uvald=: ieval openv   NB. defined value: displacement
+assert. notFloat rvald=: ireval openv  NB. defined value: rdisplacement <<<<< rational
+uvalu=: eval openv   NB. defined value: factor
 assert. notFloat rvalu=: reval openv  NB. defined value: factor <<<<< rational
 i.0 0
 )
-
-eval=: 3 : 0 "1
-  NB. returns 'floating'
-  NB. used to evaluate numeric exprns in UUC
-  NB. c/f valueOf, strValueOf
-y=. '/%-_Ee'charsub >y
-try. {.".y catch. UNDEFINED end.
-)
-
-NB. uniform=: ''&$: :(4 : 0)
-NB.   NB. x== SI-conformance level
-NB.   NB. WARNING: internally temporarily replaces SIC with x
-NB. savedSIC=. SIC
-NB. if. -. x-:'' do. SIC=: x end.
-NB. msg '+++ uniform: ENTERED: x=(x) y=(y)'
-NB.   NB. change units (y) as appropriate for (SIC)
-NB. y=. utf8 deb y  NB. convert (y) from possible datatype=='unicode'
-NB. select. SIC
-NB.  case. 0 do.  NB. ASCII only
-NB.   z=. unucode undotted y
-NB.  case. 1 do.  NB. SI units with /
-NB.   ]z=. undotted y
-NB.   if. 1< +/SL=y do.  NB. if more than 1 slash
-NB.     ]z=. slash1 z
-NB.   end.
-NB.   ]z=. ucode z
-NB. fcase. 2 do.  NB. Standard SI units
-NB.  case. 3 do.  NB. Standard SI units with dots
-NB.   if. y-: ,SL do.  NB. …no bare '/' in Standard SI
-NB.     msg '--- uniform: y=SL returns NIL'
-NB.     '' [SIC=: savedSIC return.
-NB.   end.
-NB.   ]z=. unucode undotted y	NB. c/f case 0
-NB.   ]z=. ucode deslash unslash1 z
-NB.   if. SIC=3 do. z=. dotted z end.
-NB. end.
-NB. z [SIC=: savedSIC return.
-NB. )
 
 uniform=: ''&$: :(4 : 0)
   NB. enforces SI-conformance on unit: y

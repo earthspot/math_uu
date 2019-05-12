@@ -1,8 +1,8 @@
-smoutput(jpathsep>(4!:4<'zx'){4!:3'');~zx=.'uu test3 component test'
+smoutput(jpathsep>(4!:4<'zx'){4!:3'');~zx=.'uu test3'
 cocurrent 'uu'
 'SIC SIG SIZ'=: 0 3 1e_17
 Q=: 3 : 'q1234__=: y'
-A=: 3 : 'assert. y-:q1234__ [qq=: y;q1234__'
+A=: 3 : 'assert. y-:q1234__ [qqq__=: y;q1234__'
 
 SIC=: 0	NB. no unicode in units
 Q uu '3 ft'
