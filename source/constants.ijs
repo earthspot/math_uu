@@ -1,11 +1,10 @@
 	NB. uu - constants.ijs
 '==================== [uu] constants ===================='
+0 :0
+Tuesday 14 May 2019  15:50:29
+)
 
 cocurrent 'uu'
-
-0 :0
-Friday 12 April 2019  12:51:30
-)
 
 ABOUT=: 0 : 0
 UU: scientific quantity converter
@@ -51,10 +50,10 @@ NB. =========================================================
 factory=: 3 : 0
   NB. init/restore factory settings of alterable globals
 SIC=: 1		NB. Used chiefly by: ucode, uniform
-SIG=: 3		NB. used by: scino
-SCI=: 5		NB. used by: scino
-SIZ=: 1e_9	NB. used by: scino
-ZERO=: 'NO'	NB. used by: format
+SIG=: 3		NB. used by: scino - decimal places
+SCI=: 5		NB. used by: scino - sci notatn power-of-ten
+SIZ=: __		NB. used by: scino - zero attrn power-of-ten
+ZERO=: 'NO'	NB. used by: format for unit: [!]
 i.0 0
 )
 

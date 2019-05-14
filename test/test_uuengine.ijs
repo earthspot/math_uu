@@ -1,6 +1,6 @@
 smoutput(jpathsep>(4!:4<'zx'){4!:3'');~zx=.'test uuengine'
 cocurrent 'uu'
-'SIC SIG SIZ'=: 0 3 1e_7
+'SIC SIG SIZ'=: 0 3 __
 Q=: 3 : 'q1234__=: y'
 A=: 3 : 'assert. y-:q1234__ [qqq__=: y;q1234__'
 	NB. uuengine test
@@ -43,8 +43,8 @@ A SIZ
 uuengine 'szer OVER'	NB. set Boolean ZERO word
 Q uuengine 'QZER'	NB. query Boolean ZERO word
 A 'OVER'
-Q uuengine 'SCIN 2.34E-5'	NB. numarg--> (string numeral) scientific notation
-A '2.340e_5'
+Q uuengine 'SCIN 2.34e_5'	NB. numarg--> (string numeral) scientific notation
+A '2.340E-5'
 Q uuengine 'SELF km/s km s'	NB. self-cancel units
 A 'km^2'
 Q uuengine 'UCOD 100 degC'	NB. convert special symbols --> "goy"
@@ -88,9 +88,9 @@ A 2
 uuengine 'ssig 6'	NB. set significant figures
 Q SIG
 A 6
-uuengine 'ssiz 1E-8'	NB. set zero attraction threshold
+uuengine 'ssiz _8'	NB. set zero attraction threshold
 Q SIZ
-A 1e_8
+A _8
 uuengine 'strt'  	NB. restart this instance of UU
-Q SCI;SIC;SIZ
-A 5;1;1e_9
+Q SCI,SIC,SIZ
+A 5 1 __

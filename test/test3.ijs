@@ -1,6 +1,6 @@
 smoutput(jpathsep>(4!:4<'zx'){4!:3'');~zx=.'uu test3'
 cocurrent 'uu'
-'SIC SIG SIZ'=: 0 3 1e_17
+'SCI SIG SIZ'=: 6 3 __
 Q=: 3 : 'q1234__=: y'
 A=: 3 : 'assert. y-:q1234__ [qqq__=: y;q1234__'
 
@@ -22,7 +22,7 @@ SIC=: 0	NB. no unicode in units
 Q uu '15 Ang/s/s'
 A '1.500E-9 m/s^2'
 Q 'Ang' uu '1 mm'
-A '10000000 Ang'
+A '1.000E7 Ang'
 Q 'Ang/s^2' uu '0.0001 ft/s/s'
 A '304800 Ang/s^2'
 
@@ -39,7 +39,7 @@ SIC=: 1	NB. unicoded with slashes
 Q uu '15 Ang/s/s'
 A '1.500E-9 m/s²'
 Q 'Ang' uu '1 mm'
-A '10000000 Å'
+A '1.000E7 Å'
 Q 'Ang/s^2' uu '0.0001 ft/s/s'
 A '304800 Å/s²'
 z=: '2.532E-17 ft/s²'
@@ -52,7 +52,7 @@ SIC=: 2	NB. unicoded with negative powers
 Q uu '15 Ang/s/s'
 A '1.500E-9 m s⁻²'
 Q 'Ang' uu '1 mm'
-A '10000000 Å'
+A '1.000E7 Å'
 Q 'Ang/s^2' uu '0.0001 ft/s/s'
 A '304800 Å s⁻²'
 Q 'ft/s^2' uu '1 Å h⁻²'
@@ -68,7 +68,7 @@ SIC=: 3	NB. unicoded like SIC=2 but dotted
 Q uu '15 Ang/s/s'
 A '1.500E-9 m·s⁻²'
 Q 'Ang' uu '1 mm'
-A '10000000 Å'
+A '1.000E7 Å'
 Q 'Ang/s^2' uu '0.0001 ft/s/s'
 A '304800 Å·s⁻²'
 Q 'ft/s^2' uu '1 Å·h⁻²'
@@ -79,3 +79,5 @@ Q 'ft/s^2' uu '1 Å/h/h'
 A '2.532E-17 ft·s⁻²'
 Q 'ft/s^2' uu '1 Ang/h/h'
 A '2.532E-17 ft·s⁻²'
+
+factory''

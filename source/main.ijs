@@ -153,17 +153,20 @@ rnd=: [: <. 0.5 + ]
 scino=: (3 : 0)"0
   NB. Scientific notation for number: y
   NB. but returns ordinary integer for integer (y)
-  NB. Uses current values of SIG and SCI (they can change)
-if. y=<.y do. ":y return. end.
-fmt=. j. SIG * 1 _1 {~ ((10^SCI) <: |y)  or  ((10^-SIG) > |y)
-if. (y=<.y) and (y<10^SCI) do. z=.":y else. z=.fmt ":y end.
-if. SIZ>|y do. z=.'0',~ '- +'{~ 1+*y end.
-z return.
+  NB. Uses current values of SCI, SIG, SIZ (they can change)
+y=. float y
+if. (10^SIZ)>|y do. '0',~ '- +'{~ 1+*y
+elseif. any (10^SCI)<: y,%y do. sci4j y":~ 0 j. -SIG  NB. force sci ntn
+elseif. y=<.y do. sci4j ":y
+elseif. do.  NB. sci ntn OR decimals
+  z=. sci4j y":~ 0 j. SIG
+  if. *./ z e. '-0.' do. sci4j y":~ 0 j. -SIG else. z end.
+end.
 )
 
 selfcanc=: 3 : 0
 msg '+++ selfcanc: ENTERED'
-  NB. Self-cancel unitstr (y) without reducing to mks
+  NB. Self-cancel unitstr (y) without reducing to base units
   NB. Sort tokens EACH REVERSED -collects num+denom terms
 z=. ; |.each sort |.each ut=. utoks y
 t=. ~. }.each ut
@@ -329,6 +332,17 @@ unucode=: 0&ucode
 uurowsc=: 4 : '(UUC ssmx y){UUC [UCASE=: x'
 uurowsf=: 4 : '(UUF ssmx y){UUF [UCASE=: x'
 listedUnits=: 3 : 'units e.~ <,y'
+
+state=: 3 : 0
+  NB. query and set the UU state variables
+sv=. b4o 'SIC SCI SIG SIZ'
+if. 0=#y do.
+  ".}:;sv,.<';'
+else.  NB. set the sv's
+  sv=. (#y){.sv
+  (sv{.~#y)=: y
+end.
+)
 
 NB. =========== trace ========================
 trace=: 3 : 0

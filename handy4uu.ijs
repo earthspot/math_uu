@@ -1,6 +1,6 @@
 NB. handy4uu.ijs
 0 :0
-Sunday 12 May 2019  15:05:47
+Tuesday 14 May 2019  06:49:44
 -
 Establishes in _z_ all handy verbs actually needed by UU CAL TABULA
 )
@@ -14,6 +14,28 @@ select. y
   case. 0 do. wd 'ide hide' [IDE_z_=: y
   case. 1 do. wd 'ide show' [IDE_z_=: y
   case.   do. ide -.IDE_z_	NB. toggle status
+end.
+)
+
+runlab=: 1&$: : (4 : 0)
+  NB. run the lab: y (paranoid version)
+if. 0=#y do.
+  if. absent'thelab_z_' do. thelab_z_=: jpath TPUU,'/uu.ijt' end.
+  y=. thelab_z_
+end.
+if. -.fexist y do.
+  smoutput '>>> runlab: file not found: ',y
+  return.
+end.
+if. x-:0 do. open y return. end.
+]thelab_z_=: y
+(trace_cal_ :: 0:) 0
+(trace_uu_ :: 0:) 0
+require '~addons/labs/labs/labs.ijs'
+try. lab_jlab_ thelab
+catch.
+  require '~addons/labs/labs/labs805.ijs'
+  lab_jlab805_ thelab
 end.
 )
 

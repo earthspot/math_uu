@@ -57,33 +57,11 @@ zz=.zz ,  (xx z) ;~ z=:'TPUT'	NB. usertools.ijs
 zz=.zz ,  (xx z) ;~ z=:'TPUU'	NB. uu.ijs
 )
 
-runlabuu=: 3 : 0
-  NB. private way to run uu.ijt in j807
-  NB.   see: temp 16
-if. 0=#y do.
-  ]y=. jpath TPUU,'/uu.ijt'
-end.  NB. THE LAB UNDER DEVT
-if. -.fexist y do.
-  smoutput '>>> runlab: file not found: ',y
-  return.
-end.
-]thelab_z_=: y
-trace 0	NB. to reset existing verb tracing
-require '~addons/labs/labs/labs.ijs'
-try. lab_jlab_ thelab
-catch.
-  require '~addons/labs/labs/labs805.ijs'
-  lab_jlab805_ thelab
-end.
-)
-
 '==================== [uu] utilities ===================='
 
 cocurrent 'uu'
 
   NB. NEEDS CHECKING against long PI again >>>>>>>>>>>>>>>>>>>>
-NB. dfr=: *&(%PI%180)  NO... needs latest truncated PI!
-NB. rfd=: *&(PI%180)
 dfr=: 3 : '180*y%PI'
 rfd=: 3 : 'PI*y%180'
 
@@ -174,12 +152,5 @@ ID=: 3 : 0
 units i. ;:y
 )
 
-sci2j=: 3 : 0
-  NB. convert scientific numeral to j numeral
-y rplc '-' ; '_' ; 'E' ; 'e'
-)
-
-sci4j=: 3 : 0
-  NB. convert j numeral to scientific numeral
-y rplc '_' ; '-' ; 'e' ; 'E'
-)
+sci2j=: '/%-_Ee'&charsub  NB. convert sci notation to j numeral
+sci4j=: '%/_-eE'&charsub  NB. convert j numeral to sci notation

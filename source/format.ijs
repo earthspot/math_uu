@@ -164,7 +164,8 @@ sw'(note y) note' [ NO_UNITS_NEEDED=: 1
 
 give_2_sci=: 4 : 0
 register'give_2_sci'
-z=. (toupper@hy@scino) y  NB. scientific notation (conventional)
+NB. z=. (toupper@hy@scino) y  NB. scientific notation (conventional)
+z=. scino y  NB. scientific notation (conventional)
 unit=. x
 msg '... give_2_sci: x=(x) y=(y) z=(z) unit=(unit)'
 z return.

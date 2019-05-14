@@ -14,14 +14,27 @@ PARENTDIR=: (zx i:'/'){.zx=.jpathsep>(4!:4<'zx'){4!:3''[zx=.''
 AABUILT=: '2019-05-12  16:43:37'
 AABUILT=: '2019-05-12  16:50:33'
 AABUILT=: '2019-05-12  16:52:39'
+AABUILT=: '2019-05-12  17:06:20'
+AABUILT=: '2019-05-14  15:46:58'
+AABUILT=: '2019-05-14  15:59:40'
+AABUILT=: '2019-05-14  16:04:35'
+AABUILT=: '2019-05-14  16:11:42'
+AABUILT=: '2019-05-14  16:21:54'
+AABUILT=: '2019-05-14  16:47:55'
+AABUILT=: '2019-05-14  16:58:23'
+AABUILT=: '2019-05-14  17:00:33'
+AABUILT=: '2019-05-14  17:06:37'
+AABUILT=: '2019-05-14  17:12:03'
+AABUILT=: '2019-05-14  17:15:56'
+AABUILT=: '2019-05-14  17:18:57'
+AABUILT=: '2019-05-14  17:20:38'
 
 '==================== [uu] constants ===================='
+0 :0
+Tuesday 14 May 2019  15:50:29
+)
 
 cocurrent 'uu'
-
-0 :0
-Friday 12 April 2019  12:51:30
-)
 
 ABOUT=: 0 : 0
 UU: scientific quantity converter
@@ -56,7 +69,7 @@ factory=: 3 : 0
 SIC=: 1
 SIG=: 3
 SCI=: 5
-SIZ=: 1e_9
+SIZ=: __
 ZERO=: 'NO'
 i.0 0
 )
@@ -215,26 +228,6 @@ zz=.zz ,  (xx z) ;~ z=:'TPUT'
 zz=.zz ,  (xx z) ;~ z=:'TPUU'
 )
 
-runlabuu=: 3 : 0
-
-
-if. 0=#y do.
-  ]y=. jpath TPUU,'/uu.ijt'
-end.
-if. -.fexist y do.
-  smoutput '>>> runlab: file not found: ',y
-  return.
-end.
-]thelab_z_=: y
-trace 0
-require '~addons/labs/labs/labs.ijs'
-try. lab_jlab_ thelab
-catch.
-  require '~addons/labs/labs/labs805.ijs'
-  lab_jlab805_ thelab
-end.
-)
-
 '==================== [uu] utilities ===================='
 
 cocurrent 'uu'
@@ -327,15 +320,8 @@ ID=: 3 : 0
 units i. ;:y
 )
 
-sci2j=: 3 : 0
-
-y rplc '-' ; '_' ; 'E' ; 'e'
-)
-
-sci4j=: 3 : 0
-
-y rplc '_' ; '-' ; 'e' ; 'E'
-)
+sci2j=: '/%-_Ee'&charsub
+sci4j=: '%/_-eE'&charsub
 
 '==================== [uu] rational ===================='
 
@@ -782,11 +768,14 @@ scino=: (3 : 0)"0
 
 
 
-if. y=<.y do. ":y return. end.
-fmt=. j. SIG * 1 _1 {~ ((10^SCI) <: |y)  or  ((10^-SIG) > |y)
-if. (y=<.y) and (y<10^SCI) do. z=.":y else. z=.fmt ":y end.
-if. SIZ>|y do. z=.'0',~ '- +'{~ 1+*y end.
-z return.
+y=. float y
+if. (10^SIZ)>|y do. '0',~ '- +'{~ 1+*y
+elseif. any (10^SCI)<: y,%y do. sci4j y":~ 0 j. -SIG
+elseif. y=<.y do. sci4j ":y
+elseif. do.
+  z=. sci4j y":~ 0 j. SIG
+  if. *./ z e. '-0.' do. sci4j y":~ 0 j. -SIG else. z end.
+end.
 )
 
 selfcanc=: 3 : 0
@@ -951,6 +940,17 @@ unucode=: 0&ucode
 uurowsc=: 4 : '(UUC ssmx y){UUC [UCASE=: x'
 uurowsf=: 4 : '(UUF ssmx y){UUF [UCASE=: x'
 listedUnits=: 3 : 'units e.~ <,y'
+
+state=: 3 : 0
+
+sv=. b4o 'SIC SCI SIG SIZ'
+if. 0=#y do.
+  ".}:;sv,.<';'
+else.
+  sv=. (#y){.sv
+  (sv{.~#y)=: y
+end.
+)
 trace=: 3 : 0
 
 
@@ -1502,7 +1502,7 @@ sw'(note y) note' [ NO_UNITS_NEEDED=: 1
 
 give_2_sci=: 4 : 0
 register'give_2_sci'
-z=. (toupper@hy@scino) y
+z=. scino y
 unit=. x
 msg '... give_2_sci: x=(x) y=(y) z=(z) unit=(unit)'
 z return.

@@ -1,6 +1,6 @@
 smoutput(jpathsep>(4!:4<'zx'){4!:3'');~zx=.'test uu with SIC=3'
 cocurrent 'uu'
-'SIC SIG SIZ'=: 3 3 1e_7
+'SIC SIG SIZ'=: 3 3 __
 Q=: 3 : 'q1234__=: y'
 A=: 3 : 'assert. y-:q1234__ [qqq__=: y;q1234__'
 	NB. FROM HERE ON, temps 100 101 102 103 INPUTS are identical
