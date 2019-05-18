@@ -12,6 +12,7 @@ onload_z_=: empty
 PARENTDIR=: (zx i:'/'){.zx=.jpathsep>(4!:4<'zx'){4!:3''[zx=.''
 
 AABUILT=: '2019-05-18  12:45:46'
+AABUILT=: '2019-05-18  12:58:50'
 
 '==================== [uu] constants ===================='
 0 :0
@@ -753,7 +754,8 @@ scino=: (3 : 0)"0
 
 
 y=. float y
-if. (10^SIZ)>|y do. '0',~ '- +'{~ 1+*y
+if. y=0 do. ,'0'
+elseif. (10^SIZ)>|y do. '0',~ '- +'{~ 1+*y
 elseif. any (10^SCI)<: y,%y do. sci4j y":~ 0 j. -SIG
 elseif. y=<.y do. sci4j ":y
 elseif. do.

@@ -155,8 +155,9 @@ scino=: (3 : 0)"0
   NB. but returns ordinary integer for integer (y)
   NB. Uses current values of SCI, SIG, SIZ (they can change)
 y=. float y
-if. (10^SIZ)>|y do. '0',~ '- +'{~ 1+*y
-elseif. any (10^SCI)<: y,%y do. sci4j y":~ 0 j. -SIG  NB. force sci ntn
+if. y=0 do. ,'0'
+elseif. (10^SIZ)>|y do. '0',~ '- +'{~ 1+*y
+elseif. any (10^SCI)<: y,%y do. sci4j y":~ 0 j. -SIG  NB. force sci
 elseif. y=<.y do. sci4j ":y
 elseif. do.  NB. sci ntn OR decimals
   z=. sci4j y":~ 0 j. SIG
