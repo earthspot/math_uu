@@ -57,7 +57,7 @@ Lab Section COMPATIBLE1
 ...But of course only if the units are compatible.
 
 If they are not, uu returns a value of zero 
-(meaning: there are no kilowatt-hours in one foot)
+(meaning: there are no feet in a kilowatt-hour.)
 ...
 )
 
@@ -130,8 +130,7 @@ uu'*CPAT J > gizmo'
 
 NB. =========================================================
 Lab Section COMPATLIST3
-NOTE the behavior of uu (as opposed to uuengine)
-with unknown units...
+NOTE the behavior of uu with unknown units...
 )
 
 'gizmo' uu '1 yd'
@@ -161,6 +160,10 @@ To "divide" two arbitrary units strings, use: udiv
 that the denominator doesn't contain slash).
 
 Then use: uu -to cancel-out...
+
+	>>> We don't have access to udiv now
+
+
 )
 
 u1=: 'kg m^2/A^2/s^3'		NB. energy
@@ -174,6 +177,11 @@ uu approximates the "SI look-and-feel" with unicode chars
 (in utf-8 encoding, the standard for the J session).
 
 To suppress this behavior, enter: uunicode 0
+
+
+	>>> no uunicode any more
+		but we now have: state
+
 
 If you enter: uunicode 1
 -then uu will not only output utf-8 chars,
@@ -192,6 +200,10 @@ uunicode 1	NB. reset to the default
 NB. =========================================================
 Lab Section SI_LOOK2
 Strict SI units do not use '/' to represent units quotients.
+
+	>>>> not strictly true.
+
+
 Thus uu accepts [m/s/s] and [m/s^2] (units of acceleration)
 whereas SI insists on the format [m s⁻²].
 

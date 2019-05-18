@@ -22,6 +22,7 @@ end.
 	sllog 'uu x y valu rvalu unit'
   NB. compute target value: rvtarg
 if. cannotScale unit do.  NB. formatOUT itself converts given value
+  'targ rdisp rfactor'=. x convert unit
   rvtarg=. rvalu	NB. <<<<< rational
 elseif. 0=#x do.  NB. (x) is empty | monadic invocation
   'targ rdisp rfactor'=. convert unit
@@ -33,7 +34,7 @@ end.
   NB. cache the exact value, obtained from the rational calculations
 UU_VALUE=: rvtarg	NB. <<<<< rational
 z=. targ formatOUT rvtarg
-	sllog 'uu_3 z rvtarg VEXIN VEX'
+	sllog 'uu_3 z rvtarg VEXIN'
   NB. Flag: NO_UNITS_NEEDED is set by the take_* verb
 if. NO_UNITS_NEEDED do. z else. deb z,SP,uniform targ end.
 )

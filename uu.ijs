@@ -1,5 +1,5 @@
 0 :0
-Sunday 12 May 2019  15:40:59
+Saturday 18 May 2019  12:45:34
 -
 UU: scientific units conversion package
 )
@@ -11,23 +11,7 @@ onload_z_=: empty
 
 PARENTDIR=: (zx i:'/'){.zx=.jpathsep>(4!:4<'zx'){4!:3''[zx=.''
 
-AABUILT=: '2019-05-12  16:43:37'
-AABUILT=: '2019-05-12  16:50:33'
-AABUILT=: '2019-05-12  16:52:39'
-AABUILT=: '2019-05-12  17:06:20'
-AABUILT=: '2019-05-14  15:46:58'
-AABUILT=: '2019-05-14  15:59:40'
-AABUILT=: '2019-05-14  16:04:35'
-AABUILT=: '2019-05-14  16:11:42'
-AABUILT=: '2019-05-14  16:21:54'
-AABUILT=: '2019-05-14  16:47:55'
-AABUILT=: '2019-05-14  16:58:23'
-AABUILT=: '2019-05-14  17:00:33'
-AABUILT=: '2019-05-14  17:06:37'
-AABUILT=: '2019-05-14  17:12:03'
-AABUILT=: '2019-05-14  17:15:56'
-AABUILT=: '2019-05-14  17:18:57'
-AABUILT=: '2019-05-14  17:20:38'
+AABUILT=: '2019-05-18  12:45:46'
 
 '==================== [uu] constants ===================='
 0 :0
@@ -988,6 +972,7 @@ end.
 	sllog 'uu x y valu rvalu unit'
 
 if. cannotScale unit do.
+  'targ rdisp rfactor'=. x convert unit
   rvtarg=. rvalu
 elseif. 0=#x do.
   'targ rdisp rfactor'=. convert unit
@@ -999,7 +984,7 @@ end.
 
 UU_VALUE=: rvtarg
 z=. targ formatOUT rvtarg
-	sllog 'uu_3 z rvtarg VEXIN VEX'
+	sllog 'uu_3 z rvtarg VEXIN'
 
 if. NO_UNITS_NEEDED do. z else. deb z,SP,uniform targ end.
 )
@@ -1358,135 +1343,42 @@ end.
 )
 
 '==================== [uu] format.ijs =================='
-
+0 :0
+Saturday 18 May 2019  12:45:15
+)
 cocurrent 'uu'
 
-0 :0
-Thursday 15 November 2018  04:10:53
-)
-register=: 3 : 0
-
-
-VEX=: y
-)
-
 format=: formatOUT=: ''&$: :(4 : 0)
-msg '+++ formatOUT: x=[(x)] y=[(y)]'
+
+
+msg '+++ format_1: x=[(x)] y=[(y)]'
+nu=. 3 : 'y[NO_UNITS_NEEDED=:1'
 NO_UNITS_NEEDED=: 0
-kunits=. bris x
-z=. kunits daisychain y
-z [msg '--- formatOUT: returns qty:[(z)] by daisy:(VEX)'
-)
-
-make_daisychainOUT=: 3 : 0
-
->z=. 'give_' nl 3
-]z=. (; z,each <' ::'),'giverr'
-daisychain=: 13 : ('x(',z,')y')
-i.0 0
-)
-
-giverr=: 4 : 0
-msg '>>> giverr: none chime: x=(x) y=(y)'
-sw'(y) [(x)??]'
-)
-
-give_0_angle=: 4 : 0
-register'give_0_angle'
-
-assert. x -: 'deg'
-d=. scino y
-if. SIC=0 do. z=. sw'(d) deg'
-else.   z=. ucode sw'(d)deg'
-end.
-z [ NO_UNITS_NEEDED=: 1
-)
-
-give_0_dms=: 4 : 0
-register'give_0_dms'
-
-asec4deg=. 3600 * ]
-assert. x -: 'dms'
-'d m s'=.":each <.each 360 60 60 #: asec4deg |y
-if. SIC=0 do. z=. sw'(d) deg (m)'' (s)"'
-else.   z=. ucode sw'(d)deg (m)amin (s)asec'
-end.
-z [ NO_UNITS_NEEDED=: 1
-)
-
-give_0_yesno=: 4 : 0
-register'give_0_yesno'
-
-
-assert. (,x) -: ,'!'
-NO_UNITS_NEEDED=: 1
-if. y=0 do. ZERO
-else.
-select. ZERO
-case. 'no' do. 'yes'
-case. 'NO' do. 'YES'
-case. 'off' do. 'on'
-case. 'OFF' do. 'ON'
-case. 'lo' do. 'hi'
-case. 'LO' do. 'HI'
-case. 'low' do. 'high'
-case. 'LOW' do. 'HIGH'
-case. 'false' do. 'true'
-case. 'FALSE' do. 'TRUE'
-case. do. '~',ZERO
-end.
+select. kunits=. bris x
+ case. 'deg'	do. ":y
+ case. 'dms'	do. nu dms y
+ case. 'hms'	do. hms y
+ case. ,'!'	do. nu yesno y
+ case. 'note'	do. nu ' note',~ note y
+ case. 'midino'	do. nu ' midino',~ ":midino y
+case.		do. x format_misc y
 end.
 )
-0 :0
-'!' give_0_yesno 0
-'!' give_0_yesno 1
-uu '0 !'
-'!' uu '0 !'
-uu '1 !'
-'!' uu '1 !'
-)
 
-give_1_temp=: 4 : 0
+format_misc=: 4 : 0
 
-register'give_1_temp'
-unit=. ,x
-assert. isTemperature unit
-sllog 'VEX x y unit disp'
-sw'(scino y)'
-)
-0 :0
-'degRo' give_1_temp 373.15
-'degRo' uu '373.15 K'
-'degRo' uu '1 b.p'
-'degRo' uu '1 f.p'
-)
-
-give_0_misc=: 4 : 0
-register'give_0_misc'
-
+msg '+++ format_misc: x=[(x)] y=[(y)]'
 if. isUndefined y do. 'UNDEFINED' return. end.
-if. SIC>0 do. infinity=. '∞'
-else. infinity=. 'infinity'
+if. SIC>0 do. inf=. '∞' else. inf=. 'inf' end.
+if. y=__			do. '-',inf
+elseif. y=_		do. inf
+elseif. isTemperature x	do. sw'(scino y)'
+elseif.			do. scino y
 end.
-if. y=__ do. '-',infinity return.
-elseif. y=_ do. infinity return.
-end.
-assert. 0
 )
 
-give_9_general=: 4 : 0
-register'give_9_general'
+hms=: 3 : 0
 
-
-unit=. x
-msg '... give_9_general: x=(x) y=(y) unit=(unit)'
-sw'(y) (unit)'
-)
-
-give_0_hms=: 4 : 0
-register'give_0_hms'
-
-assert. x -: 'hms'
 'hh mm ss'=.":each 24 60 60 #: y
 if. 10>".hh do. hh=. '0',hh end.
 if. 10>".mm do. mm=. '0',mm end.
@@ -1494,23 +1386,33 @@ if. 10>".ss do. ss=. '0',ss end.
 sw'(hh):(mm):(ss)'
 )
 
-give_2_note=: 4 : 0
-register'give_2_note'
-assert. x -: 'note'
-sw'(note y) note' [ NO_UNITS_NEEDED=: 1
+dms=: 3 : 0
+
+asec4deg=. 3600 * ]
+'d m s'=.":each <.each 360 60 60 #: asec4deg |y
+if. SIC=0 do. sw'(d) deg (m)'' (s)"'
+else.         ucode sw'(d)deg (m)amin (s)asec'
+end.
 )
 
-give_2_sci=: 4 : 0
-register'give_2_sci'
-z=. scino y
-unit=. x
-msg '... give_2_sci: x=(x) y=(y) z=(z) unit=(unit)'
-z return.
+yesno=: 3 : 0
+
+
+if. y=0 do. ZERO return. end.
+select. ZERO
+case. 'no'	do. 'yes'
+case. 'NO'	do. 'YES'
+case. 'off'	do. 'on'
+case. 'OFF'	do. 'ON'
+case. 'lo'	do. 'hi'
+case. 'LO'	do. 'HI'
+case. 'low'	do. 'high'
+case. 'LOW'	do. 'HIGH'
+case. 'false'	do. 'true'
+case. 'FALSE'	do. 'TRUE'
+case. 		do. '~',ZERO
+end.
 )
-
-give_2_sig=: give_2_sci
-
-make_daisychainOUT''
 
 '==================== [uu] formatIN.ijs =================='
 0 :0
