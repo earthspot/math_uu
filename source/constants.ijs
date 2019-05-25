@@ -59,7 +59,7 @@ i.0 0
 
 CANNOTSCALE=: cutopen 0 : 0
 gas.mark
-midino
+midi
 note
 )
 

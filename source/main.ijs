@@ -125,14 +125,21 @@ if. any 'kg^' E. y do. 0 return. end.	NB. cannot accept powers of [kg]
 1	NB. return true with no more tests
 )
 
-midino=: midi4Hz=: 69 + 12 * 2 ^. 440 %~ ]	NB. "midi number" of freq: y (Hz)
+midi4Hz=: midino=: 69 + 12 * 2 ^. 440 %~ ]  NB. "midi number" of freq: y (Hz)
+Hz4midi=: midino inv
 
-note=: note4Hz=: 3 : 0
+nnote4Hz=: nnote=: 3 : 'rnd 12 | midino y'  NB. nearest musical note-number of freq: y (Hz)
+
+note4Hz=: note=: 3 : 0
   NB. nearest musical note of freq: y (Hz)
-NOTE=. <;._1 ' C C# D D# E F F# G G# A A# B C'
-,>NOTE {~ rnd (12 | midino y)
+NOTE=. cut 'C C# D D# E F F# G G# A A# B C'
+NB. ,>NOTE {~ rnd (12 | midino y)
+,>NOTE {~ nnote y
 )
 
+Hz4note=: note4Hz inv
+
+0 :0
 Hz4note=: 3 : 0
   NB. freq [Hz] for given musical note
   NB. UNFINISHED <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<

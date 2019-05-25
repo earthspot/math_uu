@@ -13,6 +13,11 @@ PARENTDIR=: (zx i:'/'){.zx=.jpathsep>(4!:4<'zx'){4!:3''[zx=.''
 
 AABUILT=: '2019-05-18  12:45:46'
 AABUILT=: '2019-05-18  12:58:50'
+AABUILT=: '2019-05-21  11:00:10'
+AABUILT=: '2019-05-21  11:07:24'
+AABUILT=: '2019-05-21  11:44:34'
+AABUILT=: '2019-05-21  11:48:45'
+AABUILT=: '2019-05-21  12:26:03'
 
 '==================== [uu] constants ===================='
 0 :0
@@ -61,7 +66,7 @@ i.0 0
 
 CANNOTSCALE=: cutopen 0 : 0
 gas.mark
-midino
+midi
 note
 )
 
@@ -156,11 +161,32 @@ BOIL_C=: 100x + ICE_C
 BOIL_K=: 100x + ICE_K
 
 '==================== [z] utilities ===================='
-
 cocurrent 'z'
 
-ident=: ([: , [) -: ([: , ])
+REPOCAL=: jpath '~Gitrcal'
+REPOUU=:  jpath '~Gitruu'
 
+O=: '\'-.~ 0 :0
+cal''  NB\. open cal.ijs
+cai''  NB\. open cal_interface
+uui''  NB\. open uu_interface
+uuc''  NB\. open uuc
+uuf''  NB\. open uuf
+uut''  NB\. open uu lab
+utf''  NB\. open uu test folder
+)
+
+cal=: 3 : 'open REPOCAL,''/cal.ijs'''
+cai=: 3 : 'open REPOCAL,''/source/cal_interface.ijs'''
+uui=: 3 : 'open REPOUU,''/source/uu_interface.ijs'''
+uuc=: 3 : 'open TPUC sl ''/uuc.ijs'''
+uuf=: 3 : 'open TPUF sl ''/uuf.ijs'''
+uum=: 3 : 'open TPUM sl ''/uum.ijs'''
+uut=: 3 : 'open TPUU sl ''/uu.ijt'''
+utf=: 3 : 'openf REPOUU,''/test'''
+
+test=: test_uu_
+ident=: ([: , [) -: ([: , ])
 choice=: 4 : '((0>.1<.x)){y'
 abs=: |
 avg=: +/ % #
@@ -169,21 +195,8 @@ int=: [: <. ] + 0 > ]
 mod=: |~
 times=: *
 
-test_z_=: test_uu_
-
-ot1=: open bind '~Gitcal/test/test1.ijs'
-ot1r=: open bind '~Gitrcal/test/test1.ijs'
-ocal=: open bind '~Gitcal/cal.ijs'
-ocalr=: open bind '~Gitrcal/cal.ijs'
-
-uut=: openlab=: open bind '~Gituu/uu.ijt'
-uucr=:open bind '~Gitruu/uuc.ijs'
-cal=: open bind '~Gitcal/source/cal_interface.ijs'
-uuu=: open bind '~Gituu/source/uu_interface.ijs'
-
-uuc=: open bind '~addons/math/uu/uuc.ijs'
-uuf=: open bind '~addons/math/uu/uuf.ijs'
-uum=: open bind '~addons/math/uu/uum.ijs'
+'==================== [uu] utilities ===================='
+cocurrent 'uu'
 
 test=: 3 : 0
 
@@ -193,8 +206,13 @@ try. smoutput '--- VERSION of CAL -- ',VERSION_cal_ catch. end.
 try. smoutput '--- VERSION of TABULA -- ',VERSION_tabby_ catch. end.
 
 smoutput '--- TP*_z_ paths:'
-zz=. 0 2$a:
+tpaths''
+)
+
+tpaths=: 3 : 0
+
 xx=. 3 : '". y,''_z_'''
+zz=. 0 2$a:
 zz=.zz ,  (xx z) ;~ z=:'TPAR'
 zz=.zz ,  (xx z) ;~ z=:'TPAT'
 zz=.zz ,  (xx z) ;~ z=:'TPCA'
@@ -212,10 +230,6 @@ zz=.zz ,  (xx z) ;~ z=:'TPUM'
 zz=.zz ,  (xx z) ;~ z=:'TPUT'
 zz=.zz ,  (xx z) ;~ z=:'TPUU'
 )
-
-'==================== [uu] utilities ===================='
-
-cocurrent 'uu'
 
 
 dfr=: 3 : '180*y%PI'
@@ -724,14 +738,20 @@ if. any 'kg^' E. y do. 0 return. end.
 1
 )
 
-midino=: midi4Hz=: 69 + 12 * 2 ^. 440 %~ ]
+midi4Hz=: midino=: 69 + 12 * 2 ^. 440 %~ ]
+Hz4midi=: midino inv
 
-note=: note4Hz=: 3 : 0
+nnote4Hz=: nnote=: 3 : 'rnd 12 | midino y'
 
-NOTE=. <;._1 ' C C# D D# E F F# G G# A A# B C'
-,>NOTE {~ rnd (12 | midino y)
+note4Hz=: note=: 3 : 0
+
+NOTE=. cut 'C C# D D# E F F# G G# A A# B C'
+,>NOTE {~ nnote y
 )
 
+Hz4note=: note4Hz inv
+
+0 :0
 Hz4note=: 3 : 0
 
 
@@ -1362,7 +1382,6 @@ select. kunits=. bris x
  case. 'hms'	do. hms y
  case. ,'!'	do. nu yesno y
  case. 'note'	do. nu ' note',~ note y
- case. 'midino'	do. nu ' midino',~ ":midino y
 case.		do. x format_misc y
 end.
 )

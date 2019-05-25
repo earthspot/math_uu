@@ -24,7 +24,7 @@ NB. If units not specified for a given var (say a) then a(*) assumed.
 cocurrent 'uu'
 
 UUF=: cmx noun define
-__ [/] Wednesday 6 March 2019  01:17:52
+__ [/] Tuesday 21 May 2019  12:22:17
 tran(X,Y) : X(*),Y(*) [!] transfer {X} --> {Y}
 trag(X,Y) : X(*),Y(*) [!] transfer {X} -->+{Y}
 trad(X,Y) : X(*),Y(*) [!] transfer {X} -->-{Y}
@@ -67,6 +67,7 @@ m*(v^2)/2 : m(kg),v(m/s) [J] kinetic energy
 m*f*h : m(kg),f(m/s^2),h(m) [J] potential energy
 9.812865328*m*h : m(kg),h(m) [J] potential energy; earth surface
 PI2*r : r(m) [m] circumference of circle
+69+(12*(2^.(f%440))) : f(Hz) [/] musical midi number
 73.3*m^0.75 ; m(kg) [kcal/d] basal metabolic rate
 0.01*m^0.7 ; m(kg) [kg] mammalian brain weight; not ape
 0.04*m^0.66 ; m(kg) [kg] ape brain weight

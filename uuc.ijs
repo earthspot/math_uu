@@ -32,7 +32,7 @@ NB. ...because they interfere with orderly re-scaling by menu
 cocurrent 'uu'
 
 UUC=: cmx 0 : 0
-1 /	[saved]	Monday 29 April 2019  00:34:02
+1 /	[saved]	Tuesday 21 May 2019  22:31:35
 1 m	[m]	base unit - metre (distance)
 1 kg	[kg]	base unit - kilogramme (mass)
 1 s	[s]	base unit - second (time)
@@ -50,9 +50,7 @@ UUC=: cmx 0 : 0
 22 yd	[ch]	chain
 220 yd	[fu]	furlong
 1760 yd	[mi]	mile
-1e_6 m	[mu]	micron; micrometre
-1e_6 m	[mum]	micron; micrometre
-1e_6 m	[µ]	micron; micrometre
+1e_6 m	[u]	micron; micrometre
 1e_10 m	[Ang]	Angstrom-unit
 0.001 kg	[g]	gram (needs defining because SI base-unit is kg)
 1 s	[sec]	second (time)
@@ -64,7 +62,6 @@ UUC=: cmx 0 : 0
 0.01 /	[%]	Percent
 1 *	[!]	YES-NO
 1 /s	[Hz]	Frequency; Hertz
-1 Hz	[midi]	Musical midi number
 1 Hz	[note]	Musical note
 1 kg m/s/s [N]	Force; Newton
 1 N/m/m	[Pa]	Pressure; Pascal
@@ -86,7 +83,7 @@ UUC=: cmx 0 : 0
 1e4 m^2	[ha]	hectare
 4840 yd^2	[acre]	acre
 0.25 acre	[rd]	rood
-7140 m^2	[soccer.pitch]	area of typical football field
+7140 m^2	[soccer]	area of typical football field
 1e_3 m^3	[l]	litre
 1e_2 l	[alu]	unit of alcohol; dietary
 1 m/s	[v.si]	unit velocity

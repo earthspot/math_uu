@@ -17,7 +17,6 @@ select. kunits=. bris x  NB. work internally in kosher units
  case. 'hms'	do. hms y
  case. ,'!'	do. nu yesno y
  case. 'note'	do. nu ' note',~ note y
- case. 'midino'	do. nu ' midino',~ ":midino y
 case.		do. x format_misc y
 end.
 )
