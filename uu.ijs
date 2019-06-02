@@ -18,6 +18,8 @@ AABUILT=: '2019-05-21  11:07:24'
 AABUILT=: '2019-05-21  11:44:34'
 AABUILT=: '2019-05-21  11:48:45'
 AABUILT=: '2019-05-21  12:26:03'
+AABUILT=: '2019-06-02  21:31:18'
+AABUILT=: '2019-06-02  21:50:03'
 
 '==================== [uu] constants ===================='
 0 :0
@@ -183,9 +185,11 @@ uuc=: 3 : 'open TPUC sl ''/uuc.ijs'''
 uuf=: 3 : 'open TPUF sl ''/uuf.ijs'''
 uum=: 3 : 'open TPUM sl ''/uum.ijs'''
 uut=: 3 : 'open TPUU sl ''/uu.ijt'''
+uuu=: 3 : 'open TPUU sl ''/uu.ijs'''
 utf=: 3 : 'openf REPOUU,''/test'''
 
 test=: test_uu_
+tpaths=: tpaths_uu_
 ident=: ([: , [) -: ([: , ])
 choice=: 4 : '((0>.1<.x)){y'
 abs=: |
@@ -809,7 +813,12 @@ if. x do.
   z=. canon z
   a=. '/' taketo z
   b=. '/' dropto z
-  z=. a,'/',paren deb b rplc SL;SP
+  z=. deb b rplc SL;SP
+  if. SP e. z do.
+    z=. a,'/',paren z
+  else.
+    z=. a,'/',z
+  end.
 else.
   if. ')'~:{:z do. y return. end.
   a=. '(' taketo z
@@ -883,10 +892,10 @@ end.
 udiv=: 4 : 0
 
 
-if. (1=#y) and (y=SL) do. x return. end.
-z=. cnvi utoks y
-z=. selfcanc x , ;z
-z=. z rplc '/^2';'/'
+
+if. y ident SL do. x return. end.
+z=. (utoks x) , cnvi utoks y
+z=. selfcanc ;z
 )
 
 make_units=: 0&$: :(4 : 0)
@@ -969,6 +978,95 @@ else.
   sllog=: empty
 end.
 i.0 0
+)
+ERROR_UDIV=: '?/?'
+
+canc=: 4 : 0
+
+
+
+
+msg '+++ canc: x=[(x)] y=[(y)]'
+z=. sp1 x
+n=. SP,y
+d=. SL,y
+whilst. -. w-:z do.
+  z=. (w=.z) rplc (n,d);'' ; (d,n);''
+  msg '... canc:   z=[(z)] n=[(n)] d=[(d)]'
+end.
+z return.
+)
+
+coll=: 4 : 0
+
+
+
+
+msg '+++ coll: x=[(x)] y=[(y)]'
+z=. ,x
+n=. SP,y
+d=. SL,y
+for_p. 4 3 2 do.
+  z=. z rplc ((p*$n)$n);(n,PW,":p) ; ((p*$d)$d);(d,PW,":p)
+  msg '... coll:     n=[(n)] d=[(d)] p=(p) --> z=[(z)]'
+end.
+z return.
+)
+
+diss=: 3 : 0
+
+
+for_cboxed. y [z=.'' do. c=. >cboxed
+  p=. 1 >. {. ". PW takeafter c
+  z=. z, p# <PW taketo c
+end.
+z return.
+)
+
+selfcanc=: 3 : 0
+
+
+
+z=. ; |.each sort |.each ut=. diss utoks y
+msg '+++ selfcanc: y=(y) --> z=[(z)]'
+
+for_cboxed. ~. }.each ut do. c=. >cboxed
+  z=. z canc c
+  z=. z coll c
+  msg '... selfcanc: c=[(c)] --> z=[(z)]'
+end.
+z=. selfcancFix dlb canon z
+msg '--- selfcanc: RETURNS: z=(z)'
+z return.
+)
+
+selfcancFix=: 3 : 0
+
+y rplc '/^0';'/';'/^1';'/';'/^2';'/';'/^3';'/';'/^4';'/';'/^5';'/';'/^6';'/';'/^7';'/';'/^8';'/';'/^9';'/'
+)
+udiv=: 4 : 0
+
+
+x=. unucode x
+y=. unucode y
+if. y ident SL do. uniform x return. end.
+if. 0 = #y     do. uniform x return. end.
+
+z=. selfcanc ; (utoks x) , (cnvi utoks y)
+if. udivCodesOk x;y;z do. uniform z
+else. ERROR_UDIV
+end.
+)
+
+udivCodesOk=: 3 : 0
+
+'x y z'=. y
+codex=. 2 pick qtcode4anyunit x
+codey=. 2 pick qtcode4anyunit y
+codez=. 2 pick qtcode4anyunit z
+if. codez = codexy=.codex%codey do. 1
+else. 0 [ smoutput llog 'BAD codez z codex x codey y codexy'
+end.
 )
 
 '==================== [uu] uuverb.ijs ===================='

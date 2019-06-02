@@ -22,9 +22,11 @@ uuc=: 3 : 'open TPUC sl ''/uuc.ijs'''
 uuf=: 3 : 'open TPUF sl ''/uuf.ijs'''
 uum=: 3 : 'open TPUM sl ''/uum.ijs'''
 uut=: 3 : 'open TPUU sl ''/uu.ijt'''
+uuu=: 3 : 'open TPUU sl ''/uu.ijs'''
 utf=: 3 : 'openf REPOUU,''/test'''
 
 test=: test_uu_
+tpaths=: tpaths_uu_
 ident=: ([: , [) -: ([: , ])  NB. atom -: list[1]
 choice=: 4 : '((0>.1<.x)){y'  NB. always pick 0 or 1 of y
 abs=: |

@@ -198,7 +198,12 @@ NB.   if. SIC>:2 do. y return. end.  NB. convention n/a
   z=. canon z
   a=. '/' taketo z
   b=. '/' dropto z  NB. all sub-units should be slashed
-  z=. a,'/',paren deb b rplc SL;SP  NB. crudely invert b
+  z=. deb b rplc SL;SP  NB. crudely invert b
+  if. SP e. z do.
+    z=. a,'/',paren z
+  else.
+    z=. a,'/',z
+  end.
 else.  NB. unapply convention
   if. ')'~:{:z do. y return. end.  NB. convention not applied
   a=. '(' taketo z
@@ -275,10 +280,10 @@ end.
 udiv=: 4 : 0
   NB. divides 2 generalized units-strs: x y
   NB. For use by (eg): combine in: cal
-if. (1=#y) and (y=SL) do. x return. end.
-z=. cnvi utoks y    NB. invert token-list y
-z=. selfcanc x , ;z NB. combine x, z as if multiplied
-z=. z rplc '/^2';'/'
+  NB. Expects KOSHER x, y
+if. y ident SL do. x return. end.
+z=. (utoks x) , cnvi utoks y
+z=. selfcanc ;z
 )
 
 make_units=: 0&$: :(4 : 0)
@@ -367,3 +372,103 @@ end.
 NB. smoutput '+++ trace ',":y
 i.0 0
 )
+
+NB. ========== udiv fix OVERRIDES ============
+NB. From: tempuu 106
+NB. Remove duplicated words above
+
+ERROR_UDIV=: '?/?'
+
+canc=: 4 : 0
+  NB. cancels-out adjacent ' xx' and '/xx' terms
+  NB. serves: canon selfcanc  e.g.
+  NB. 'm kg kg/kg/kg s/s' canc 'kg' --> ' m s/s'
+  NB. WARNING: cannot handle powered terms in (x) correctly !!!
+msg '+++ canc: x=[(x)] y=[(y)]'
+z=. sp1 x	NB. the object string
+n=. SP,y	NB. unit: y in numerator
+d=. SL,y	NB. unit: y in denominator
+whilst. -. w-:z do.
+  z=. (w=.z) rplc (n,d);'' ; (d,n);''
+  msg '... canc:   z=[(z)] n=[(n)] d=[(d)]'
+end.
+z return.
+)
+
+coll=: 4 : 0
+  NB. collects [y]-terms (no cancel-out)
+  NB. serves: canon selfcanc  e.g.
+  NB. ' m kg kg/kg/kg s/s' coll 'kg' --> 'm kg^2/kg^2 s/s'
+  NB. WARNING: cannot handle powered terms in (x) correctly !!!
+msg '+++ coll: x=[(x)] y=[(y)]'
+z=. ,x		NB. the object string
+n=. SP,y		NB. unit: y in numerator
+d=. SL,y		NB. unit: y in denominator
+for_p. 4 3 2 do.	NB. 4th-power units are highest recognised
+  z=. z rplc ((p*$n)$n);(n,PW,":p) ; ((p*$d)$d);(d,PW,":p)
+  msg '... coll:     n=[(n)] d=[(d)] p=(p) --> z=[(z)]'
+end.
+z return.
+)
+
+diss=: 3 : 0
+  NB. Dissolve powered tokens in boxed list (y) into >1 toks of power 1
+  NB. WARNING: can't handle tok of form: ' s^_1'
+for_cboxed. y [z=.'' do. c=. >cboxed
+  p=. 1 >. {. ". PW takeafter c
+  z=. z, p# <PW taketo c
+end.
+z return.
+)
+
+selfcanc=: 3 : 0
+  NB. Self-cancel unitstr (y) without reducing to base units
+  NB. Sort tokens EACH REVERSED -collects ' xx' and '/xx' terms
+  NB. (Without reversal, '/xx' terms would collect as a block)
+z=. ; |.each sort |.each ut=. diss utoks y
+msg '+++ selfcanc: y=(y) --> z=[(z)]'
+  NB. enum distinct (signless) cunits (c)
+for_cboxed. ~. }.each ut do. c=. >cboxed
+  z=. z canc c
+  z=. z coll c
+  msg '... selfcanc: c=[(c)] --> z=[(z)]'
+end.
+z=. selfcancFix dlb canon z
+msg '--- selfcanc: RETURNS: z=(z)'
+z return.
+)
+
+selfcancFix=: 3 : 0
+  NB. remove corrupt terms known to arise, viz. lacking unit
+y rplc '/^0';'/';'/^1';'/';'/^2';'/';'/^3';'/';'/^4';'/';'/^5';'/';'/^6';'/';'/^7';'/';'/^8';'/';'/^9';'/'
+)
+
+NB. selfcancFix=: ]  NB. UNcomment to force: '?/?' with y-:''
+
+udiv=: 4 : 0
+  NB. divides 2 generalized units-strs: x y
+  NB. For use by: combine and: fnline in: cal
+x=. unucode x  NB. code below needs KOSHER x
+y=. unucode y  NB. code below needs KOSHER y
+NB. smoutput sw '+++ udiv: ENTERED x=[(x)] y=[(y)]'
+if. y ident SL do. uniform x return. end.
+if. 0 = #y     do. uniform x return. end.  NB. comment out to force: '?/?' with y-:''
+  NB. invert y-toks and concatenate
+z=. selfcanc ; (utoks x) , (cnvi utoks y)
+if. udivCodesOk x;y;z do. uniform z
+else. ERROR_UDIV
+end.
+)
+
+udivCodesOk=: 3 : 0
+  NB. check units pp-codes agree
+'x y z'=. y
+codex=. 2 pick qtcode4anyunit x
+codey=. 2 pick qtcode4anyunit y
+codez=. 2 pick qtcode4anyunit z
+if. codez = codexy=.codex%codey do. 1  NB. yes - pp-codes agree
+else. 0 [ smoutput llog 'BAD codez z codex x codey y codexy'
+end.
+)
+
+NB. udivCodesOk=: 1:  NB. if you want to risk it !!!
