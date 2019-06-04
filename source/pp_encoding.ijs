@@ -175,6 +175,7 @@ muv;mur;muz return.
 
 cnvCunit=: 3 : 0
   NB. cut prefs/suffs from a cunit (eg: '/kg^3')
+msg '+++ cnvCunit: y=(y)'
 z=. dltb y  NB. (,'m') for y=='m' or y==' m'
 k=. p=. 1   NB. to be overridden below
    NB. elim a NEGATIVE power in all forms
@@ -187,7 +188,7 @@ if. PW e. z do.  NB. recognise a power-suffix
   NB. drop power-suffix from z -but remember it as (int) p
   'p z'=. (".{:z) ; (}:}:z)
 end.
-msg '+++ cnvCunit: y=(y) z=(z) j=(j) p=(p)'
+msg '... cnvCunit: y=(y) z=(z) j=(j) p=(p)'
   NB. split-off scaling prefixes, eg 'ms' 'Gs' 'µ' (all variants of: s)
   NB. ONLY IF z is not itself in: units, eg 'knot' ...
 if. (-.iskg z) and (-.listedUnits z) do.

@@ -292,6 +292,7 @@ _2r3j373.15 K	[degDe]	temperature; Delisle
 500 km/s	[v.solw]	speed of solar wind
 1.622 m/s^2 [moon.g]	moon gravity unit
 3.711 m/s^2 [mars.g]	mars gravity unit
+1 grav	[earth.g]	earth gravity unit
 1.674920e_27 kg	[neut.mass]	mass of neutron
 1.672614e_27 kg	[prot.mass]	mass of proton
 9.109558e_31 kg	[elect.mass]	mass of electron

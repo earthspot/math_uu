@@ -47,7 +47,7 @@ NB. smoutput '--- ucode_test: ok'
 ucode_test''
 
 uniform_test=: 3 : 0
-assert. 'm m/(K s s)'	-: 0 uniform_uu_ 'm m/(K s s)'
+assert. 'm m/K/s/s'	-: 0 uniform_uu_ 'm m/(K s s)'
 assert. 'm m/(K s s)'	-: 1 uniform_uu_ 'm m/(K s s)'
 assert. 'm m K⁻¹ s⁻¹ s⁻¹'	-: 2 uniform_uu_ 'm m/(K s s)'
 assert. 'm·m·K⁻¹·s⁻¹·s⁻¹'	-: 3 uniform_uu_ 'm m/(K s s)'

@@ -20,6 +20,9 @@ AABUILT=: '2019-05-21  11:48:45'
 AABUILT=: '2019-05-21  12:26:03'
 AABUILT=: '2019-06-02  21:31:18'
 AABUILT=: '2019-06-02  21:50:03'
+AABUILT=: '2019-06-04  12:53:03'
+AABUILT=: '2019-06-04  15:27:27'
+AABUILT=: '2019-06-04  15:32:13'
 
 '==================== [uu] constants ===================='
 0 :0
@@ -788,6 +791,7 @@ elseif. do.
 end.
 )
 
+0 :0
 selfcanc=: 3 : 0
 msg '+++ selfcanc: ENTERED'
 
@@ -889,15 +893,6 @@ case. _1 do.
 end.
 )
 
-udiv=: 4 : 0
-
-
-
-if. y ident SL do. x return. end.
-z=. (utoks x) , cnvi utoks y
-z=. selfcanc ;z
-)
-
 make_units=: 0&$: :(4 : 0)
 
 
@@ -929,7 +924,7 @@ msg '+++ uniform: ENTERED: x=(x) sic=(sic)  y=(y)'
 y=. utf8 deb y
 select. sic
 case. 0 do.
-  z=. unucode undotted y
+  z=. bris y
 case. 1 do.
   z=. undotted y
 
@@ -941,7 +936,7 @@ case. 3 do.
     msg '--- uniform: y=(crex y) returns NIL'
     NIL return.
   end.
-  ]z=. unucode undotted y
+  ]z=. bris y
   ]z=. ucode deslash unslash1 z
   if. sic=3 do. z=. dotted z end.
 end.
@@ -986,15 +981,18 @@ canc=: 4 : 0
 
 
 
+
 msg '+++ canc: x=[(x)] y=[(y)]'
-z=. sp1 x
+z=. SP ,~ sp1 x
 n=. SP,y
 d=. SL,y
 whilst. -. w-:z do.
-  z=. (w=.z) rplc (n,d);'' ; (d,n);''
+  w=. z
+
+  z=. z rplc (n,d,SP);SP ; (n,d,SL);SL
   msg '... canc:   z=[(z)] n=[(n)] d=[(d)]'
 end.
-z return.
+dtb z return.
 )
 
 coll=: 4 : 0
@@ -1027,7 +1025,7 @@ selfcanc=: 3 : 0
 
 
 
-z=. ; |.each sort |.each ut=. diss utoks y
+z=. ; |.each sort |.each ut=. diss utoks bris y
 msg '+++ selfcanc: y=(y) --> z=[(z)]'
 
 for_cboxed. ~. }.each ut do. c=. >cboxed
@@ -1047,8 +1045,8 @@ y rplc '/^0';'/';'/^1';'/';'/^2';'/';'/^3';'/';'/^4';'/';'/^5';'/';'/^6';'/';'/^
 udiv=: 4 : 0
 
 
-x=. unucode x
-y=. unucode y
+x=. bris x
+y=. bris y
 if. y ident SL do. uniform x return. end.
 if. 0 = #y     do. uniform x return. end.
 
@@ -1304,6 +1302,7 @@ muv;mur;muz return.
 
 cnvCunit=: 3 : 0
 
+msg '+++ cnvCunit: y=(y)'
 z=. dltb y
 k=. p=. 1
 
@@ -1316,7 +1315,7 @@ if. PW e. z do.
 
   'p z'=. (".{:z) ; (}:}:z)
 end.
-msg '+++ cnvCunit: y=(y) z=(z) j=(j) p=(p)'
+msg '... cnvCunit: y=(y) z=(z) j=(j) p=(p)'
 
 
 if. (-.iskg z) and (-.listedUnits z) do.

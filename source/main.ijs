@@ -172,6 +172,7 @@ elseif. do.  NB. sci ntn OR decimals
 end.
 )
 
+0 :0
 selfcanc=: 3 : 0
 msg '+++ selfcanc: ENTERED'
   NB. Self-cancel unitstr (y) without reducing to base units
@@ -231,8 +232,8 @@ undeslash=: 0&deslash
 
 ucode=: 1&$: :(4 : 0)
   NB. Substitutes (for) correct utf-8 symbols in (string) y
-  NB. x==1 kosher-->unicoded
-  NB. x==0 unicoded-->kosher
+  NB. x==1 NOT-unicoded --> unicoded
+  NB. x==0     unicoded --> NOT-unicoded
 y=. utf8 y  NB. This algo needs y to be bytes not wchars
 if. x do.  NB. subst 'π' for 'PI' etc
   if. -.isascii y do. y return. end.  NB. already converted
@@ -277,15 +278,6 @@ case. _1 do.		NB. return all boxed data (if ever reqd)
 end.
 )
 
-udiv=: 4 : 0
-  NB. divides 2 generalized units-strs: x y
-  NB. For use by (eg): combine in: cal
-  NB. Expects KOSHER x, y
-if. y ident SL do. x return. end.
-z=. (utoks x) , cnvi utoks y
-z=. selfcanc ;z
-)
-
 make_units=: 0&$: :(4 : 0)
   NB. makes globals: cspel csymb units unitv uvalu uvald
   NB. x=0: DONT adjust currency
@@ -319,7 +311,8 @@ msg '+++ uniform: ENTERED: x=(x) sic=(sic)  y=(y)'
 y=. utf8 deb y  NB. convert (y) from possible datatype=='unicode'
 select. sic
 case. 0 do.  NB. ASCII only ("kosher")
-  z=. unucode undotted y
+NB.   z=. unucode undotted y
+  z=. bris y
 case. 1 do.  NB. Permitted SI units with slashes
   z=. undotted y
   NB. If more than 1 slash, convert to parenthesised denominator
@@ -331,7 +324,8 @@ case. 3 do.  NB. Recommended SI units with dots
     msg '--- uniform: y=(crex y) returns NIL'
     NIL return.
   end.
-  ]z=. unucode undotted y	NB. "kosher" as safe intermediate
+NB.   ]z=. unucode undotted y	NB. "kosher" as safe intermediate
+  ]z=. bris y	NB. "kosher" as safe preliminary
   ]z=. ucode deslash unslash1 z
   if. sic=3 do. z=. dotted z end.
 end.
@@ -380,19 +374,22 @@ NB. Remove duplicated words above
 ERROR_UDIV=: '?/?'
 
 canc=: 4 : 0
-  NB. cancels-out adjacent ' xx' and '/xx' terms
+  NB. [from temp 106] - cancels-out adjacent ' xx' and '/xx' terms
+  NB. ASSUMES: sorted: ' xx' series precedes '/xx' series
+  NB. ASSUMES: all powered terms have been dissolved by: diss
   NB. serves: canon selfcanc  e.g.
   NB. 'm kg kg/kg/kg s/s' canc 'kg' --> ' m s/s'
-  NB. WARNING: cannot handle powered terms in (x) correctly !!!
 msg '+++ canc: x=[(x)] y=[(y)]'
-z=. sp1 x	NB. the object string
-n=. SP,y	NB. unit: y in numerator
-d=. SL,y	NB. unit: y in denominator
+z=. SP ,~ sp1 x	NB. the object string
+n=. SP,y		NB. unit: y in numerator
+d=. SL,y		NB. unit: y in denominator
 whilst. -. w-:z do.
-  z=. (w=.z) rplc (n,d);'' ; (d,n);''
+  w=. z
+  NB. remove e.g. ' xx/xx' ONLY if followed by ' ' or '/'
+  z=. z rplc (n,d,SP);SP ; (n,d,SL);SL
   msg '... canc:   z=[(z)] n=[(n)] d=[(d)]'
 end.
-z return.
+dtb z return.
 )
 
 coll=: 4 : 0
@@ -425,7 +422,7 @@ selfcanc=: 3 : 0
   NB. Self-cancel unitstr (y) without reducing to base units
   NB. Sort tokens EACH REVERSED -collects ' xx' and '/xx' terms
   NB. (Without reversal, '/xx' terms would collect as a block)
-z=. ; |.each sort |.each ut=. diss utoks y
+z=. ; |.each sort |.each ut=. diss utoks bris y
 msg '+++ selfcanc: y=(y) --> z=[(z)]'
   NB. enum distinct (signless) cunits (c)
 for_cboxed. ~. }.each ut do. c=. >cboxed
@@ -448,8 +445,8 @@ NB. selfcancFix=: ]  NB. UNcomment to force: '?/?' with y-:''
 udiv=: 4 : 0
   NB. divides 2 generalized units-strs: x y
   NB. For use by: combine and: fnline in: cal
-x=. unucode x  NB. code below needs KOSHER x
-y=. unucode y  NB. code below needs KOSHER y
+x=. bris x  NB. code below needs KOSHER x
+y=. bris y  NB. code below needs KOSHER y
 NB. smoutput sw '+++ udiv: ENTERED x=[(x)] y=[(y)]'
 if. y ident SL do. uniform x return. end.
 if. 0 = #y     do. uniform x return. end.  NB. comment out to force: '?/?' with y-:''
