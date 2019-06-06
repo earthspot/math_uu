@@ -2,7 +2,7 @@ NB. math/uu manifest
 
 CAPTION=: 'Scientific units conversion package'
 
-VERSION=: '2.1.19'
+VERSION=: '2.1.20'
 
 DEPENDS=: 0 : 0
 format/zulu
