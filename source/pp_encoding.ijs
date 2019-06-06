@@ -287,11 +287,11 @@ targ ; rdisp ; rfactor	NB. <<<<< rational
 'ytarg yrdisp yrfactor'=. z=.convert y
 if. 0=#x do. z return. end.  NB. empty x - treat as monad
 'xtarg xrdisp xrfactor'=. convert x
-if. xtarg -: ytarg do.
+if. (xtarg-:ytarg) or (xtarg ident '*') or (ytarg ident '*') do.
   rfactor=. yrfactor % xrfactor
   rdisp=. (yrdisp-xrdisp)%yrfactor
   x ; rdisp ; rfactor	NB. <<<<< rational
-else.
+elseif. do.
   msg '>>> convert: incompatible units: x=[(x)] y=[(y)]'
   x ; 0x ; 0x		NB. error values <<<<< rational
 end.

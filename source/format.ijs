@@ -1,9 +1,27 @@
 	NB. uu - format.ijs
 '==================== [uu] format.ijs =================='
 0 :0
-Saturday 18 May 2019  12:45:15
+Thursday 6 June 2019  02:32:59
 )
 cocurrent 'uu'
+
+  NB. MOVED INTO TEST SUITE…
+local_format_test=: 3 : 0
+sm 'deg' uu '1 rad'
+sm 'dms' uu '1 rad'
+sm 'hms' uu '3700 s'
+sm 'hms' uu '1.1 h'
+sm '*' uu '1.1 h'
+sm 'note' uu '440 Hz'
+sm '*' uu '440 Hz'
+sm '!' uu 2
+sm '!' uu 1
+sm '!' uu '1 /'
+sm '!' uu '1 *'
+sm '!' uu 0
+sm '!' uu '0 /'
+sm '!' uu '0 *'
+)
 
 format=: formatOUT=: ''&$: :(4 : 0)
   NB. format the quantity (y;x) for output
@@ -12,7 +30,7 @@ msg '+++ format_1: x=[(x)] y=[(y)]'
 nu=. 3 : 'y[NO_UNITS_NEEDED=:1' NB. append-units
 NO_UNITS_NEEDED=: 0  NB. initialize the flag, overridden below
 select. kunits=. bris x  NB. work internally in kosher units
- case. 'deg'	do. ":y
+ case. 'deg'	do. nu deg y
  case. 'dms'	do. nu dms y
  case. 'hms'	do. hms y
  case. ,'!'	do. nu yesno y
@@ -34,12 +52,21 @@ end.
 )
 
 hms=: 3 : 0
-  NB. converts value (y) in seconds [s] to hh:mm:ss
-'hh mm ss'=.":each 24 60 60 #: y
+  NB. converts value (y) in hours [h] to hh:mm:ss
+'hh mm ss'=.":each 24 60 60 #: y * 3600
 if. 10>".hh do. hh=. '0',hh end.
 if. 10>".mm do. mm=. '0',mm end.
 if. 10>".ss do. ss=. '0',ss end.
 sw'(hh):(mm):(ss)'
+)
+
+deg=: 3 : 0
+  NB. converts value (y) in degrees [deg] to d°
+  NB. gets the degree symbol up close, but ony if SIC>0
+y=. float y	NB. cannot handle rational y !!
+if. SIC=0 do. sw'(y) deg'
+else.         ucode sw'(y)deg'
+end.
 )
 
 dms=: 3 : 0
@@ -68,6 +95,8 @@ case. 'low'	do. 'high'
 case. 'LOW'	do. 'HIGH'
 case. 'false'	do. 'true'
 case. 'FALSE'	do. 'TRUE'
-case. 		do. '~',ZERO  NB. ZERO has unforeseen value
+case. 		do. '~',ZERO  NB. word: ZERO has unforeseen value
 end.
 )
+
+onload 'local_format_test $0'

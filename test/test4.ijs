@@ -13,7 +13,7 @@ cocurrent 'base' [clear''
 
 format_test=: 3 : 0
 assert. '3° 8′ 29″' -: 'dms' formatOUT_uu_ PI
-assert. '00:01:00' -: 'hms' formatOUT_uu_ 60
+assert. '23:26:24' -: 'hms' formatOUT_uu_ 23.44  NB. [h]
 NB. smoutput '--- format_test: ok'
 )
 

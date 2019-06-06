@@ -23,6 +23,12 @@ AABUILT=: '2019-06-02  21:50:03'
 AABUILT=: '2019-06-04  12:53:03'
 AABUILT=: '2019-06-04  15:27:27'
 AABUILT=: '2019-06-04  15:32:13'
+AABUILT=: '2019-06-06  01:39:58'
+AABUILT=: '2019-06-06  01:42:15'
+AABUILT=: '2019-06-06  02:00:15'
+AABUILT=: '2019-06-06  02:08:43'
+AABUILT=: '2019-06-06  02:32:35'
+AABUILT=: '2019-06-06  02:34:16'
 
 '==================== [uu] constants ===================='
 0 :0
@@ -1068,12 +1074,11 @@ end.
 )
 
 '==================== [uu] uuverb.ijs ===================='
+0 :0
+Thursday 6 June 2019  02:33:33
+)
 
 cocurrent 'uu'
-
-0 :0
-Tuesday 7 May 2019  11:52:16
-)
 
 uu=: (''&$: :(4 : 0))"1
 
@@ -1081,11 +1086,20 @@ if. '*'={.y do. uuengine }.y return. end.
 if. isBoxed y do.
   'valu unit'=. y
   rvalu=. rat valu
-else.
+elseif. isNum y do.
+]  valu=. y
+]  rvalu=. x: y
+]  unit=. ,'/'
+]  unit=. ,'*'
+elseif. isStr y do.
 ]  yf=. dltb formatIN y
 ]  valu=. valueOf yf
 ]  rvalu=. rvalueOf yf
 ]  unit=. unitsOf yf
+elseif. do.
+]  valu=. BADFLO
+]  rvalu=. BADRAT
+]  unit=. '??'
 end.
 	sllog 'uu x y valu rvalu unit'
 
@@ -1413,11 +1427,11 @@ targ ; rdisp ; rfactor
 'ytarg yrdisp yrfactor'=. z=.convert y
 if. 0=#x do. z return. end.
 'xtarg xrdisp xrfactor'=. convert x
-if. xtarg -: ytarg do.
+if. (xtarg-:ytarg) or (xtarg ident '*') or (ytarg ident '*') do.
   rfactor=. yrfactor % xrfactor
   rdisp=. (yrdisp-xrdisp)%yrfactor
   x ; rdisp ; rfactor
-else.
+elseif. do.
   msg '>>> convert: incompatible units: x=[(x)] y=[(y)]'
   x ; 0x ; 0x
 end.
@@ -1463,9 +1477,27 @@ end.
 
 '==================== [uu] format.ijs =================='
 0 :0
-Saturday 18 May 2019  12:45:15
+Thursday 6 June 2019  02:32:59
 )
 cocurrent 'uu'
+
+
+local_format_test=: 3 : 0
+sm 'deg' uu '1 rad'
+sm 'dms' uu '1 rad'
+sm 'hms' uu '3700 s'
+sm 'hms' uu '1.1 h'
+sm '*' uu '1.1 h'
+sm 'note' uu '440 Hz'
+sm '*' uu '440 Hz'
+sm '!' uu 2
+sm '!' uu 1
+sm '!' uu '1 /'
+sm '!' uu '1 *'
+sm '!' uu 0
+sm '!' uu '0 /'
+sm '!' uu '0 *'
+)
 
 format=: formatOUT=: ''&$: :(4 : 0)
 
@@ -1474,7 +1506,7 @@ msg '+++ format_1: x=[(x)] y=[(y)]'
 nu=. 3 : 'y[NO_UNITS_NEEDED=:1'
 NO_UNITS_NEEDED=: 0
 select. kunits=. bris x
- case. 'deg'	do. ":y
+ case. 'deg'	do. nu deg y
  case. 'dms'	do. nu dms y
  case. 'hms'	do. hms y
  case. ,'!'	do. nu yesno y
@@ -1497,11 +1529,20 @@ end.
 
 hms=: 3 : 0
 
-'hh mm ss'=.":each 24 60 60 #: y
+'hh mm ss'=.":each 24 60 60 #: y * 3600
 if. 10>".hh do. hh=. '0',hh end.
 if. 10>".mm do. mm=. '0',mm end.
 if. 10>".ss do. ss=. '0',ss end.
 sw'(hh):(mm):(ss)'
+)
+
+deg=: 3 : 0
+
+
+y=. float y
+if. SIC=0 do. sw'(y) deg'
+else.         ucode sw'(y)deg'
+end.
 )
 
 dms=: 3 : 0
@@ -1531,6 +1572,8 @@ case. 'FALSE'	do. 'TRUE'
 case. 		do. '~',ZERO
 end.
 )
+
+onload 'local_format_test $0'
 
 '==================== [uu] formatIN.ijs =================='
 0 :0

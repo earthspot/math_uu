@@ -1,11 +1,10 @@
 	NB. uu - uuverb.ijs
 '==================== [uu] uuverb.ijs ===================='
+0 :0
+Thursday 6 June 2019  02:33:33
+)
 
 cocurrent 'uu'
-
-0 :0
-Tuesday 7 May 2019  11:52:16
-)
 
 uu=: (''&$: :(4 : 0))"1
   NB. convert units: y (e.g. '212 degF') to target: x (e.g. '100 degC')
@@ -13,11 +12,20 @@ if. '*'={.y do. uuengine }.y return. end. NB. uuengine call-thru
 if. isBoxed y do.
   'valu unit'=. y
   rvalu=. rat valu
-else.
+elseif. isNum y do.  NB. no units specified
+]  valu=. y
+]  rvalu=. x: y	NB. <<<<< rational
+]  unit=. ,'/'	NB. "dimensionless" [/]
+]  unit=. ,'*'	NB. "wildcard" [*]
+elseif. isStr y do.
 ]  yf=. dltb formatIN y
 ]  valu=. valueOf yf
 ]  rvalu=. rvalueOf yf	NB. <<<<< rational
 ]  unit=. unitsOf yf
+elseif. do.  NB. cannot handle, treat as BAD*
+]  valu=. BADFLO
+]  rvalu=. BADRAT
+]  unit=. '??'
 end.
 	sllog 'uu x y valu rvalu unit'
   NB. compute target value: rvtarg
@@ -35,7 +43,7 @@ end.
 UU_VALUE=: rvtarg	NB. <<<<< rational
 z=. targ formatOUT rvtarg
 	sllog 'uu_3 z rvtarg VEXIN'
-  NB. Flag: NO_UNITS_NEEDED is set by the take_* verb
+  NB. Flag: NO_UNITS_NEEDED is set by: formatOUT
 if. NO_UNITS_NEEDED do. z else. deb z,SP,uniform targ end.
 )
 
