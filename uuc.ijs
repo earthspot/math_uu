@@ -1,38 +1,31 @@
-NB. == CONSTANTS ==
-NB. syntax of a line: {<nn>} <value> <unitv> [<units>] <description>
-NB.	<value> can be calculated (but use '/' for division, not '%').
-NB.	<unitv> are the PREVIOUSLY DEFINED units attached to <value>.
-NB.	<units> are the nominal units, which are DEFINED by this line.
-NB.	<description> is what should appear in the t-table when attached.
-NB.	-a final '=' in <description> means "persistent hold",
-NB.	--but '=' should not appear below:
-NB.	--it is added by TABULA to appended lines.
-NB.
-NB.	WARNING: The base unit of mass in SI units is not [g] but [kg].
-NB.	This means that scaleunits_cal_ gives [g] and [kg] special treatment.
-NB.	The first 11 lines of UUC define base units in terms of themselves.
-NB.	They are not active definitions: their conversion factors are always 1.
-NB.	They appear below as appendable lines for the sake of completeness.
-NB.
-NB.	Temperature scales: '1 F.dgr' and '1 C.dgr' are RANGES, not TEMPERATURES.
-NB.	--e.g '1 C.dgr' is equivalent to a rise in temperature of 1 K
-NB.	--but '1 degC' is equivalent to an absolute temperature of 274.15 K
-
-NB. WITHDRAWN DEFINITIONS
-NB. ...because they interfere with orderly re-scaling by menu
-0 :0
-1000 m	[km] kilometre
-0.01 m	[cm] centimetre
-0.001 m	[mm] millimetre
-0.001 l	[ml] millilitre
-0.01 l	[cl] centilitre
-0.88 eur	[usd] US dollars [u gets replaced by µ]
-)
-
+NB. uuc.ijs
 cocurrent 'uu'
 
+ABOUT_UUC=: 0 : 0
+== CONSTANTS ==
+Syntax of a line: {<nn>} <value> <unitv> [<units>] <description>
+  <value> can be calculated (but use '/' for division, not '%').
+  <unitv> are the PREVIOUSLY DEFINED units attached to <value>.
+  <units> are the nominal units, which are DEFINED by this line.
+  <description> is what should appear in the t-table when attached.
+
+A final '=' in <description> means "persistent hold"
+  but '=' should not appear below:
+  it is supplied by TABULA to appended lines.
+
+WARNING: The base unit of mass in SI units is not [g] but [kg].
+  This means that scaleunits_cal_ gives [g] and [kg] special treatment.
+  The first 11 lines of UUC define base units in terms of themselves.
+  They are not active definitions: their conversion factors are always 1.
+  They appear below as appendable lines for the sake of completeness.
+
+  Temperature scales: '1 F.dgr' and '1 C.dgr' are RANGES, not TEMPERATURES.
+  --e.g '1 C.dgr' is equivalent to a rise in temperature of 1 K
+  --but '1 degC' is equivalent to an absolute temperature of 274.15 K
+)
+
 UUC=: cmx 0 : 0
-1 /	[saved]	Tuesday 21 May 2019  22:31:35
+1 /	[saved]	Thursday 6 June 2019  22:21:30
 1 m	[m]	base unit - metre (distance)
 1 kg	[kg]	base unit - kilogramme (mass)
 1 s	[s]	base unit - second (time)
@@ -328,4 +321,3 @@ _2r3j373.15 K	[degDe]	temperature; Delisle
 6.62606957e_34 J s	[Planck]	Planck constant
 8.314 J/K/mol	[gas.c]	gas constant
 9.649e4 C/mol	[Faraday]	Faraday constant
-)

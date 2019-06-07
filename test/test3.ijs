@@ -20,9 +20,9 @@ A '56.789 km'
 
 SIC=: 0	NB. no unicode in units
 Q uu '15 Ang/s/s'
-A '1.500E-9 m/s^2'
+A '1.5E-9 m/s^2'
 Q 'Ang' uu '1 mm'
-A '1.000E7 Ang'
+A '1.0E7 Ang'
 Q 'Ang/s^2' uu '0.0001 ft/s/s'
 A '304800 Ang/s^2'
 
@@ -37,9 +37,9 @@ A '2.532E-17 ft/s^2'
 
 SIC=: 1	NB. unicoded with slashes
 Q uu '15 Ang/s/s'
-A '1.500E-9 m/s²'
+A '1.5E-9 m/s²'
 Q 'Ang' uu '1 mm'
-A '1.000E7 Å'
+A '1.0E7 Å'
 Q 'Ang/s^2' uu '0.0001 ft/s/s'
 A '304800 Å/s²'
 z=: '2.532E-17 ft/s²'
@@ -50,9 +50,9 @@ Q 'ft/s^2' uu '1 Ang/h/h'
 
 SIC=: 2	NB. unicoded with negative powers
 Q uu '15 Ang/s/s'
-A '1.500E-9 m s⁻²'
+A '1.5E-9 m s⁻²'
 Q 'Ang' uu '1 mm'
-A '1.000E7 Å'
+A '1.0E7 Å'
 Q 'Ang/s^2' uu '0.0001 ft/s/s'
 A '304800 Å s⁻²'
 Q 'ft/s^2' uu '1 Å h⁻²'
@@ -66,9 +66,9 @@ A '2.532E-17 ft s⁻²'
 
 SIC=: 3	NB. unicoded like SIC=2 but dotted
 Q uu '15 Ang/s/s'
-A '1.500E-9 m·s⁻²'
+A '1.5E-9 m·s⁻²'
 Q 'Ang' uu '1 mm'
-A '1.000E7 Å'
+A '1.0E7 Å'
 Q 'Ang/s^2' uu '0.0001 ft/s/s'
 A '304800 Å·s⁻²'
 Q 'ft/s^2' uu '1 Å·h⁻²'

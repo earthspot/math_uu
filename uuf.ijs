@@ -1,29 +1,34 @@
-NB. == FORMULAS ==
-NB. syntax of a line:
-NB.	<formula>                  [<units>] <desc>
-NB.	<formula> : <dependencies> [<units>] <desc>
-NB.	<formula> ; <dependencies> [<units>] <desc>
-
-NB. Put ';' in place of ':' to require evaluation in the given units only.
-NB. This must be done if the formula is UNITS-SPECIFIC, eg it contains
-NB. a numeric value standing for a physical (dimensioned) constant,
-NB. which would not be valid for vars expressed in different units.
-NB. >>> Examples of UNITS-SPECIFIC formulas:
-NB.  a*3.281 ; a(m) [ft]  (3.281 DEMANDS a in [m], result in [ft])
-NB.  u+(t*9.812865328) ; u(m/s),t(s) [m/s]  (const has units [ft/s^2])
-NB. Using ':' declares that the formula is valid for vars in ANY units.
-NB. This can be guaranteed by supplying as vars any physical constants.
-NB. Use of PI, PI2, etc, does not make a formula UNITS-SPECIFIC,
-NB. because such constants are dimensionless.
-NB. >>> Examples of UNITS-FREE formulas:
-NB.  abs a [/]
-NB.  a/b : a(m),b(s) [m/s] (units used only to check compatibility)
-NB.  u+(t*f) : u(m/s),t(s),f(m/s^2) [m/s] (f will be converted as needed)
-NB. If units not specified for a given var (say a) then a(*) assumed.
-
+NB. uuf.ijs
 cocurrent 'uu'
 
-UUF=: cmx noun define
+ABOUT_UUF=: 0 : 0
+== FORMULAS ==
+Syntax of a line:
+  <formula>                  [<units>] <desc>
+  <formula> : <dependencies> [<units>] <desc>
+  <formula> ; <dependencies> [<units>] <desc>
+
+Put ';' in place of ':' to require evaluation in the given units only.
+This must be done if the formula is UNITS-SPECIFIC, eg it contains
+a numeric value standing for a physical (dimensioned) constant,
+which would not be valid for vars expressed in different units.
+
+Examples of UNITS-SPECIFIC formulas:
+ a*3.281 ; a(m) [ft]  (3.281 DEMANDS a in [m], result in [ft])
+ u+(t*9.812865328) ; u(m/s),t(s) [m/s]  (const has units [ft/s^2])
+Using ':' declares that the formula is valid for vars in ANY units.
+This can be guaranteed by supplying as vars any physical constants.
+Use of PI, PI2, etc, does not make a formula UNITS-SPECIFIC,
+because such constants are dimensionless.
+
+Examples of UNITS-FREE formulas:
+ abs a [/]
+ a/b : a(m),b(s) [m/s] (units used only to check compatibility)
+ u+(t*f) : u(m/s),t(s),f(m/s^2) [m/s] (f will be converted as needed)
+If units not specified for a given var (say a) then a(*) assumed.
+)
+
+UUF=: cmx 0 : 0
 __ [/] Tuesday 21 May 2019  12:22:17
 tran(X,Y) : X(*),Y(*) [!] transfer {X} --> {Y}
 trag(X,Y) : X(*),Y(*) [!] transfer {X} -->+{Y}

@@ -44,7 +44,7 @@ uuengine 'szer OVER'	NB. set Boolean ZERO word
 Q uuengine 'QZER'	NB. query Boolean ZERO word
 A 'OVER'
 Q uuengine 'SCIN 2.34e_5'	NB. numarg--> (string numeral) scientific notation
-A '2.340E-5'
+A '2.34E-5'
 Q uuengine 'SELF km/s km s'	NB. self-cancel units
 A 'km^2'
 Q uuengine 'UCOD 100 degC'	NB. convert special symbols --> "goy"

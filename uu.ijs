@@ -29,10 +29,36 @@ AABUILT=: '2019-06-06  02:00:15'
 AABUILT=: '2019-06-06  02:08:43'
 AABUILT=: '2019-06-06  02:32:35'
 AABUILT=: '2019-06-06  02:34:16'
+AABUILT=: '2019-06-06  22:43:42'
+AABUILT=: '2019-06-06  22:44:50'
+AABUILT=: '2019-06-06  22:47:32'
+AABUILT=: '2019-06-06  22:50:20'
+AABUILT=: '2019-06-06  23:06:03'
+AABUILT=: '2019-06-07  00:22:40'
+AABUILT=: '2019-06-07  00:24:21'
+AABUILT=: '2019-06-07  00:27:06'
+AABUILT=: '2019-06-07  00:32:13'
+AABUILT=: '2019-06-07  00:36:09'
+AABUILT=: '2019-06-07  00:40:51'
+AABUILT=: '2019-06-07  00:46:03'
+AABUILT=: '2019-06-07  00:49:46'
+AABUILT=: '2019-06-07  00:51:24'
+AABUILT=: '2019-06-07  01:30:26'
+AABUILT=: '2019-06-07  01:36:28'
+AABUILT=: '2019-06-07  01:39:15'
+AABUILT=: '2019-06-07  01:42:48'
+AABUILT=: '2019-06-07  01:44:18'
+AABUILT=: '2019-06-07  01:45:32'
+AABUILT=: '2019-06-07  01:50:58'
+AABUILT=: '2019-06-07  01:51:49'
+AABUILT=: '2019-06-07  01:54:32'
+AABUILT=: '2019-06-07  01:56:57'
+AABUILT=: '2019-06-07  02:20:19'
+AABUILT=: '2019-06-07  02:29:45'
 
 '==================== [uu] constants ===================='
 0 :0
-Tuesday 14 May 2019  15:50:29
+Thursday 6 June 2019  22:43:34
 )
 
 cocurrent 'uu'
@@ -46,12 +72,11 @@ UU: scientific quantity converter
 
 CUTAB0=: 2 2$<;._1 ' USD 1.3 GBP 0.8'
 CUTAB=: CUTAB0
-BADFLO=: __
+BADFLOAT=: __
 BADRAT=: __r1
 BADQTY=: '0 ??'
+BADUNITS=: '??'
 HD=: '·'
-MI=: '-'
-NUN=: '??'
 PWM=: '^-'
 PWU=: '^_'
 PW=: '^'
@@ -461,9 +486,9 @@ EVAL__=:''
 rc=. (9+2*x)&o.
 try.
   if. isNo z=.".y do. rc z	[EVAL__=: 'scalar num expression'
-  else. BADFLO		[EVAL__=: 'evaluates -not scalar num'
+  else. BADFLOAT		[EVAL__=: 'evaluates -not scalar num'
   end.
-catch. BADFLO		[EVAL__=: 'fails to evaluate'
+catch. BADFLOAT		[EVAL__=: 'fails to evaluate'
 end.
 )
 
@@ -474,8 +499,8 @@ eval=: 0&$: : (4 : 0)"1
 
 
 EVAL__=:''
-if. 0=#y do. BADFLO	[EVAL__=: 'empty'
-elseif. _1=4!:0<y do. BADFLO	[EVAL__=: 'unassigned id'
+if. 0=#y do. BADFLOAT		[EVAL__=: 'empty'
+elseif. _1=4!:0<y do. BADFLOAT	[EVAL__=: 'unassigned id'
 elseif. 0=4!:0<y do. x evalRC y
 elseif. do.
   x evalRC '/%-_Ee'charsub ,>y
@@ -631,17 +656,6 @@ cocurrent 'uu'
 
 bris=: unucode@unslash1@undotted@deb"1
 
-canc=: 4 : 0
-
-
-z=. sp1 x
-n=. SP,y
-d=. SL,y
-whilst. -. w-:z do.
-  z=. (w=.z) rplc (n,d);'' ; (d,n);''
-end.
-)
-
 canon=: 3 : 0
 
 
@@ -671,22 +685,6 @@ for_i. i.#y do. z=. >i{y
   end.
 end.
 zz return.
-)
-
-coll=: 4 : 0
-
-
-
-
-P=. PW
-z=. ,x
-n=. SP,y
-d=. SL,y
-for_p. 4 3 2 do.
-  z=. z rplc ((p*$n)$n);(n,P,":p) ; ((p*$d)$d);(d,P,":p)
-  msg '+++ coll:   z=(z) power:p=(p)'
-end.
-z return.
 )
 
 curfig=: 3 : 'hy (0 j. 2)":y'
@@ -782,36 +780,35 @@ val ; uni
 
 rnd=: [: <. 0.5 + ]
 
+trim0=: 3 : 0
+
+if. 'E' e. y do.
+  'n m'=. 'E'cut y
+  z=. (trim0 n),'E',m 
+  z return.
+end.
+z=. deb y
+if. (1=+/DT=z) and (DT~: {: }:z) and all z e. n9,DT do. z=. dt0 z end.
+if. DT={:z do. z=. z,'0' end.
+z return.
+)
+
 scino=: (3 : 0)"0
 
 
 
+
 y=. float y
-if. y=0 do. ,'0'
-elseif. (10^SIZ)>|y do. '0',~ '- +'{~ 1+*y
-elseif. any (10^SCI)<: y,%y do. sci4j y":~ 0 j. -SIG
-elseif. y=<.y do. sci4j ":y
+if. y=0 do. z=. ,'0'
+elseif. (10^SIZ)>|y do. z=. '0',~ '- +'{~ 1+*y
+elseif. any (10^SCI)<: y,%y do. z=. sci4j y":~ 0 j. -SIG
+elseif. y=<.y do. z=. sci4j ":y
 elseif. do.
   z=. sci4j y":~ 0 j. SIG
-  if. *./ z e. '-0.' do. sci4j y":~ 0 j. -SIG else. z end.
+  if. *./ z e. '-0.' do. z=. sci4j y":~ 0 j. -SIG end.
 end.
-)
 
-0 :0
-selfcanc=: 3 : 0
-msg '+++ selfcanc: ENTERED'
-
-
-z=. ; |.each sort |.each ut=. utoks y
-t=. ~. }.each ut
-for_cb. ~.t do.
-  z=. z canc >cb
-  z=. z coll >cb
-end.
-z=. dlb canon z
-z=. z rplc '/^2';'/';'/^3';'/';'/^4';'/';'/^5';'/';'/^6';'/';'/^7';'/';'/^8';'/';'/^9';'/'
-msg '--- selfcanc: EXITS: z=(z)'
-z return.
+trim0 z return.
 )
 
 slash1=: 1&$: : (4 : 0)
@@ -1072,6 +1069,7 @@ if. codez = codexy=.codex%codey do. 1
 else. 0 [ smoutput llog 'BAD codez z codex x codey y codexy'
 end.
 )
+onload 'smoutput (,.z) ; scino z=.0 1 1.0 1.23 1.230 123 12300 123000000 123.0 123.000'
 
 '==================== [uu] uuverb.ijs ===================='
 0 :0
@@ -1086,22 +1084,22 @@ if. '*'={.y do. uuengine }.y return. end.
 if. isBoxed y do.
   'valu unit'=. y
   rvalu=. rat valu
-elseif. isNum y do.
-]  valu=. y
-]  rvalu=. x: y
-]  unit=. ,'/'
-]  unit=. ,'*'
+elseif. isReal y do.
+  valu=. y
+  rvalu=. x: y
+  unit=. ,'/'
+  unit=. ,'*'
 elseif. isStr y do.
-]  yf=. dltb formatIN y
-]  valu=. valueOf yf
-]  rvalu=. rvalueOf yf
-]  unit=. unitsOf yf
+  yf=. dltb formatIN y
+  valu=. valueOf yf
+  rvalu=. rvalueOf yf
+  unit=. unitsOf yf
 elseif. do.
-]  valu=. BADFLO
-]  rvalu=. BADRAT
-]  unit=. '??'
+  valu=.  BADFLOAT
+  rvalu=. BADRAT
+  unit=.  BADUNITS
 end.
-	sllog 'uu x y valu rvalu unit'
+sllog 'uu x y valu rvalu unit'
 
 if. cannotScale unit do.
   'targ rdisp rfactor'=. x convert unit
@@ -1116,7 +1114,7 @@ end.
 
 UU_VALUE=: rvtarg
 z=. targ formatOUT rvtarg
-	sllog 'uu_3 z rvtarg VEXIN'
+sllog 'uu_3 z rvtarg VEXIN'
 
 if. NO_UNITS_NEEDED do. z else. deb z,SP,uniform targ end.
 )
@@ -1147,6 +1145,7 @@ unitsOf=: 3 : 0
 numeral=. strValueOf y
 deb y }.~ #numeral
 )
+
 onload }: 0 :0
 smoutput (x=:'degF') uu (y=:'100 degC')
 )
@@ -1157,13 +1156,7 @@ smoutput 'yd' uu 2r3 ; 'ft'
 )
 
 '==================== [uu] pp_encoding.ijs ===================='
-
-
 cocurrent 'uu'
-
-0 :0
-Tuesday 30 April 2019  22:46:22
-)
 
 UNSETCODE=: BADCODE=: KILLERCODE=: ZEROCODE=: 0x
 TRIVIALCODE=: 1x
@@ -1464,17 +1457,6 @@ brack unit=: uniform unitsOf y
 cannotScale=: 3 : 'CANNOTSCALE e.~ <deb y'
 
 
-isTemperature=: 3 : 0
-
-by=. <deb y
-if. y beginsWith 'deg' do. -.(y-:'deg') return.
-elseif. by e. TEMPERATURE_SCALES do. 1 return.
-elseif. by e. 2 {.each TEMPERATURE_SCALES do. 1 return.
-elseif. by e. 2 {.each TEMPERATURE_SCALES do. 1 return.
-elseif. do. 0 return.
-end.
-)
-
 '==================== [uu] format.ijs =================='
 0 :0
 Thursday 6 June 2019  02:32:59
@@ -1483,12 +1465,18 @@ cocurrent 'uu'
 
 
 local_format_test=: 3 : 0
+SIG=:9 [sav=.SIG
+trace 0
+sm 'degF' uu '1.1 degC'
+sm 'degF' uu '1.1°C'
 sm 'deg' uu '1 rad'
 sm 'dms' uu '1 rad'
 sm 'hms' uu '3700 s'
 sm 'hms' uu '1.1 h'
 sm '*' uu '1.1 h'
 sm 'note' uu '440 Hz'
+sm '*' uu 1.23
+sm '*' uu 1230000000
 sm '*' uu '440 Hz'
 sm '!' uu 2
 sm '!' uu 1
@@ -1497,13 +1485,13 @@ sm '!' uu '1 *'
 sm '!' uu 0
 sm '!' uu '0 /'
 sm '!' uu '0 *'
+SIG=: sav
 )
 
 format=: formatOUT=: ''&$: :(4 : 0)
 
 
-msg '+++ format_1: x=[(x)] y=[(y)]'
-nu=. 3 : 'y[NO_UNITS_NEEDED=:1'
+msg '+++ format: x=[(x)] y=[(y)]'
 NO_UNITS_NEEDED=: 0
 select. kunits=. bris x
  case. 'deg'	do. nu deg y
@@ -1515,15 +1503,35 @@ case.		do. x format_misc y
 end.
 )
 
+nu=: 3 : 'y[NO_UNITS_NEEDED=:1'
+
+isTemperature=: 3 : 0
+
+if. y ident 'K' do. 0 return. end.
+by=. <deb y
+if. y beginsWith 'deg' do. -.(y-:'deg') return.
+elseif. by e. TEMPERATURE_SCALES do. 1 return.
+elseif. by e. 2 {.each TEMPERATURE_SCALES do. 1 return.
+elseif. by e. 2 {.each TEMPERATURE_SCALES do. 1 return.
+elseif. do. 0 return.
+end.
+)
+
+kdeg=: 3 : 0
+
+
+y rplc ' °' ; '°'
+)
+
 format_misc=: 4 : 0
 
 msg '+++ format_misc: x=[(x)] y=[(y)]'
 if. isUndefined y do. 'UNDEFINED' return. end.
 if. SIC>0 do. inf=. '∞' else. inf=. 'inf' end.
-if. y=__			do. '-',inf
-elseif. y=_		do. inf
-elseif. isTemperature x	do. sw'(scino y)'
-elseif.			do. scino y
+    if. y=__ do. '-',inf
+elseif. y=_  do. inf
+elseif. isTemperature x do. nu kdeg sw'(scino y) (uniform x)'
+elseif. do. scino y
 end.
 )
 
@@ -1541,7 +1549,7 @@ deg=: 3 : 0
 
 y=. float y
 if. SIC=0 do. sw'(y) deg'
-else.         ucode sw'(y)deg'
+else.         uniform sw'(y)deg'
 end.
 )
 
@@ -1550,7 +1558,7 @@ dms=: 3 : 0
 asec4deg=. 3600 * ]
 'd m s'=.":each <.each 360 60 60 #: asec4deg |y
 if. SIC=0 do. sw'(d) deg (m)'' (s)"'
-else.         ucode sw'(d)deg (m)amin (s)asec'
+else.         uniform sw'(d)deg (m)amin (s)asec'
 end.
 )
 
@@ -1614,7 +1622,7 @@ i.0 0
 
 takerr=: 3 : 0
 msg '>>> takerr: none chime: x=(x) y=(y)'
-sw'(y) [???]'
+sw'(y) (BADUNITS)'
 )
 
 take_0_angle=: 3 : 0

@@ -1,7 +1,7 @@
 	NB. uu - constants.ijs
 '==================== [uu] constants ===================='
 0 :0
-Tuesday 14 May 2019  15:50:29
+Thursday 6 June 2019  22:43:34
 )
 
 cocurrent 'uu'
@@ -24,12 +24,11 @@ NB. =========================================================
 NB. General purpose constants
 NB. =========================================================
 
-BADFLO=: __	NB. "bad" floating numeral - returned by: eval
+BADFLOAT=: __	NB. "bad" floating numeral - returned by: eval
 BADRAT=: __r1	NB. "bad" rational numeral - returned by: reval
-BADQTY=: '0 ??'	NB. "bad" returned qty by verb: uu
+BADQTY=: '0 ??'	NB. "bad" qty - returned by: uu
+BADUNITS=: '??'	NB. "bad" units - returned by: uu
 HD=: '·'		NB. hi-dot, optional SI convention
-MI=: '-'		NB. minus (==HY)
-NUN=: '??'	NB. unrecognised-units placeholder, used by: convert
 PWM=: '^-'	NB. power,minus (precedes a negative power)
 PWU=: '^_'	NB. power,underscore (precedes a negative power)
 PW=: '^'		NB. power

@@ -7,12 +7,18 @@ cocurrent 'uu'
 
   NB. MOVED INTO TEST SUITE…
 local_format_test=: 3 : 0
+SIG=:9 [sav=.SIG
+trace 0
+sm 'degF' uu '1.1 degC'
+sm 'degF' uu '1.1°C'
 sm 'deg' uu '1 rad'
 sm 'dms' uu '1 rad'
 sm 'hms' uu '3700 s'
 sm 'hms' uu '1.1 h'
 sm '*' uu '1.1 h'
 sm 'note' uu '440 Hz'
+sm '*' uu 1.23
+sm '*' uu 1230000000
 sm '*' uu '440 Hz'
 sm '!' uu 2
 sm '!' uu 1
@@ -21,13 +27,13 @@ sm '!' uu '1 *'
 sm '!' uu 0
 sm '!' uu '0 /'
 sm '!' uu '0 *'
+SIG=: sav
 )
 
 format=: formatOUT=: ''&$: :(4 : 0)
   NB. format the quantity (y;x) for output
   NB. ALL temperature scales handled by: format_misc
-msg '+++ format_1: x=[(x)] y=[(y)]'
-nu=. 3 : 'y[NO_UNITS_NEEDED=:1' NB. append-units
+msg '+++ format: x=[(x)] y=[(y)]'
 NO_UNITS_NEEDED=: 0  NB. initialize the flag, overridden below
 select. kunits=. bris x  NB. work internally in kosher units
  case. 'deg'	do. nu deg y
@@ -39,15 +45,35 @@ case.		do. x format_misc y
 end.
 )
 
+nu=: 3 : 'y[NO_UNITS_NEEDED=:1' NB. append-units
+
+isTemperature=: 3 : 0
+  NB. (kosher unit) y is a temperature scale …but not [K]
+if. y ident 'K' do. 0 return. end.
+by=. <deb y
+if. y beginsWith 'deg' do. -.(y-:'deg') return.
+elseif. by e. TEMPERATURE_SCALES do. 1 return.
+elseif. by e. 2 {.each TEMPERATURE_SCALES do. 1 return.
+elseif. by e. 2 {.each TEMPERATURE_SCALES do. 1 return.
+elseif. do. 0 return.  NB. not a temperature scale
+end.
+)
+
+kdeg=: 3 : 0
+  NB. '100 °F' --> '100°F'
+  NB. '100 Fahrenheit' --unchanged
+y rplc ' °' ; '°'
+)
+
 format_misc=: 4 : 0
   NB. cf give_0_misc
 msg '+++ format_misc: x=[(x)] y=[(y)]'
 if. isUndefined y do. 'UNDEFINED' return. end.
 if. SIC>0 do. inf=. '∞' else. inf=. 'inf' end.
-if. y=__			do. '-',inf
-elseif. y=_		do. inf
-elseif. isTemperature x	do. sw'(scino y)'  NB. <<<<<<<<<<<<<<<<
-elseif.			do. scino y
+    if. y=__ do. '-',inf
+elseif. y=_  do. inf
+elseif. isTemperature x do. nu kdeg sw'(scino y) (uniform x)'
+elseif. do. scino y
 end.
 )
 
@@ -65,7 +91,7 @@ deg=: 3 : 0
   NB. gets the degree symbol up close, but ony if SIC>0
 y=. float y	NB. cannot handle rational y !!
 if. SIC=0 do. sw'(y) deg'
-else.         ucode sw'(y)deg'
+else.         uniform sw'(y)deg'
 end.
 )
 
@@ -74,7 +100,7 @@ dms=: 3 : 0
 asec4deg=. 3600 * ]
 'd m s'=.":each <.each 360 60 60 #: asec4deg |y
 if. SIC=0 do. sw'(d) deg (m)'' (s)"'
-else.         ucode sw'(d)deg (m)amin (s)asec'
+else.         uniform sw'(d)deg (m)amin (s)asec'
 end.
 )
 

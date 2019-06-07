@@ -1,24 +1,9 @@
 	NB. uu - pp_encoding.ijs
 '==================== [uu] pp_encoding.ijs ===================='
-	NB. The notes here have been moved to temp 181 /179
-	NB. AND 0 :0 -inserts have been hived-off to temp 18
 cocurrent 'uu'
-
-0 :0
-Tuesday 30 April 2019  22:46:22
-)
 
 UNSETCODE=: BADCODE=: KILLERCODE=: ZEROCODE=: 0x
 TRIVIALCODE=: 1x
-
-NB. assigned in: constants.ijs...
-NB. PWM=: '^-'	NB. power,minus (precedes a negative power)
-NB. PWU=: '^_'	NB. power,underscore (precedes a negative power)
-NB. PW=: '^'		NB. power
-NB. MI=: '-'		NB. minus (==HY)
-
-NB. mksx=: ;:'m kg s A K cd mol rad eur'
-NB. ---BUT assignment in constants.ijs is DEFINITIVE.
 Nmks=: #mks	NB. # of base units == # of primes for pp-coding
   NB. …Nmks used in tacit verbs. Otherwise scarcely faster than #mks
 Pmks=: x:p:i.Nmks	NB. the first (#mks) primes
@@ -323,14 +308,3 @@ brack unit=: uniform unitsOf y
 
 cannotScale=: 3 : 'CANNOTSCALE e.~ <deb y'
   NB. (kosher unit) y cannot be scaled, e.g. [note]
-
-isTemperature=: 3 : 0
-  NB. (kosher unit) y is a temperature scale
-by=. <deb y
-if. y beginsWith 'deg' do. -.(y-:'deg') return.
-elseif. by e. TEMPERATURE_SCALES do. 1 return.
-elseif. by e. 2 {.each TEMPERATURE_SCALES do. 1 return.
-elseif. by e. 2 {.each TEMPERATURE_SCALES do. 1 return.
-elseif. do. 0 return.  NB. not a temperature scale
-end.
-)

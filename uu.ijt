@@ -27,6 +27,8 @@ But UU knows Imperial units too,
 plus some informal units journalists love to use ...
 )
 
+cocurrent 'base'
+
 require 'math/uu'
 
 uu '1 g'         NB. in SI the base unit is [kg] not [g]
@@ -95,42 +97,43 @@ To "divide" two arbitrary units strings, use: udiv
 that the denominator doesn't contain slash).
 
 Then use: uu -to cancel-out...
-
-	>>> We don't have access to udiv now
-
-
 )
+
+udiv=: udiv_uu_
 
 u1=: 'kg m^2/A^2/s^3'		NB. energy
 u2=: 'kg m^2/A^2/s^2'		NB. power
-u1 udiv u2
-uu  '1 ', u1 udiv u2
 
+u1 udiv u2
+uu  '123 ', u1 udiv u2
+
+NB. =========================================================
 NB. =========================================================
 Lab Section SI_LOOK1
 uu approximates the "SI look-and-feel" with unicode chars
 (in utf-8 encoding, the standard for the J session).
 
-To suppress this behavior, enter: uunicode 0
+To suppress this behavior, enter: state_uu_ 0
 
 
 	>>> no uunicode any more
 		but we now have: state
 
 
-If you enter: uunicode 1
+If you enter: state_uu_ 1
 -then uu will not only output utf-8 chars,
 but accept them as input too.
 )
 
+state_uu_ 1
 'Ohm' uu '1 kg m^2/A^2/s^3'
       uu '1 kg m^2/A^2/s^3'
 
-uunicode 0
+state_uu_ 0
 'Ohm' uu '1 kg m^2/A^2/s^3'
       uu '1 kg m^2/A^2/s^3'
 
-uunicode 1	NB. reset to the default
+state_uu_ 1	NB. reset to the default
 
 NB. =========================================================
 Lab Section SI_LOOK2
@@ -146,13 +149,13 @@ You can force UU to output units in the strict SI convention
 by setting: uunicode 2
 )
 
-uunicode 0
+state_uu_ 0
    uu '1 J'
 
-uunicode 2
+state_uu_ 2
    uu '1 J'
 
-uunicode 1	NB. reset to the default
+state_uu_ 1	NB. reset to the default
 
 
 NB. =========================================================
@@ -180,10 +183,10 @@ The full range is:
  	10^−12 	10^−15 	10^−18 	10^−21 	10^−24
 )
 
-uu '1 GW'	NB. one gigawatt
-uu '1e21 zg'	NB. one gram, SI-style
-uu '1 g'	NB. -for comparison.
-   NB. ...SI takes [kg] not [g] as the basic unit of mass.
+uu '1 GW'          NB. one gigawatt
+uu '1e21 zg'       NB. one gram, SI-style
+uu '1 g'           NB. -for comparison.
+   NB. …in SI units, [kg] not [g] is the basic unit of mass.
 
 NB. =========================================================
 Lab Section ZEPTO2
@@ -196,14 +199,15 @@ However UU accepts [µ] by itself to mean "micron".
 
 WARNING: not every unicode variant of µ will work!
 
-Use either 'mu' or 'µ' for entering microns [µm]...
+Use either 'u' or 'µ' for entering microns [µm]...
 )
 
-uu '100 mum'	NB. 100 microns
-uu '100 µm'
-uu '100 mu'
-uu '100 µ'
-'Ang' uu '1 µm'	NB. microns --> Ångstrom units
+uu '1000 um'       NB. 1000 micron (micrometre)
+uu '1000 µm'
+uu '1000 µ'
+'mm' uu '1000 µ'   NB. 1000 micron = 1 mm
+
+'Ang' uu '1 µm'    NB. micron --> Ångstrom units
 'Å' uu '1 µ'
 'µ' uu '1 Å'
 

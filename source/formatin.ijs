@@ -39,7 +39,7 @@ i.0 0
 
 takerr=: 3 : 0
 msg '>>> takerr: none chime: x=(x) y=(y)'
-sw'(y) [???]'
+sw'(y) (BADUNITS)'
 )
 
 take_0_angle=: 3 : 0

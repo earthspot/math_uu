@@ -127,9 +127,9 @@ EVAL__=:''  NB. diagnostic flag
 rc=. (9+2*x)&o.  NB. complex(x=1) or real(x=0) part of y
 try.
   if. isNo z=.".y do. rc z	[EVAL__=: 'scalar num expression'
-  else. BADFLO		[EVAL__=: 'evaluates -not scalar num'
+  else. BADFLOAT		[EVAL__=: 'evaluates -not scalar num'
   end.
-catch. BADFLO		[EVAL__=: 'fails to evaluate'
+catch. BADFLOAT		[EVAL__=: 'fails to evaluate'
 end.
 )
 
@@ -140,8 +140,8 @@ eval=: 0&$: : (4 : 0)"1
   NB. x==0 - return real part if complex
   NB. x==1 - return imag part if complex
 EVAL__=:''  NB. diagnostic flag
-if. 0=#y do. BADFLO	[EVAL__=: 'empty'
-elseif. _1=4!:0<y do. BADFLO	[EVAL__=: 'unassigned id'
+if. 0=#y do. BADFLOAT		[EVAL__=: 'empty'
+elseif. _1=4!:0<y do. BADFLOAT	[EVAL__=: 'unassigned id'
 elseif. 0=4!:0<y do. x evalRC y
 elseif. do.
   x evalRC '/%-_Ee'charsub ,>y

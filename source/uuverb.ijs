@@ -12,22 +12,22 @@ if. '*'={.y do. uuengine }.y return. end. NB. uuengine call-thru
 if. isBoxed y do.
   'valu unit'=. y
   rvalu=. rat valu
-elseif. isNum y do.  NB. no units specified
-]  valu=. y
-]  rvalu=. x: y	NB. <<<<< rational
-]  unit=. ,'/'	NB. "dimensionless" [/]
-]  unit=. ,'*'	NB. "wildcard" [*]
+elseif. isReal y do.  NB. no units specified
+  valu=. y
+  rvalu=. x: y	NB. <<<<< rational
+  unit=. ,'/'	NB. "dimensionless" [/]
+  unit=. ,'*'	NB. "wildcard" [*]
 elseif. isStr y do.
-]  yf=. dltb formatIN y
-]  valu=. valueOf yf
-]  rvalu=. rvalueOf yf	NB. <<<<< rational
-]  unit=. unitsOf yf
+  yf=. dltb formatIN y
+  valu=. valueOf yf
+  rvalu=. rvalueOf yf	NB. <<<<< rational
+  unit=. unitsOf yf
 elseif. do.  NB. cannot handle, treat as BAD*
-]  valu=. BADFLO
-]  rvalu=. BADRAT
-]  unit=. '??'
+  valu=.  BADFLOAT
+  rvalu=. BADRAT
+  unit=.  BADUNITS
 end.
-	sllog 'uu x y valu rvalu unit'
+sllog 'uu x y valu rvalu unit'
   NB. compute target value: rvtarg
 if. cannotScale unit do.  NB. formatOUT itself converts given value
   'targ rdisp rfactor'=. x convert unit
@@ -42,7 +42,7 @@ end.
   NB. cache the exact value, obtained from the rational calculations
 UU_VALUE=: rvtarg	NB. <<<<< rational
 z=. targ formatOUT rvtarg
-	sllog 'uu_3 z rvtarg VEXIN'
+sllog 'uu_3 z rvtarg VEXIN'
   NB. Flag: NO_UNITS_NEEDED is set by: formatOUT
 if. NO_UNITS_NEEDED do. z else. deb z,SP,uniform targ end.
 )
@@ -74,7 +74,6 @@ numeral=. strValueOf y
 deb y }.~ #numeral
 )
 
-NB. onload 'load temp 94' >>>> temp 94 REDUNDANT: scale_displace elimd
 onload }: 0 :0
 smoutput (x=:'degF') uu (y=:'100 degC')
 )

@@ -1,6 +1,6 @@
 NB. handy4uu.ijs
 0 :0
-Tuesday 14 May 2019  06:49:44
+Thursday 6 June 2019  23:03:23
 -
 Establishes in _z_ all handy verbs actually needed by UU CAL TABULA
 )
@@ -55,6 +55,7 @@ imag=: 11&o.
 ifdefined=: 0 <: [: 4!:0 <
 isLit=: 2 2048 e.~ 3!:0
 isNum=: 1 4 8 16 64 128 e.~ 3!:0  NB. accepts complex num too (…16…)
+isReal=: 1 4 8 64 128 e.~ 3!:0    NB. NOT complex num (…16…)
 isScalar=: [: {. 0 = [: $ $
 isNo=: isNum *. isScalar
 daterev=: 3 : 'if. 31<2{y do. |.3{.y else. 3{.y end.'
@@ -193,7 +194,8 @@ end.
 ('=:',~"1 >z),. ": vv ". ','sfy z
 )
 
-dtlf=: #~ ([: +./\. (10{a.)&~:)
+dtlf=: #~ ([: +./\. LF&~:)   NB. delete trailing LF
+dt0=:  #~ ([: +./\. '0'&~:)  NB. delete trailing '0'
 edit=: [: open [: , [: > whichscript_z_
 extx=: (0 < [: # ]) # ] , [ #~ [: -. '.' e. ]	NB. …tacit
 fname=: ([: >: '/' i:~ ]) }. ] {.~ '.' i:~ ]

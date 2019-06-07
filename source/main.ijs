@@ -5,17 +5,6 @@ cocurrent 'uu'
 
 bris=: unucode@unslash1@undotted@deb"1  NB. c(y)--> "kosher"
 
-canc=: 4 : 0
-	NB. cancel-out (serves: canon)
-	NB. eg: 'm kg kg/kg/kg s/s' canc 'kg'
-z=. sp1 x	NB. the object string
-n=. SP,y	NB. unit: y in numerator
-d=. SL,y	NB. unit: y in denominator
-whilst. -. w-:z do.
-  z=. (w=.z) rplc (n,d);'' ; (d,n);''
-end.
-)
-
 canon=: 3 : 0
 	NB. Sort units (str y) into canonical order
 	NB. y must be fully-resolved units, ie all from boxed list: mks
@@ -45,22 +34,6 @@ for_i. i.#y do. z=. >i{y	NB. the i'th cunit of list: y
   end.
 end.
 zz return.
-)
-
-coll=: 4 : 0
-	NB. collects-terms (no cancel-out)
-	NB. serves: canon
-	NB. eg: ' m kg kg/kg/kg s/s' coll 'kg'
-	NB.	 m kg^2/kg^2 s/s
-P=. PW
-z=. ,x			NB. the object string
-n=. SP,y		NB. unit: y in numerator
-d=. SL,y		NB. unit: y in denominator
-for_p. 4 3 2 do.	NB. 4th-power units are highest recognised
-  z=. z rplc ((p*$n)$n);(n,P,":p) ; ((p*$d)$d);(d,P,":p)
-  msg '+++ coll:   z=(z) power:p=(p)'
-end.
-z return.
 )
 
 curfig=: 3 : 'hy (0 j. 2)":y'
@@ -157,36 +130,35 @@ val ; uni
 
 rnd=: [: <. 0.5 + ]
 
+trim0=: 3 : 0
+  NB. trim zeros from scientific numeral
+if. 'E' e. y do.
+  'n m'=. 'E'cut y
+  z=. (trim0 n),'E',m 
+  z return.
+end.
+z=. deb y
+if. (1=+/DT=z) and (DT~: {: }:z) and all z e. n9,DT do. z=. dt0 z end.
+if. DT={:z do. z=. z,'0' end.
+z return.
+)
+
 scino=: (3 : 0)"0
   NB. Scientific notation for number: y
   NB. but returns ordinary integer for integer (y)
   NB. Uses current values of SCI, SIG, SIZ (they can change)
+  NB. test: tempuu 108 <<<<<<<<<<<<<<<
 y=. float y
-if. y=0 do. ,'0'
-elseif. (10^SIZ)>|y do. '0',~ '- +'{~ 1+*y
-elseif. any (10^SCI)<: y,%y do. sci4j y":~ 0 j. -SIG  NB. force sci
-elseif. y=<.y do. sci4j ":y
+if. y=0 do. z=. ,'0'
+elseif. (10^SIZ)>|y do. z=. '0',~ '- +'{~ 1+*y
+elseif. any (10^SCI)<: y,%y do. z=. sci4j y":~ 0 j. -SIG  NB. force sci
+elseif. y=<.y do. z=. sci4j ":y
 elseif. do.  NB. sci ntn OR decimals
   z=. sci4j y":~ 0 j. SIG
-  if. *./ z e. '-0.' do. sci4j y":~ 0 j. -SIG else. z end.
+  if. *./ z e. '-0.' do. z=. sci4j y":~ 0 j. -SIG end.
 end.
-)
-
-0 :0
-selfcanc=: 3 : 0
-msg '+++ selfcanc: ENTERED'
-  NB. Self-cancel unitstr (y) without reducing to base units
-  NB. Sort tokens EACH REVERSED -collects num+denom terms
-z=. ; |.each sort |.each ut=. utoks y
-t=. ~. }.each ut
-for_cb. ~.t do.
-  z=. z canc >cb
-  z=. z coll >cb
-end.
-z=. dlb canon z
-z=. z rplc '/^2';'/';'/^3';'/';'/^4';'/';'/^5';'/';'/^6';'/';'/^7';'/';'/^8';'/';'/^9';'/'
-msg '--- selfcanc: EXITS: z=(z)'
-z return.
+  NB. henceforth assume valid z, but needs zeros trimming
+trim0 z return.
 )
 
 slash1=: 1&$: : (4 : 0)
@@ -469,3 +441,5 @@ end.
 )
 
 NB. udivCodesOk=: 1:  NB. if you want to risk it !!!
+
+onload 'smoutput (,.z) ; scino z=.0 1 1.0 1.23 1.230 123 12300 123000000 123.0 123.000'
