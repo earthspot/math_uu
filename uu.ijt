@@ -2,7 +2,7 @@ LABTITLE=: 'Scientific Units'
 LABDEPENDS=: 'math/uu'
 
 0 :0
-Tuesday 14 May 2019  06:51:26
+Friday 7 June 2019  13:03:59
 -
 done to…
 NB. ========…
@@ -121,8 +121,8 @@ To suppress this behavior, enter: state_uu_ 0
 
 
 If you enter: state_uu_ 1
--then uu will not only output utf-8 chars,
-but accept them as input too.
+then uu will output utf-8 chars.
+(It always accepts them as input.)
 )
 
 state_uu_ 1

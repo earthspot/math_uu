@@ -28,6 +28,7 @@ BADFLOAT=: __	NB. "bad" floating numeral - returned by: eval
 BADRAT=: __r1	NB. "bad" rational numeral - returned by: reval
 BADQTY=: '0 ??'	NB. "bad" qty - returned by: uu
 BADUNITS=: '??'	NB. "bad" units - returned by: uu
+ERROR_UDIV=: '?/?' NB. "bad" result - retd by udiv
 HD=: '·'		NB. hi-dot, optional SI convention
 PWM=: '^-'	NB. power,minus (precedes a negative power)
 PWU=: '^_'	NB. power,underscore (precedes a negative power)

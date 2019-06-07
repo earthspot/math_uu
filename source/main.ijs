@@ -343,8 +343,6 @@ NB. ========== udiv fix OVERRIDES ============
 NB. From: tempuu 106
 NB. Remove duplicated words above
 
-ERROR_UDIV=: '?/?'
-
 canc=: 4 : 0
   NB. [from temp 106] - cancels-out adjacent ' xx' and '/xx' terms
   NB. ASSUMES: sorted: ' xx' series precedes '/xx' series
