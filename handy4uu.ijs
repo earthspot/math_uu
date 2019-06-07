@@ -1,6 +1,6 @@
 NB. handy4uu.ijs
 0 :0
-Friday 7 June 2019  20:17:15
+Friday 7 June 2019  21:06:40
 -
 Establishes in _z_ all handy verbs actually needed by UU CAL TABULA
 )
@@ -102,6 +102,8 @@ if. 0<: 4!:0 <y do. y~ return. end.
 
 min=: $:/ :<.
 paren=: 1 |. ')(' , ":
+parentpathof=: [: pathof [: }: pathof
+pathof=: ] {.~ [: >: '/' i:~ ]
 rnd=: 0&$: :(4 : '(<. 0.5 + y*10^x)%10^x')
 term=: 3 : '>{:{. wd''sm get term'''  NB. (string) from Term window
 edwn=: 3 : '>{:{. wd''sm get edit'''  NB. (string) from Edit window
