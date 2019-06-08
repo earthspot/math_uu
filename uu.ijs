@@ -57,6 +57,11 @@ AABUILT=: '2019-06-07  02:20:19'
 AABUILT=: '2019-06-07  02:29:45'
 AABUILT=: '2019-06-07  21:02:21'
 AABUILT=: '2019-06-07  21:06:51'
+AABUILT=: '2019-06-07  21:10:47'
+AABUILT=: '2019-06-08  19:34:55'
+AABUILT=: '2019-06-08  19:46:40'
+AABUILT=: '2019-06-08  19:48:56'
+AABUILT=: '2019-06-08  20:51:47'
 
 '==================== [uu] constants ===================='
 0 :0
@@ -495,12 +500,14 @@ catch. BADFLOAT		[EVAL__=: 'fails to evaluate'
 end.
 )
 
-eval=: 0&$: : (4 : 0)"1
+eval=: (3 : 0)"1
 
 
 
 
 
+0 eval y
+:
 EVAL__=:''
 if. 0=#y do. BADFLOAT		[EVAL__=: 'empty'
 elseif. _1=4!:0<y do. BADFLOAT	[EVAL__=: 'unassigned id'

@@ -133,12 +133,14 @@ catch. BADFLOAT		[EVAL__=: 'fails to evaluate'
 end.
 )
 
-eval=: 0&$: : (4 : 0)"1
+eval=: (3 : 0)"1
   NB. returns SCALAR num having datatype 'floating'
   NB. evaluates "numerals" (numeric phrases) in UUC without crashing
   NB. c/f valueOf, strValueOf
   NB. x==0 - return real part if complex
   NB. x==1 - return imag part if complex
+0 eval y
+:
 EVAL__=:''  NB. diagnostic flag
 if. 0=#y do. BADFLOAT		[EVAL__=: 'empty'
 elseif. _1=4!:0<y do. BADFLOAT	[EVAL__=: 'unassigned id'
