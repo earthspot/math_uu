@@ -1,5 +1,5 @@
 0 :0
-Saturday 18 May 2019  12:45:34
+Sunday 9 June 2019  07:18:45
 -
 UU: scientific units conversion package
 )
@@ -11,57 +11,8 @@ onload_z_=: empty
 
 PARENTDIR=: (zx i:'/'){.zx=.jpathsep>(4!:4<'zx'){4!:3''[zx=.''
 
-AABUILT=: '2019-05-18  12:45:46'
-AABUILT=: '2019-05-18  12:58:50'
-AABUILT=: '2019-05-21  11:00:10'
-AABUILT=: '2019-05-21  11:07:24'
-AABUILT=: '2019-05-21  11:44:34'
-AABUILT=: '2019-05-21  11:48:45'
-AABUILT=: '2019-05-21  12:26:03'
-AABUILT=: '2019-06-02  21:31:18'
-AABUILT=: '2019-06-02  21:50:03'
-AABUILT=: '2019-06-04  12:53:03'
-AABUILT=: '2019-06-04  15:27:27'
-AABUILT=: '2019-06-04  15:32:13'
-AABUILT=: '2019-06-06  01:39:58'
-AABUILT=: '2019-06-06  01:42:15'
-AABUILT=: '2019-06-06  02:00:15'
-AABUILT=: '2019-06-06  02:08:43'
-AABUILT=: '2019-06-06  02:32:35'
-AABUILT=: '2019-06-06  02:34:16'
-AABUILT=: '2019-06-06  22:43:42'
-AABUILT=: '2019-06-06  22:44:50'
-AABUILT=: '2019-06-06  22:47:32'
-AABUILT=: '2019-06-06  22:50:20'
-AABUILT=: '2019-06-06  23:06:03'
-AABUILT=: '2019-06-07  00:22:40'
-AABUILT=: '2019-06-07  00:24:21'
-AABUILT=: '2019-06-07  00:27:06'
-AABUILT=: '2019-06-07  00:32:13'
-AABUILT=: '2019-06-07  00:36:09'
-AABUILT=: '2019-06-07  00:40:51'
-AABUILT=: '2019-06-07  00:46:03'
-AABUILT=: '2019-06-07  00:49:46'
-AABUILT=: '2019-06-07  00:51:24'
-AABUILT=: '2019-06-07  01:30:26'
-AABUILT=: '2019-06-07  01:36:28'
-AABUILT=: '2019-06-07  01:39:15'
-AABUILT=: '2019-06-07  01:42:48'
-AABUILT=: '2019-06-07  01:44:18'
-AABUILT=: '2019-06-07  01:45:32'
-AABUILT=: '2019-06-07  01:50:58'
-AABUILT=: '2019-06-07  01:51:49'
-AABUILT=: '2019-06-07  01:54:32'
-AABUILT=: '2019-06-07  01:56:57'
-AABUILT=: '2019-06-07  02:20:19'
-AABUILT=: '2019-06-07  02:29:45'
-AABUILT=: '2019-06-07  21:02:21'
-AABUILT=: '2019-06-07  21:06:51'
-AABUILT=: '2019-06-07  21:10:47'
-AABUILT=: '2019-06-08  19:34:55'
-AABUILT=: '2019-06-08  19:46:40'
-AABUILT=: '2019-06-08  19:48:56'
-AABUILT=: '2019-06-08  20:51:47'
+AABUILT=: '2019-06-09  07:18:59'
+AABUILT=: '2019-06-09  07:33:39'
 
 '==================== [uu] constants ===================='
 0 :0
@@ -536,6 +487,8 @@ reval=: 3 : 0 "1
 msg '+++ reval: y=(y)'
 doo=. ". :: rat4bad
 if. 0=#y=. deb >y do. BADRAT [msg '>>> reval: empty y'
+elseif. y-: ,'_' do. _r1
+elseif. y-: '__' do. __r1
 elseif. ('-'={.y) or ('_'={.y) do. rat4neg y
 elseif. all y e. n9 do. doo y,'x'
 elseif. (all (}:y) e. n9) and ('x'={:y) do. doo y
@@ -544,8 +497,6 @@ elseif. all y e. n9,'/' do. doo '/r'charsub y
 elseif. '/' e. y do. rat4sl y
 elseif. _1=4!:0<y do. BADRAT [msg '>>> reval: empty y'
 elseif. 'j' e. y do. rat4sc :: rat4bad 'j' taketo y
-elseif. y-: ,'_' do. BADRAT
-elseif. y-: '__' do. BADRAT
 elseif. all y e. n9,'._' do. rat4sc :: rat4bad y
 elseif. 'e' e. y do. rat4sc :: rat4bad y
 elseif. 'E' e. y do. rat4sc :: rat4bad y
@@ -1493,6 +1444,7 @@ sm '!' uu '1 *'
 sm '!' uu 0
 sm '!' uu '0 /'
 sm '!' uu '0 *'
+sm uu '_ /'
 SIG=: sav
 )
 

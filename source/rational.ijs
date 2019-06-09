@@ -169,6 +169,8 @@ reval=: 3 : 0 "1
 msg '+++ reval: y=(y)'
 doo=. ". :: rat4bad
 if. 0=#y=. deb >y do. BADRAT [msg '>>> reval: empty y'
+elseif. y-: ,'_' do. _r1
+elseif. y-: '__' do. __r1
 elseif. ('-'={.y) or ('_'={.y) do. rat4neg y
 elseif. all y e. n9 do. doo y,'x'
 elseif. (all (}:y) e. n9) and ('x'={:y) do. doo y
@@ -177,8 +179,6 @@ elseif. all y e. n9,'/' do. doo '/r'charsub y
 elseif. '/' e. y do. rat4sl y
 elseif. _1=4!:0<y do. BADRAT [msg '>>> reval: empty y'
 elseif. 'j' e. y do. rat4sc :: rat4bad 'j' taketo y  NB. REAL PART ONLY !!!
-elseif. y-: ,'_' do. BADRAT
-elseif. y-: '__' do. BADRAT
 elseif. all y e. n9,'._' do. rat4sc :: rat4bad y
 elseif. 'e' e. y do. rat4sc :: rat4bad y
 elseif. 'E' e. y do. rat4sc :: rat4bad y

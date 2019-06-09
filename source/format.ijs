@@ -27,6 +27,7 @@ sm '!' uu '1 *'
 sm '!' uu 0
 sm '!' uu '0 /'
 sm '!' uu '0 *'
+sm uu '_ /'
 SIG=: sav
 )
 

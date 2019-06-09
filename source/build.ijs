@@ -1,6 +1,6 @@
 NB. math_uu repo - build
 0 :0
-Saturday 27 April 2019  18:03:06
+Sunday 9 June 2019  02:12:00
 -
 open BUILTFILE
 )
@@ -20,7 +20,7 @@ date_z_=: 6!:0 bind 'YYYY-MM-DD  hh:mm:ss'
 
 NOW=: date''
 HEADERFILE_z_=: GIT,'/source/header.ijs'
-BUILTFILE_z_=: 1!:1 <jpath GIT,'/builtfile'
+BUILTFILE_z_=: GIT,'/uu.ijs'
 
 RB=: ')'
 
