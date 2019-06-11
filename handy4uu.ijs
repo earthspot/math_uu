@@ -1,6 +1,6 @@
 NB. handy4uu.ijs
 0 :0
-Friday 7 June 2019  21:06:40
+Tuesday 11 June 2019  16:29:04
 -
 Establishes in _z_ all handy verbs actually needed by UU CAL TABULA
 )
@@ -75,9 +75,8 @@ ifabsent=: 4 : 'if. ifdefined y do. ".y else. x end.'
 all=: *./
 and=: *.
 any=: +./
-  NB. …use b4o instead of monadic (;:) with open-lists of units
-  NB. because units can contain '.' -which (;:) cuts.
 begins=: beginsWith=: ] -: [ {.~ [: # ]
+endsWith=: ends=: [ (] -: [ {.~ [: - [: # ]) [: , ]
 brack=:	1 |. '][' , ":  NB. layout tool for message string ->'[y]'
 nb=: [: ([: }. [: ; ' ' ,&.> ]) ":&.>	 NB. embed nums in string
 or=:  +.
@@ -213,7 +212,7 @@ sq=: *: :[:
 sqrt=: %: :[:
 square=: *: :[:
 
-NB. zulu verbs
+NB. zulu verbs, now loaded directly from: format/zulu
 0 :0
 o4b=: b2o=:	}.@((<SP) ;@,. ])
 b4o=: o2b=:	[: <;._1 SP , ]
