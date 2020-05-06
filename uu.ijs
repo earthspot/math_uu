@@ -13,6 +13,12 @@ PARENTDIR=: (zx i:'/'){.zx=.jpathsep>(4!:4<'zx'){4!:3''[zx=.''
 
 AABUILT=: '2019-06-09  07:18:59'
 AABUILT=: '2019-06-09  07:33:39'
+AABUILT=: '2020-05-06  09:43:05'
+AABUILT=: '2020-05-06  09:47:21'
+AABUILT=: '2020-05-06  11:02:25'
+AABUILT=: '2020-05-06  11:17:01'
+AABUILT=: '2020-05-06  11:17:21'
+AABUILT=: '2020-05-06  11:17:43'
 
 '==================== [uu] constants ===================='
 0 :0
@@ -1032,7 +1038,7 @@ onload 'smoutput (,.z) ; scino z=.0 1 1.0 1.23 1.230 123 12300 123000000 123.0 1
 
 '==================== [uu] uuverb.ijs ===================='
 0 :0
-Thursday 6 June 2019  02:33:33
+Wednesday 6 May 2020  11:10:46
 )
 
 cocurrent 'uu'
@@ -1106,15 +1112,19 @@ deb y }.~ #numeral
 )
 
 onload }: 0 :0
-smoutput (x=:'degF') uu (y=:'100 degC')
+smoutput (x=:'m^2') uu (y=:'1 mm^2') [smclear''
 )
 0 :0
+smoutput (x=:'degF') uu (y=:'100 degC') [smclear''
 smoutput uu '212 degF'
 smoutput (x=:'ft/s^2') uu y=:'1 Å h⁻²'
 smoutput 'yd' uu 2r3 ; 'ft'
 )
 
 '==================== [uu] pp_encoding.ijs ===================='
+0 :0
+Corrected qtcode4anyunit: IAC Wednesday 6 May 2020  10:59:09
+)
 cocurrent 'uu'
 
 UNSETCODE=: BADCODE=: KILLERCODE=: ZEROCODE=: 0x
@@ -1245,6 +1255,7 @@ if. (,ST)-: ,y do. 1;1r1;KILLERCODE return. end.
 r=. v=. z=. 0$0x
 for_t. utoks y do.
   'invert scale bareunit power'=. cnvCunit cunit=.>t
+  scale=. scale ^ power
   rscale=. rational scale
   rpower=. rational power
   'valu ralu code'=. qtcode4bareunit bareunit

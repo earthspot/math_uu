@@ -1,13 +1,19 @@
 NB. handy4uu.ijs
 0 :0
-Tuesday 11 June 2019  16:29:04
+Tuesday 27 August 2019  15:09:09
 -
 Establishes in _z_ all handy verbs actually needed by UU CAL TABULA
 )
 
 cocurrent 'z'
 
-ddefine=: 1 : 'm&$: : (4 : 0)'
+atrain=: adverb define
+  NB. LF-separated list --> train using Adverse (::)
+  NB. needs to be defined before first use
+13 : ('(', ')y',~ (}:u) rplc LF ; ' ::')
+)
+
+ddefine=: adverb : 'm&$: : (4 : 0)'
 
 ide=: 3 : 0
 select. y
@@ -99,13 +105,40 @@ if. 0<: 4!:0 <y do. y~ return. end.
 (y)=:x
 )
 
+edwn=: 3 : 0
+  NB. return choice (y) of data from top Edit window
+t=. wd'sm get edit'  NB. table: boxed(3 2) from Edit window
+select. {.y
+fcase. ' ' do.  NB. to match prev behavior
+fcase. {.'text' do.
+case. 0 do.
+	(<0 1) pick t
+fcase. {.'range' do.
+case. 1 do.
+	". (<1 1) pick t
+fcase. {.'path' do.
+case. 2 do.
+	z=. (<2 1) pick t
+	wd 'clipcopy *',utf8 z
+	'+++ edwn: copied: ',LF,z
+fcase. {.'selected' do.
+case. 3 do.
+	z=. ucp (<0 1) pick t
+	utf8 z{~ }: to/ ". (<1 1) pick t
+case. '?' do.
+	smoutput 'edwn ''text'''
+	smoutput 'edwn ''range'''
+	smoutput 'edwn ''path'''
+	smoutput 'edwn ''selected'''
+end.
+)
+
 min=: $:/ :<.
 paren=: 1 |. ')(' , ":
 parentpathof=: [: pathof [: }: pathof
 pathof=: ] {.~ [: >: '/' i:~ ]
 rnd=: 0&$: :(4 : '(<. 0.5 + y*10^x)%10^x')
 term=: 3 : '>{:{. wd''sm get term'''  NB. (string) from Term window
-edwn=: 3 : '>{:{. wd''sm get edit'''  NB. (string) from Edit window
 vv=: ":@|:@,:
 
 	NB. handy4cal.ijs

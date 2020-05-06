@@ -1,5 +1,8 @@
 	NB. uu - pp_encoding.ijs
 '==================== [uu] pp_encoding.ijs ===================='
+0 :0
+Corrected qtcode4anyunit: IAC Wednesday 6 May 2020  10:59:09
+)
 cocurrent 'uu'
 
 UNSETCODE=: BADCODE=: KILLERCODE=: ZEROCODE=: 0x
@@ -137,6 +140,7 @@ if. (,ST)-: ,y do. 1;1r1;KILLERCODE return. end.
 r=. v=. z=. 0$0x  NB. Initialize list-caches paralleling (utoks y)
 for_t. utoks y do.
   'invert scale bareunit power'=. cnvCunit cunit=.>t
+  scale=. scale ^ power  NB. IAC Wednesday 6 May 2020  10:59:09
   rscale=. rational scale
   rpower=. rational power
   'valu ralu code'=. qtcode4bareunit bareunit

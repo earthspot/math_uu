@@ -1,7 +1,7 @@
 	NB. uu - uuverb.ijs
 '==================== [uu] uuverb.ijs ===================='
 0 :0
-Thursday 6 June 2019  02:33:33
+Wednesday 6 May 2020  11:10:46
 )
 
 cocurrent 'uu'
@@ -75,9 +75,10 @@ deb y }.~ #numeral
 )
 
 onload }: 0 :0
-smoutput (x=:'degF') uu (y=:'100 degC')
+smoutput (x=:'m^2') uu (y=:'1 mm^2') [smclear''
 )
-0 :0
+0 :0  NB. spare lines for: onload
+smoutput (x=:'degF') uu (y=:'100 degC') [smclear''
 smoutput uu '212 degF'
 smoutput (x=:'ft/s^2') uu y=:'1 Å h⁻²'
 smoutput 'yd' uu 2r3 ; 'ft'
