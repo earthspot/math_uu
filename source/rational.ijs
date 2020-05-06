@@ -2,7 +2,8 @@
 '==================== [uu] rational ===================='
 
 0 :0
-Sunday 12 May 2019  15:05:29
+Wednesday 6 May 2020  12:21:14
+wd'beep'  NB. REMOVED: IAC Wednesday 6 May 2020  12:20:28
 -
 BADRAT - a bona-fide rational, but intended as signalling an error
 )
@@ -115,7 +116,7 @@ catch.
   bads=. I. -.boo
   smoutput sw'>>> rat_check[(y)] failed at these UUC rows…'
   smoutput vt bads
-  wd'beep'
+NB.  wd'beep'  NB. REMOVED: IAC Wednesday 6 May 2020  12:20:28
 end.
 )
 

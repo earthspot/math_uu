@@ -2,6 +2,7 @@
 '==================== [uu] pp_encoding.ijs ===================='
 0 :0
 Corrected qtcode4anyunit: IAC Wednesday 6 May 2020  10:59:09
+wd'msgs'  NB. REMOVED: IAC Wednesday 6 May 2020  12:19:12
 )
 cocurrent 'uu'
 
@@ -267,7 +268,7 @@ msg '+++ convert: ENTERED: y=(y) yb=(yb) disp=(disp) rdisp=(rdisp)'
 'factor rfactor code'=. qtcode4anyunit yb
 targ=. canon expandcode code
 msg '--- convert: EXITS'
-wd'msgs'  NB. is this still needed?
+NB. wd'msgs'  NB. REMOVED: IAC Wednesday 6 May 2020  12:19:12
 NB. targ ; disp ; factor return.
 targ ; rdisp ; rfactor	NB. <<<<< rational
 :

@@ -19,6 +19,7 @@ AABUILT=: '2020-05-06  11:02:25'
 AABUILT=: '2020-05-06  11:17:01'
 AABUILT=: '2020-05-06  11:17:21'
 AABUILT=: '2020-05-06  11:17:43'
+AABUILT=: '2020-05-06  12:21:22'
 
 '==================== [uu] constants ===================='
 0 :0
@@ -328,7 +329,8 @@ sci4j=: '%/_-eE'&charsub
 '==================== [uu] rational ===================='
 
 0 :0
-Sunday 12 May 2019  15:05:29
+Wednesday 6 May 2020  12:21:14
+wd'beep'
 -
 BADRAT - a bona-fide rational, but intended as signalling an error
 )
@@ -439,7 +441,6 @@ catch.
   bads=. I. -.boo
   smoutput sw'>>> rat_check[(y)] failed at these UUC rows…'
   smoutput vt bads
-  wd'beep'
 end.
 )
 
@@ -1124,6 +1125,7 @@ smoutput 'yd' uu 2r3 ; 'ft'
 '==================== [uu] pp_encoding.ijs ===================='
 0 :0
 Corrected qtcode4anyunit: IAC Wednesday 6 May 2020  10:59:09
+wd'msgs'
 )
 cocurrent 'uu'
 
@@ -1382,7 +1384,6 @@ msg '+++ convert: ENTERED: y=(y) yb=(yb) disp=(disp) rdisp=(rdisp)'
 'factor rfactor code'=. qtcode4anyunit yb
 targ=. canon expandcode code
 msg '--- convert: EXITS'
-wd'msgs'
 targ ; rdisp ; rfactor
 :
 
