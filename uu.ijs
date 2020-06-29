@@ -11,15 +11,7 @@ onload_z_=: empty
 
 PARENTDIR=: (zx i:'/'){.zx=.jpathsep>(4!:4<'zx'){4!:3''[zx=.''
 
-AABUILT=: '2019-06-09  07:18:59'
-AABUILT=: '2019-06-09  07:33:39'
-AABUILT=: '2020-05-06  09:43:05'
-AABUILT=: '2020-05-06  09:47:21'
-AABUILT=: '2020-05-06  11:02:25'
-AABUILT=: '2020-05-06  11:17:01'
-AABUILT=: '2020-05-06  11:17:21'
-AABUILT=: '2020-05-06  11:17:43'
-AABUILT=: '2020-05-06  12:21:22'
+AABUILT=: '2020-06-29  23:36:34'
 
 '==================== [uu] constants ===================='
 0 :0
@@ -1250,14 +1242,13 @@ qtcode4anyunit=: 3 : 0
 
 
 
-msg '+++ qtcode4anyunit: y=[(y)]'
-if. 0=#y    do. 1;1r1;TRIVIALCODE return. end.
 if. (,SL)-: ,y do. 1;1r1;TRIVIALCODE return. end.
 if. (,ST)-: ,y do. 1;1r1;KILLERCODE return. end.
 r=. v=. z=. 0$0x
 for_t. utoks y do.
   'invert scale bareunit power'=. cnvCunit cunit=.>t
   scale=. scale ^ power
+  if. invert do. scale=. %scale end.
   rscale=. rational scale
   rpower=. rational power
   'valu ralu code'=. qtcode4bareunit bareunit
@@ -1427,6 +1418,8 @@ brack unit=: uniform unitsOf y
 
 cannotScale=: 3 : 'CANNOTSCALE e.~ <deb y'
 
+
+onload 'qtcode4anyunit ''/mm^2'''
 
 '==================== [uu] format.ijs =================='
 0 :0

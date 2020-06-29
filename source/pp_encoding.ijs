@@ -134,14 +134,13 @@ qtcode4anyunit=: 3 : 0
   NB. RECALCULATES code for ANY entry (y) in (units)
   NB. …ignores existing code in unitc if product of codes
   NB. multiply the codes for each (powered)token
-msg '+++ qtcode4anyunit: y=[(y)]'
-if. 0=#y    do. 1;1r1;TRIVIALCODE return. end.
 if. (,SL)-: ,y do. 1;1r1;TRIVIALCODE return. end.
 if. (,ST)-: ,y do. 1;1r1;KILLERCODE return. end.
 r=. v=. z=. 0$0x  NB. Initialize list-caches paralleling (utoks y)
 for_t. utoks y do.
   'invert scale bareunit power'=. cnvCunit cunit=.>t
   scale=. scale ^ power  NB. IAC Wednesday 6 May 2020  10:59:09
+  if. invert do. scale=. %scale end.  NB. IAC Monday 29 June 2020  23:35:31
   rscale=. rational scale
   rpower=. rational power
   'valu ralu code'=. qtcode4bareunit bareunit
@@ -313,3 +312,5 @@ brack unit=: uniform unitsOf y
 
 cannotScale=: 3 : 'CANNOTSCALE e.~ <deb y'
   NB. (kosher unit) y cannot be scaled, e.g. [note]
+
+onload 'qtcode4anyunit ''/mm^2'''
